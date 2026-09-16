@@ -1728,3 +1728,180 @@ text-decoration:none;
     font-size:16px;
 
 }
+/* =====================
+   手机适配
+   不影响电脑布局
+===================== */
+
+
+@media(max-width:700px){
+
+
+body{
+
+overflow-x:hidden;
+
+}
+
+
+
+.container{
+
+width:94%;
+
+padding:15px 0;
+
+}
+
+
+
+/* 原来的左右布局改上下 */
+
+.left,
+.right{
+
+width:100%;
+
+}
+
+
+
+/* 左右栏手机排列 */
+
+.container{
+
+display:flex;
+
+flex-direction:column;
+
+}
+
+
+
+
+
+/* 文章 */
+
+.article-grid{
+
+grid-template-columns:1fr;
+
+}
+
+
+
+/* 周边 */
+
+.product-grid{
+
+grid-template-columns:1fr;
+
+}
+
+
+
+.product-card img{
+
+width:100%;
+
+height:auto;
+
+}
+
+
+
+/* 轮播 */
+
+.carousel img{
+
+width:100%;
+
+height:auto;
+
+}
+
+
+
+
+
+/* 标题 */
+
+h1{
+
+font-size:28px;
+
+text-align:center;
+
+}
+
+
+
+h2{
+
+font-size:22px;
+
+}
+
+
+
+
+/* 项目 */
+
+.projects a{
+
+display:block;
+
+margin-bottom:10px;
+
+}
+
+
+
+
+
+/* 留言 */
+
+.comment-box{
+
+width:100%;
+
+}
+
+
+.comment-box textarea{
+
+width:100%;
+
+}
+
+
+
+
+
+/* 音乐 */
+
+.music-box{
+
+width:90%;
+
+left:5%;
+
+transform:none;
+
+}
+
+
+
+.music-controls{
+
+display:flex;
+
+flex-wrap:wrap;
+
+justify-content:center;
+
+}
+
+
+
+}
