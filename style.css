@@ -1,3 +1,11 @@
+*{
+
+box-sizing:border-box;
+
+}
+
+
+
 body{
 
 margin:0;
@@ -6,20 +14,21 @@ background:#111;
 
 color:white;
 
-font-family:
-"Microsoft YaHei",
-sans-serif;
+font-family:"Microsoft YaHei";
 
 }
+
 
 
 .container{
 
 display:flex;
 
-width:90%;
+min-height:90vh;
 
-margin:auto;
+padding:30px;
+
+gap:30px;
 
 }
 
@@ -29,8 +38,6 @@ margin:auto;
 
 width:40%;
 
-padding:20px;
-
 }
 
 
@@ -39,29 +46,29 @@ padding:20px;
 
 width:60%;
 
-padding:20px;
+}
+
+
+
+.carousel img{
+
+width:100%;
+
+border-radius:20px;
+
+transition:0.5s;
 
 }
 
 
 
-.images img{
-
-width:30%;
-
-margin:5px;
-
-border-radius:10px;
-
-}
 
 
-
-.product-cover{
+.products img{
 
 width:200px;
 
-border-radius:15px;
+border-radius:20px;
 
 }
 
@@ -69,9 +76,11 @@ border-radius:15px;
 
 a{
 
-color:#8fdcff;
+color:white;
 
 text-decoration:none;
+
+font-size:20px;
 
 }
 
@@ -79,9 +88,35 @@ text-decoration:none;
 
 a:hover{
 
-color:white;
+color:#ff99cc;
 
 }
+
+
+
+
+
+.comment textarea{
+
+width:80%;
+
+height:100px;
+
+}
+
+
+
+
+
+button{
+
+padding:8px 15px;
+
+margin:5px;
+
+}
+
+
 
 
 
@@ -95,15 +130,8 @@ left:20px;
 
 background:#222;
 
-padding:10px;
+padding:15px;
 
-border-radius:10px;
-
-}
-
-
-button{
-
-margin-left:5px;
+border-radius:15px;
 
 }
