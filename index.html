@@ -17,13 +17,13 @@
 <body>
 
 
-<!-- 背景音乐 -->
-
 <audio id="bgm" loop></audio>
 
 
 
+
 <div class="container">
+
 
 
 <!-- 左侧 -->
@@ -32,11 +32,11 @@
 
 
 
-<!-- 图片轮播 -->
+<!-- 轮播图 -->
 
 <div class="carousel">
 
-<img id="banner" src="images/tv.png">
+<img id="banner" src="images/cs1.png">
 
 </div>
 
@@ -44,7 +44,7 @@
 
 
 
-<!-- 周边 -->
+<!-- 周边展示 -->
 
 <section class="products">
 
@@ -55,18 +55,125 @@
 
 
 
-<a href="products/index.html">
+<div class="product-grid">
 
 
-<img src="images/tb.png">
+
+<a class="product-card"
+href="products/spamton/index.html">
+
+
+<img src="images/products/spamton.png">
+
+
+<div>
+
+<h3>
+Deltarune Spamton
+</h3>
 
 
 <p>
-角色周边展示
+拍立得 / 徽章 / 亚克力
 </p>
 
 
+</div>
+
+
 </a>
+
+
+
+
+
+
+<a class="product-card"
+href="products/tenna/index.html">
+
+
+<img src="images/products/tenna.png">
+
+
+<div>
+
+<h3>
+Deltarune Tenna
+</h3>
+
+
+<p>
+拍立得 / 徽章 / 亚克力
+</p>
+
+
+</div>
+
+
+</a>
+
+
+
+
+
+
+<a class="product-card"
+href="products/defernull-spamton/index.html">
+
+
+<img src="images/products/defernull-spamton.png">
+
+
+<div>
+
+<h3>
+Defernull Spamton
+</h3>
+
+
+<p>
+拍立得 / 徽章 / 亚克力
+</p>
+
+
+</div>
+
+
+</a>
+
+
+
+
+
+
+<a class="product-card"
+href="products/defernull-tenna/index.html">
+
+
+<img src="images/products/defernull-tenna.png">
+
+
+<div>
+
+<h3>
+Defernull Tenna
+</h3>
+
+
+<p>
+拍立得 / 徽章 / 亚克力
+</p>
+
+
+</div>
+
+
+</a>
+
+
+
+
+</div>
 
 
 
@@ -97,29 +204,91 @@ Summer Pinellia
 
 
 
+
+
+<!-- 文章 -->
+
+<section class="articles">
+
+
 <h2>
 文章
 </h2>
 
 
 
-<div class="articles">
+
+<a class="article-card"
+href="articles/spt/index.html">
 
 
-<a href="articles/example/index.html">
+<h3>
+📁 SPT
+</h3>
 
-示例文章
+
+<p>
+DR SPT 与 DN SPT 相关作品
+</p>
+
 
 </a>
 
 
 
-</div>
+
+
+<a class="article-card"
+href="articles/antenna/index.html">
+
+
+
+<h3>
+📁 Tenna
+</h3>
+
+
+<p>
+DR Tenna 与 DN Tenna 相关作品
+</p>
+
+
+</a>
 
 
 
 
 
+<a class="article-card"
+href="articles/battat/index.html">
+
+
+<h3>
+📁 Battat
+</h3>
+
+
+<p>
+Battat 相关作品
+</p>
+
+
+</a>
+
+
+
+
+</section>
+
+
+
+
+
+
+
+<!-- 项目 -->
+
+<section class="projects">
 
 
 <h2>
@@ -128,12 +297,11 @@ Summer Pinellia
 
 
 
-<div class="projects">
 
 
-<a href="projects/dnt/index.html">
+<a class="project-card"
+href="projects/dnt/index.html">
 
-<div class="project-card">
 
 <h3>
 DNT桌宠
@@ -141,32 +309,30 @@ DNT桌宠
 
 
 <p>
-Windows桌面宠物项目
+Windows桌面宠物程序
 </p>
 
-
-</div>
 
 </a>
 
 
 
 
-<a href="projects/openqq-bridge/index.html">
 
-<div class="project-card">
+
+<a class="project-card"
+href="projects/openqq-bridge/index.html">
+
 
 <h3>
-OpenQQ Bridge
+OpenQQ同步桥
 </h3>
 
 
 <p>
-SeaDice OpenQQ数据兼容桥接工具
+SeaDice OpenQQ数据同步工具
 </p>
 
-
-</div>
 
 </a>
 
@@ -174,9 +340,10 @@ SeaDice OpenQQ数据兼容桥接工具
 
 
 
-<a href="projects/openqq-plugin/index.html">
 
-<div class="project-card">
+<a class="project-card"
+href="projects/openqq-plugin/index.html">
+
 
 <h3>
 OpenQQ Plugin
@@ -184,17 +351,28 @@ OpenQQ Plugin
 
 
 <p>
-SeaDice OpenQQ平台插件
+开放平台Webhook部署工具
 </p>
 
-
-</div>
 
 </a>
 
 
 
+
+
+
+</section>
+
+
+
 </div>
+
+
+
+</div>
+
+
 
 
 
@@ -218,7 +396,6 @@ placeholder="留下你的留言">
 </textarea>
 
 
-
 <button onclick="sendComment()">
 
 发送
@@ -234,10 +411,7 @@ placeholder="留下你的留言">
 
 
 
-<!-- 音乐控制 -->
-
-
-<!-- 音乐控制 -->
+<!-- 音乐 -->
 
 <div class="music-box">
 
@@ -268,12 +442,10 @@ placeholder="留下你的留言">
 
 
 
-
 <div class="music-controls">
 
 
-
-<button 
+<button
 class="music-btn small"
 onclick="prevMusic()">
 
@@ -283,8 +455,7 @@ onclick="prevMusic()">
 
 
 
-
-<button 
+<button
 id="playBtn"
 class="music-btn play"
 onclick="toggleMusic()">
@@ -296,7 +467,7 @@ onclick="toggleMusic()">
 
 
 
-<button 
+<button
 class="music-btn small"
 onclick="nextMusic()">
 
@@ -308,32 +479,24 @@ onclick="nextMusic()">
 
 
 
-<select 
+<select
 id="mode"
 onchange="changeMode()">
 
 
 
 <option value="loop">
-
 ↻ 循环播放
-
 </option>
-
 
 
 <option value="single">
-
 ↻ 单曲循环
-
 </option>
 
 
-
 <option value="random">
-
 🔀 随机播放
-
 </option>
 
 
@@ -341,14 +504,7 @@ onchange="changeMode()">
 </select>
 
 
-
 </div>
-
-
-
-
-
-<div class="music-line bottom"></div>
 
 
 </div>
