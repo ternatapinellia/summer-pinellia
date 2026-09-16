@@ -54,23 +54,24 @@ musics[currentMusic]
 
 function toggleMusic(){
 
+let btn=document.getElementById("playBtn");
 
-if(audio.paused)
 
-{
+if(audio.paused){
 
 audio.play();
 
+btn.innerHTML="⏸";
+
 }
 
-else
-
-{
+else{
 
 audio.pause();
 
-}
+btn.innerHTML="▶";
 
+}
 
 }
 
@@ -197,30 +198,93 @@ document.getElementById("mode").value;
 
 
 
-function sendComment(){
+async function sendComment(){
 
 
-let text =
-document.getElementById("message").value;
+    let box = document.getElementById("message");
 
 
-
-if(!text)
-
-{
-
-alert("请输入留言");
-
-return;
-
-}
+    if(!box){
+        return;
+    }
 
 
 
-alert(
-"留言功能已准备，后续接入邮箱接口"
-);
+    let text = box.value.trim();
 
+
+
+    if(text === ""){
+
+
+        alert("请输入留言");
+
+        return;
+
+    }
+
+
+
+    try{
+
+
+        let response = await fetch(
+            "/api/comment",
+            {
+
+                method:"POST",
+
+                headers:{
+
+                    "Content-Type":"application/json"
+
+                },
+
+
+                body:JSON.stringify({
+
+                    message:text
+
+                })
+
+            }
+        );
+
+
+
+        let result = await response.json();
+
+
+
+        if(result.success){
+
+
+            alert("留言发送成功");
+
+
+            box.value="";
+
+
+        }else{
+
+
+            alert("留言发送失败");
+
+
+        }
+
+
+
+    }catch(e){
+
+
+        alert("网络错误");
+
+
+        console.log(e);
+
+
+    }
 
 
 }

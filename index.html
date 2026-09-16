@@ -131,9 +131,64 @@ Summer Pinellia
 <div class="projects">
 
 
-<a href="projects/dnt.html">
+<a href="projects/dnt/index.html">
 
-DNT桌宠项目
+<div class="project-card">
+
+<h3>
+DNT桌宠
+</h3>
+
+
+<p>
+Windows桌面宠物项目
+</p>
+
+
+</div>
+
+</a>
+
+
+
+
+<a href="projects/openqq-bridge/index.html">
+
+<div class="project-card">
+
+<h3>
+OpenQQ Bridge
+</h3>
+
+
+<p>
+SeaDice OpenQQ数据兼容桥接工具
+</p>
+
+
+</div>
+
+</a>
+
+
+
+
+
+<a href="projects/openqq-plugin/index.html">
+
+<div class="project-card">
+
+<h3>
+OpenQQ Plugin
+</h3>
+
+
+<p>
+SeaDice OpenQQ平台插件
+</p>
+
+
+</div>
 
 </a>
 
@@ -149,17 +204,15 @@ DNT桌宠项目
 
 <!-- 留言 -->
 
+<div class="comment-box">
 
-<div class="comment">
 
-
-<h2>
+<h3>
 留言
-</h2>
+</h3>
 
 
-
-<textarea 
+<textarea
 id="message"
 placeholder="留下你的留言">
 </textarea>
@@ -173,16 +226,6 @@ placeholder="留下你的留言">
 </button>
 
 
-
-</div>
-
-
-
-
-
-</div>
-
-
 </div>
 
 
@@ -194,7 +237,17 @@ placeholder="留下你的留言">
 <!-- 音乐控制 -->
 
 
+<!-- 音乐控制 -->
+
 <div class="music-box">
+
+
+<div class="music-title">
+
+
+<span class="music-icon">
+🎵
+</span>
 
 
 当前音乐：
@@ -206,31 +259,48 @@ placeholder="留下你的留言">
 </span>
 
 
-<br>
+</div>
 
 
 
-<button onclick="prevMusic()">
 
-上一首
+<div class="music-line"></div>
+
+
+
+
+<div class="music-controls">
+
+
+
+<button 
+class="music-btn small"
+onclick="prevMusic()">
+
+⏮
 
 </button>
 
 
 
 
-<button onclick="toggleMusic()">
+<button 
+id="playBtn"
+class="music-btn play"
+onclick="toggleMusic()">
 
-播放/暂停
+▶
 
 </button>
 
 
 
 
-<button onclick="nextMusic()">
+<button 
+class="music-btn small"
+onclick="nextMusic()">
 
-下一首
+⏭
 
 </button>
 
@@ -246,25 +316,23 @@ onchange="changeMode()">
 
 <option value="loop">
 
-循环播放
+↻ 循环播放
 
 </option>
-
 
 
 
 <option value="single">
 
-单曲循环
+↻ 单曲循环
 
 </option>
 
 
 
-
 <option value="random">
 
-随机播放
+🔀 随机播放
 
 </option>
 
@@ -273,6 +341,14 @@ onchange="changeMode()">
 </select>
 
 
+
+</div>
+
+
+
+
+
+<div class="music-line bottom"></div>
 
 
 </div>
