@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>OpenQQ Plugin</title>
+
+<link rel="stylesheet" href="../../style.css">
+
+</head>
+
+
+<body>
+
+
+<a class="back-btn" href="../../index.html">
+← 返回首页
+</a>
+
+
+
+<div class="project-page">
+
+
+
+<h1>
+OpenQQ Plugin
+</h1>
+
+
+
+
+<h2>
+项目简介
+</h2>
+
+
+<p>
+
+本工具用于为开放平台机器人后台回调提供稳定的 Webhook 地址。
+
+通过 Caddy 提供 HTTPS 反向代理，
+配合 FRP 内网穿透，
+解决本地服务器无法直接提供公网 HTTPS 回调地址的问题。
+
+</p>
+
+
+
+
+<h2>
+使用场景
+</h2>
+
+
+<p>
+
+适用于：
+
+</p>
+
+
+<ul>
+
+<li>
+没有公网 IP 的机器人服务器
+</li>
+
+<li>
+本地运行机器人程序，需要公网 Webhook 地址
+</li>
+
+<li>
+不希望购买国内备案域名的用户
+</li>
+
+<li>
+需要长期稳定回调地址的开放平台机器人
+</li>
+
+</ul>
+
+
+<h2>
+下载
+</h2>
+
+
+
+<a class="buy-btn"
+href="#">
+
+GitHub Release
+
+</a>
+
+
+<h2>
+部署方式
+</h2>
+
+
+<h3>
+方案 A：拥有国内域名
+</h3>
+
+
+<p>
+
+如果拥有已经备案的国内域名，
+可以直接部署。
+
+下载工具包后：
+
+</p>
+
+
+<ol>
+
+<li>
+修改 Caddyfile
+</li>
+
+<li>
+修改 config/bots 文件
+</li>
+
+<li>
+填写机器人 AppID 和 Secret
+</li>
+
+<li>
+启动服务即可
+</li>
+
+</ol>
+
+
+
+<p>
+
+其中 bots 文件需要填写开放平台机器人的身份信息。
+
+Caddyfile 用于配置 HTTPS 域名以及反向代理规则。
+
+</p>
+
+
+
+
+
+<h3>
+方案 B：没有国内域名
+</h3>
+
+
+<p>
+
+可以租用国外云服务器。
+
+推荐：
+
+</p>
+
+
+<ul>
+
+<li>
+日本节点 VPS（延迟较低）
+</li>
+
+<li>
+Linux 系统
+</li>
+
+<li>
+安装 Caddy + FRP
+</li>
+
+</ul>
+
+
+<p>
+
+服务器端负责：
+
+</p>
+
+
+<ul>
+
+<li>
+绑定公网域名
+</li>
+
+<li>
+提供 HTTPS
+</li>
+
+<li>
+转发 Webhook 请求
+</li>
+
+</ul>
+
+
+<p>
+
+本地服务器负责：
+
+</p>
+
+
+<ul>
+
+<li>
+运行机器人程序
+</li>
+
+<li>
+运行 frpc
+</li>
+
+<li>
+保持与 VPS 的连接
+</li>
+
+</ul>
+
+
+
+
+
+<h2>
+Linux 部署流程
+</h2>
+
+
+
+<h3>
+1. 更新系统
+</h3>
+
+
+<pre>
+sudo apt update
+sudo apt upgrade -y
+</pre>
+
+
+
+
+<h3>
+2. 安装基础工具
+</h3>
+
+
+<pre>
+sudo apt install wget curl unzip nano -y
+</pre>
+
+
+
+
+<h3>
+3. 安装 Caddy
+</h3>
+
+
+<pre>
+sudo apt install caddy -y
+</pre>
+
+
+
+
+<h3>
+4. 编辑 Caddy 配置
+</h3>
+
+
+<pre>
+sudo nano /etc/caddy/Caddyfile
+</pre>
+
+
+
+示例：
+
+<pre>
+your-domain.com {
+
+    reverse_proxy 127.0.0.1:19093
+
+}
+</pre>
+
+
+
+保存：
+
+<pre>
+Ctrl + O
+Enter
+Ctrl + X
+</pre>
+
+
+
+重载：
+
+<pre>
+sudo systemctl reload caddy
+</pre>
+
+
+
+
+
+<h3>
+5. 安装 FRP
+</h3>
+
+
+
+下载对应 Linux 架构版本：
+
+<pre>
+uname -a
+</pre>
+
+
+
+解压：
+
+<pre>
+tar -zxvf frp.tar.gz
+</pre>
+
+
+
+
+进入目录：
+
+<pre>
+cd frp
+</pre>
+
+
+
+
+启动：
+
+<pre>
+./frpc -c frpc.ini
+</pre>
+
+
+
+FRP 支持将内网服务通过公网服务器转发出去，常用于没有公网 IP 的场景。:contentReference[oaicite:2]{index=2}
+
+
+
+
+
+<h2>
+配置文件修改
+</h2>
+
+
+
+<h3>
+config/bots
+</h3>
+
+
+<p>
+
+修改：
+
+</p>
+
+
+<pre>
+appid=你的机器人appid
+
+secret=你的机器人secret
+</pre>
+
+
+
+替换成开放平台提供的信息。
+
+
+
+
+
+<h3>
+Caddyfile
+</h3>
+
+
+<p>
+
+修改域名：
+
+</p>
+
+
+<pre>
+your-domain.com
+</pre>
+
+
+<p>
+
+修改代理端口：
+
+</p>
+
+
+<pre>
+127.0.0.1:你的监听端口
+</pre>
+
+
+
+
+
+<h3>
+frpc.ini
+</h3>
+
+
+示例：
+
+<pre>
+
+[common]
+
+server_addr = VPS地址
+
+server_port = 7000
+
+
+[openqq]
+
+type = http
+
+local_ip = 127.0.0.1
+
+local_port = 你的机器人端口
+
+custom_domains = your-domain.com
+
+
+</pre>
+
+
+
+
+
+<h2>
+启动检查
+</h2>
+
+
+<p>
+
+查看 Caddy：
+
+</p>
+
+
+<pre>
+systemctl status caddy
+</pre>
+
+
+<p>
+
+查看 FRP：
+
+</p>
+
+
+<pre>
+ps aux | grep frpc
+</pre>
+
+
+
+
+
+
+
+
+</div>
+
+
+</body>
+
+</html>
