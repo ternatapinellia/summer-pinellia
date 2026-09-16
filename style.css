@@ -157,6 +157,119 @@ margin:5px;
 
 
 }
+/* ===== 音乐控制按钮 ===== */
+
+.music-box button,
+.music-box select {
+
+    width:90px;
+
+    height:35px;
+
+    margin:6px 4px;
+
+
+    border:none;
+
+    border-radius:18px;
+
+
+    background:
+
+    linear-gradient(
+        135deg,
+        #667eea,
+        #764ba2
+    );
+
+
+    color:white;
+
+
+    font-size:14px;
+
+
+    cursor:pointer;
+
+
+    transition:0.25s;
+
+
+}
+
+
+
+.music-box button:hover,
+.music-box select:hover {
+
+
+    transform:translateY(-2px);
+
+
+    box-shadow:
+
+    0 5px 15px rgba(120,140,255,0.35);
+
+
+}
+
+
+
+
+.music-box select {
+
+
+    width:110px;
+
+
+    appearance:none;
+
+
+    text-align:center;
+
+
+}
+
+
+
+
+.music-box {
+
+
+    color:#eeeeee;
+
+    font-size:14px;
+
+
+}
+
+
+
+.music-box #musicName {
+
+
+    display:inline-block;
+
+
+    max-width:220px;
+
+
+    overflow:hidden;
+
+
+    text-overflow:ellipsis;
+
+
+    white-space:nowrap;
+
+
+    vertical-align:middle;
+
+
+    color:#cbd5ff;
+
+
+}
 /* ===== 周边展示 黑色主题 ===== */
 
 
