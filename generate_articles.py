@@ -3,29 +3,25 @@ from docx import Document
 import html
 
 
-
 SOURCE = Path("article_source")
 OUTPUT = Path("articles")
 
 
 
-
-
 # ==========================
-# 文章页面
+# 模板
 # ==========================
 
 
 ARTICLE_TEMPLATE = """
-
 <!DOCTYPE html>
-
 <html lang="zh-CN">
-
 
 <head>
 
 <meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>{title}</title>
 
@@ -34,15 +30,14 @@ ARTICLE_TEMPLATE = """
 </head>
 
 
-
 <body>
-
 
 <div class="container">
 
-
 <div class="project-page">
 
+
+<div class="nav-bar">
 
 <a class="back-btn" href="index.html">
 
@@ -51,13 +46,17 @@ ARTICLE_TEMPLATE = """
 </a>
 
 
+<a class="back-btn" href="{home}">
 
-<h1>
+← 返回首页
 
-{title}
+</a>
 
-</h1>
+</div>
 
+
+
+<h1>{title}</h1>
 
 
 <div class="article-content">
@@ -67,114 +66,72 @@ ARTICLE_TEMPLATE = """
 </div>
 
 
-
 </div>
-
 
 </div>
 
 
 </body>
 
-
 </html>
-
 """
 
 
 
 
 
-
-
-
-
-# ==========================
-# 目录页面
-# ==========================
-
-
 INDEX_TEMPLATE = """
-
 <!DOCTYPE html>
 
 <html lang="zh-CN">
 
-
 <head>
-
 
 <meta charset="UTF-8">
 
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>{title}</title>
 
-
 <link rel="stylesheet" href="{css}">
-
 
 </head>
 
 
-
 <body>
 
-
-
 <div class="container">
-
 
 <div class="project-page">
 
 
+<div class="nav-bar">
 
-<a class="back-btn" href="{home}">
-
-← 返回首页
-
-</a>
-
-
-
-
-<h1>
-
-{title}
-
-</h1>
-
-
-
-
-
-<div class="article-grid">
-
-
-{content}
-
+{nav}
 
 </div>
 
 
 
+<h1>{title}</h1>
+
+
+{folders}
+
+
+{articles}
+
+
 
 </div>
 
-
 </div>
-
-
 
 
 </body>
 
-
 </html>
-
-
 """
-
-
 
 
 
@@ -189,48 +146,35 @@ INDEX_TEMPLATE = """
 
 def read_docx(file):
 
-
     try:
 
         doc = Document(file)
 
-
     except Exception:
 
-
-        print("跳过损坏文件:", file)
-
         return "<p>文件无法读取</p>"
-
 
 
     result = []
 
 
-
     for p in doc.paragraphs:
 
+        text = p.text.strip()
 
-        if p.text.strip():
-
+        if text:
 
             result.append(
-
-                html.escape(p.text)
-
+                "<p>" + html.escape(text) + "</p>"
             )
 
 
+    if result:
 
-    if not result:
-
-
-        return "<p>暂无内容</p>"
+        return "\n".join(result)
 
 
-
-    return "<br><br>".join(result)
-
+    return "<p>暂无内容</p>"
 
 
 
@@ -246,13 +190,9 @@ def read_docx(file):
 
 def get_css_path(output):
 
-
     depth = len(
-
         output.relative_to(OUTPUT).parts
-
     )
-
 
     return "../" * depth + "style.css"
 
@@ -260,20 +200,54 @@ def get_css_path(output):
 
 
 
-
 def get_home_path(output):
 
-
     depth = len(
-
         output.relative_to(OUTPUT).parts
-
     )
-
 
     return "../" * depth + "index.html"
 
 
+
+
+
+def get_parent_path():
+
+    return "../index.html"
+
+
+
+
+
+
+
+
+# ==========================
+# 判断入口目录
+# ==========================
+
+
+def is_entry_folder(output):
+
+    folder = output.parent.relative_to(OUTPUT)
+
+
+    # articles/index.html
+
+    if len(folder.parts) == 0:
+
+        return True
+
+
+    # 一级目录
+
+    if len(folder.parts) == 1:
+
+        return True
+
+
+    return False
 
 
 
@@ -297,7 +271,9 @@ def create_article(source, output):
 
             content=read_docx(source),
 
-            css=get_css_path(output)
+            css=get_css_path(output),
+
+            home=get_home_path(output)
 
         ),
 
@@ -321,7 +297,9 @@ def create_article(source, output):
 def create_index(folder, output):
 
 
-    cards = []
+    folders = []
+
+    articles = []
 
 
 
@@ -331,42 +309,29 @@ def create_index(folder, output):
 
         # 文件夹
 
-
         if item.is_dir():
 
 
-
-            cards.append(
+            folders.append(
 
 f"""
-
 <a class="article-card"
-
 href="{item.name}/index.html">
 
-
 <h3>
-
-📁 {item.name}
-
+📁 {html.escape(item.name)}
 </h3>
 
-
 </a>
-
 """
 
             )
 
 
 
-
-
         # docx
 
-
         elif item.suffix.lower() == ".docx":
-
 
 
             if item.name.startswith("~$"):
@@ -375,24 +340,17 @@ href="{item.name}/index.html">
 
 
 
-            cards.append(
+            articles.append(
 
 f"""
-
 <a class="article-card"
-
 href="{item.stem}.html">
 
-
 <h3>
-
-📄 {item.stem}
-
+📄 {html.escape(item.stem)}
 </h3>
 
-
 </a>
-
 """
 
             )
@@ -401,10 +359,94 @@ href="{item.stem}.html">
 
 
 
-        else:
+    # 返回按钮
+
+    if is_entry_folder(output):
 
 
-            continue
+        nav = f"""
+
+<a class="back-btn" href="{get_home_path(output)}">
+
+← 返回首页
+
+</a>
+
+"""
+
+
+    else:
+
+
+        nav = f"""
+
+<a class="back-btn" href="{get_parent_path()}">
+
+← 返回上一级
+
+</a>
+
+
+<a class="back-btn" href="{get_home_path(output)}">
+
+← 返回首页
+
+</a>
+
+"""
+
+
+
+
+
+    folder_html = ""
+
+
+    if folders:
+
+
+        folder_html = f"""
+
+<h2>
+
+目录
+
+</h2>
+
+
+<div class="article-grid">
+
+{"".join(folders)}
+
+</div>
+
+"""
+
+
+
+
+    article_html = ""
+
+
+    if articles:
+
+
+        article_html = f"""
+
+<h2>
+
+文章
+
+</h2>
+
+
+<div class="article-grid">
+
+{"".join(articles)}
+
+</div>
+
+"""
 
 
 
@@ -413,22 +455,21 @@ href="{item.stem}.html">
 
     output.write_text(
 
-
         INDEX_TEMPLATE.format(
 
-            title=folder.name,
+            title=html.escape(folder.name),
 
-            content="".join(cards),
+            folders=folder_html,
+
+            articles=article_html,
 
             css=get_css_path(output),
 
-            home=get_home_path(output)
+            nav=nav
 
         ),
 
-
         encoding="utf-8"
-
 
     )
 
@@ -461,7 +502,6 @@ def process_folder(source, output):
     for item in source.iterdir():
 
 
-
         if item.is_dir():
 
 
@@ -475,15 +515,12 @@ def process_folder(source, output):
 
 
 
-
         elif item.suffix.lower() == ".docx":
-
 
 
             if item.name.startswith("~$"):
 
                 continue
-
 
 
             create_article(
@@ -493,15 +530,6 @@ def process_folder(source, output):
                 output / (item.stem + ".html")
 
             )
-
-
-
-        else:
-
-
-            continue
-
-
 
 
 
@@ -521,16 +549,19 @@ def process_folder(source, output):
 
 
 
+# ==========================
+# 主程序
+# ==========================
+
+
 def main():
 
 
     if not SOURCE.exists():
 
-
         print("没有找到 article_source")
 
         return
-
 
 
 

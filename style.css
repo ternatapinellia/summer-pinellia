@@ -1,44 +1,166 @@
+/* =========================
+   DNT Website Style
+   Clean Version
+   Part 1
+========================= */
+
+
+/* =========================
+   基础
+========================= */
+
 *{
-
-box-sizing:border-box;
-
+    box-sizing:border-box;
 }
-
 
 
 body{
 
-margin:0;
+    margin:0;
 
-background:#111;
+    background:#080808;
 
-color:white;
+    color:white;
 
-font-family:"Microsoft YaHei";
+    font-family:
+    "Microsoft YaHei",
+    Arial,
+    sans-serif;
+
+    transition:.3s;
 
 }
 
+
+a{
+
+    color:white;
+
+    text-decoration:none;
+
+}
+
+
+a:hover{
+
+    color:#ff99cc;
+
+}
+
+
+
+/* =========================
+   白天模式
+========================= */
+
+
+body.light{
+
+    background:#f5f5f5;
+
+    color:#222;
+
+}
+
+
+/* 所有主要容器 */
+
+body.light .project-page,
+body.light .products-page{
+
+    background:#ffffff;
+
+    color:#222;
+
+}
+
+
+
+/* =========================
+   主题按钮
+========================= */
+
+
+#theme-btn{
+
+    position:fixed;
+
+    right:25px;
+
+    top:20px;
+
+    width:45px;
+
+    height:45px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+
+    background:#111;
+
+    color:white;
+
+    border:
+
+    1px solid rgba(255,255,255,.3);
+
+
+    cursor:pointer;
+
+    font-size:20px;
+
+    z-index:99999;
+
+}
+
+
+
+body.light #theme-btn{
+
+    background:white;
+
+    color:#222;
+
+    border-color:#ccc;
+
+}
+
+
+
+/* =========================
+   首页布局
+========================= */
 
 
 .container{
 
-display:flex;
+    display:flex;
 
-gap:40px;
+    gap:40px;
 
-padding:40px;
+    padding:40px;
 
 }
+
+
 
 .left{
 
-width:35%;
+    width:35%;
 
 }
 
+
+
 .right{
 
-width:65%;
+    width:65%;
 
 }
 
@@ -46,11 +168,494 @@ width:65%;
 
 .carousel img{
 
-width:100%;
+    width:100%;
 
-border-radius:20px;
+    border-radius:20px;
 
-transition:0.5s;
+    transition:.3s;
+
+}
+
+
+
+/* =========================
+   页面通用容器
+========================= */
+
+
+.project-page,
+.products-page{
+
+
+    max-width:1000px;
+
+
+    margin:60px auto;
+
+
+    padding:40px;
+
+
+    background:
+
+    rgba(10,10,15,.9);
+
+
+    border-radius:20px;
+
+
+}
+
+
+
+/* =========================
+   导航按钮
+========================= */
+
+
+.nav-bar{
+
+
+    display:flex;
+
+
+    gap:15px;
+
+
+    flex-wrap:wrap;
+
+
+    margin-bottom:25px;
+
+
+}
+
+
+
+.back-btn{
+
+
+    display:inline-block;
+
+
+    padding:10px 18px;
+
+
+    border-radius:20px;
+
+
+    background:#111;
+
+
+    color:white;
+
+
+    border:
+
+    1px solid rgba(255,255,255,.15);
+
+
+    transition:.3s;
+
+
+}
+
+
+
+.back-btn:hover{
+
+
+    transform:translateY(-3px);
+
+
+    border-color:#8b6cff;
+
+
+}
+
+
+
+body.light .back-btn{
+
+
+    background:white;
+
+    color:#222;
+
+    border-color:#ddd;
+
+
+}
+
+
+
+
+/* =========================
+   文章分类
+========================= */
+
+
+.article-grid{
+
+
+    display:grid;
+
+
+    grid-template-columns:
+
+    repeat(3,1fr);
+
+
+    gap:20px;
+
+
+}
+
+
+
+.article-card{
+
+
+    display:block;
+
+
+    padding:18px;
+
+
+    min-height:70px;
+
+
+    background:#111;
+
+
+    color:white;
+
+
+    border-radius:15px;
+
+
+    border:
+
+    1px solid rgba(255,255,255,.15);
+
+
+    transition:.3s;
+
+
+}
+
+
+
+.article-card:hover{
+
+
+    transform:translateY(-4px);
+
+
+    border-color:#8b6cff;
+
+
+}
+
+
+
+.article-card h3{
+
+
+    margin:0;
+
+
+    font-size:18px;
+
+
+}
+
+
+
+body.light .article-card{
+
+
+    background:#fafafa;
+
+    color:#222;
+
+    border-color:#ddd;
+
+
+}
+
+
+
+/* =========================
+   文章正文
+========================= */
+
+
+.article-content{
+
+
+    font-size:18px;
+
+
+    line-height:2;
+
+
+}
+
+
+
+.article-content p{
+
+
+    margin:20px 0;
+
+
+}
+
+
+
+/* =========================
+   项目卡片
+========================= */
+
+
+.projects a,
+.project-card{
+
+
+    display:block;
+
+
+    padding:15px;
+
+
+    margin:12px 0;
+
+
+    background:#111;
+
+
+    color:white;
+
+
+    border-radius:15px;
+
+
+    border:
+
+    1px solid rgba(255,255,255,.12);
+
+
+    transition:.3s;
+
+
+}
+
+
+
+.projects a:hover,
+.project-card:hover{
+
+
+    transform:translateY(-4px);
+
+
+    border-color:#8b6cff;
+
+
+}
+
+
+
+body.light .projects a,
+body.light .project-card{
+
+
+    background:white;
+
+
+    color:#222;
+
+
+    border-color:#ddd;
+
+
+}
+
+
+
+/* =========================
+   图片展示
+========================= */
+
+
+.project-images{
+
+
+    display:flex;
+
+
+    flex-wrap:wrap;
+
+
+    gap:20px;
+
+
+    justify-content:center;
+
+
+}
+
+
+
+.project-image{
+
+
+    width:220px;
+
+
+    border-radius:15px;
+
+
+}
+
+
+
+.project-video{
+
+
+    width:320px;
+
+
+    max-height:500px;
+
+
+    border-radius:15px;
+
+
+}
+/* =========================
+   周边展示
+========================= */
+
+
+.product-grid{
+
+
+    display:grid;
+
+
+    grid-template-columns:
+
+    repeat(2,1fr);
+
+
+    gap:20px;
+
+
+}
+
+
+
+
+.product-card{
+
+
+    display:block;
+
+
+    padding:15px;
+
+
+    background:#111;
+
+
+    color:white;
+
+
+    border-radius:18px;
+
+
+    border:
+
+    1px solid rgba(255,255,255,.15);
+
+
+    transition:.3s;
+
+
+}
+
+
+
+.product-card:hover{
+
+
+    transform:translateY(-4px);
+
+
+    border-color:#8b6cff;
+
+
+}
+
+
+
+
+.product-card img{
+
+
+    width:100%;
+
+
+    height:160px;
+
+
+    object-fit:cover;
+
+
+    border-radius:15px;
+
+
+}
+
+
+
+.product-card h3{
+
+
+    margin:10px 0;
+
+
+}
+
+
+
+.product-card p{
+
+
+    opacity:.7;
+
+
+    font-size:14px;
+
+
+}
+
+
+
+
+body.light .product-card{
+
+
+    background:white;
+
+
+    color:#222;
+
+
+    border-color:#ddd;
+
 
 }
 
@@ -58,31 +663,176 @@ transition:0.5s;
 
 
 
-.products img{
+/* =========================
+   周边详情
+========================= */
 
-width:200px;
 
-border-radius:20px;
+.product-show{
+
+
+    display:flex;
+
+
+    justify-content:center;
+
+
+    align-items:center;
+
+
+    gap:30px;
+
+
+    margin:40px 0;
+
 
 }
 
 
 
-a{
+.product-show img{
 
-color:white;
 
-text-decoration:none;
+    width:500px;
 
-font-size:20px;
+
+    max-height:700px;
+
+
+    object-fit:contain;
+
+
+    border-radius:20px;
+
 
 }
 
 
 
-a:hover{
+.product-info{
 
-color:#ff99cc;
+
+    padding:25px;
+
+
+    background:#111;
+
+
+    color:white;
+
+
+    border-radius:20px;
+
+
+}
+
+
+
+body.light .product-info{
+
+
+    background:white;
+
+
+    color:#222;
+
+
+}
+
+
+
+
+.tags span{
+
+
+    display:inline-block;
+
+
+    padding:8px 15px;
+
+
+    margin:5px;
+
+
+    border-radius:20px;
+
+
+    background:#222;
+
+
+}
+
+
+
+body.light .tags span{
+
+
+    background:#eee;
+
+
+    color:#222;
+
+
+}
+
+
+
+
+.buy-btn,
+.detail-btn,
+.download-btn{
+
+
+    display:inline-block;
+
+
+    padding:12px 30px;
+
+
+    margin-top:20px;
+
+
+    border-radius:25px;
+
+
+    background:#111;
+
+
+    color:white;
+
+
+    border:1px solid #8b6cff;
+
+
+    transition:.3s;
+
+
+}
+
+
+
+.buy-btn:hover,
+.detail-btn:hover,
+.download-btn:hover{
+
+
+    transform:scale(1.05);
+
+
+}
+
+
+
+body.light .buy-btn,
+body.light .detail-btn,
+body.light .download-btn{
+
+
+    background:white;
+
+
+    color:#222;
+
 
 }
 
@@ -90,32 +840,9 @@ color:#ff99cc;
 
 
 
-.comment textarea{
-
-width:80%;
-
-height:100px;
-
-}
-
-
-
-
-
-button{
-
-padding:8px 15px;
-
-margin:5px;
-
-}
-
-
-
-
-/* =====================
-   Music Player Dark UI
-===================== */
+/* =========================
+   音乐播放器
+========================= */
 
 
 .music-box{
@@ -130,43 +857,31 @@ margin:5px;
     top:20px;
 
 
-
     width:200px;
-
 
 
     padding:12px;
 
 
-
     background:
 
-    rgba(8,8,12,0.95);
-
+    rgba(8,8,12,.95);
 
 
     border-radius:18px;
 
 
-
     border:
 
-    1px solid rgba(255,255,255,0.12);
-
+    1px solid rgba(255,255,255,.12);
 
 
     box-shadow:
 
-    0 8px 30px rgba(0,0,0,0.7);
-
+    0 8px 30px rgba(0,0,0,.7);
 
 
     backdrop-filter:blur(10px);
-
-
-
-    color:white;
-
 
 
     z-index:9999;
@@ -177,26 +892,13 @@ margin:5px;
 
 
 
-
 .music-title{
 
 
     font-size:12px;
 
 
-    font-weight:600;
-
-
-    line-height:20px;
-
-
-
-    color:white;
-
-
 }
-
-
 
 
 
@@ -211,44 +913,28 @@ margin:5px;
 
 
 
-
 #musicName{
 
 
     display:block;
 
 
-
-    margin-top:3px;
-
-
-
-    color:white;
-
+    margin-top:5px;
 
 
     font-size:12px;
 
 
-
-    max-width:170px;
-
-
-
     overflow:hidden;
-
-
-
-    text-overflow:ellipsis;
-
 
 
     white-space:nowrap;
 
 
+    text-overflow:ellipsis;
+
+
 }
-
-
 
 
 
@@ -259,19 +945,13 @@ margin:5px;
     height:1px;
 
 
-
     margin:10px 0;
 
 
-
-    background:
-
-    rgba(255,255,255,0.15);
-
+    background:rgba(255,255,255,.15);
 
 
 }
-
 
 
 
@@ -283,17 +963,13 @@ margin:5px;
     display:flex;
 
 
+    justify-content:center;
+
 
     align-items:center;
 
 
-
-    justify-content:center;
-
-
-
-    gap:7px;
-
+    gap:8px;
 
 
     flex-wrap:wrap;
@@ -304,65 +980,39 @@ margin:5px;
 
 
 
-
-
-
 .music-btn{
 
 
     border:none;
 
 
-
     border-radius:50%;
 
 
-
-    background:
-
-    rgba(20,20,25,0.95);
-
-
-
-    border:
-
-    1px solid rgba(255,255,255,0.18);
-
+    background:#111;
 
 
     color:white;
 
 
-
     cursor:pointer;
-
-
-
-    display:flex;
-
-
-
-    align-items:center;
-
-
-
-    justify-content:center;
-
 
 
     transition:.2s;
 
 
-
-    box-shadow:
-
-    0 4px 12px rgba(0,0,0,0.8);
-
-
-
 }
 
 
+
+
+.music-btn:hover{
+
+
+    transform:scale(1.1);
+
+
+}
 
 
 
@@ -373,20 +1023,10 @@ margin:5px;
     width:30px;
 
 
-
     height:30px;
 
 
-
-    font-size:14px;
-
-
-
 }
-
-
-
-
 
 
 
@@ -396,70 +1036,13 @@ margin:5px;
     width:42px;
 
 
-
     height:42px;
-
 
 
     font-size:20px;
 
 
-
-    background:
-
-    linear-gradient(
-
-    135deg,
-
-    #202020,
-
-    #050505
-
-    );
-
-
-
-    border:
-
-    1px solid rgba(160,120,255,0.45);
-
-
-
-    box-shadow:
-
-    0 0 15px rgba(130,90,255,0.35);
-
-
-
 }
-
-
-
-
-
-
-
-.music-btn:hover{
-
-
-    transform:scale(1.12);
-
-
-}
-
-
-
-
-
-.music-btn:active{
-
-
-    transform:scale(0.9);
-
-
-}
-
-
 
 
 
@@ -471,181 +1054,61 @@ margin:5px;
     width:95px;
 
 
-
     height:30px;
 
 
-
-    padding:0 8px;
-
-
-
     border-radius:15px;
-
-
-
-    background:
-
-    rgba(15,15,20,0.95);
-
-
-
-    border:
-
-    1px solid rgba(255,255,255,0.18);
-
-
-
-    color:white;
-
-
-
-    font-size:11px;
-
-
-
-    cursor:pointer;
-
-
-
-    outline:none;
-
-
-}
-
-
-
-
-
-
-
-.music-box select option{
 
 
     background:#111;
 
 
-
     color:white;
 
 
-}
-
-
-
-
-
-
-.music-line.bottom{
-
-
-    margin-top:10px;
-
-
-
-    margin-bottom:0;
-
-
-}
-/* ===== 周边展示 黑色主题 ===== */
-
-
-.products-page{
-
-    max-width:1000px;
-    margin:auto;
-    padding:40px;
-
-    color:#eeeeee;
-
-}
-
-
-
-.page-title{
-
-    font-size:36px;
-    text-align:center;
-
-    color:white;
-
-}
-
-
-
-.page-desc{
-
-    text-align:center;
-
-    color:#aaaaaa;
-
-    margin-bottom:40px;
-
-}
-
-
-
-
-.product-container{
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:30px;
-
-}
-
-
-
-
-
-.product-card{
-
-
-    display:flex;
-
-    overflow:hidden;
-
-
-    background:
-
-    linear-gradient(
-        135deg,
-        rgba(40,40,50,0.95),
-        rgba(20,20,25,0.95)
-    );
-
-
-    border-radius:22px;
-
-
-    border:
-
-    1px solid rgba(255,255,255,0.08);
-
-
-    box-shadow:
-
-    0 10px 35px rgba(0,0,0,0.6);
-
-
-    transition:0.3s;
+    border:1px solid rgba(255,255,255,.2);
 
 
 }
 
 
 
-.product-card:hover{
+body.light .music-box{
 
 
-    transform:translateY(-8px);
+    background:white;
 
 
-    box-shadow:
+    color:#222;
 
-    0 15px 45px rgba(80,120,255,0.25);
+
+    border-color:#ddd;
+
+
+}
+
+
+
+body.light .music-btn{
+
+
+    background:#eee;
+
+
+    color:#222;
+
+
+}
+
+
+
+body.light .music-box select{
+
+
+    background:white;
+
+
+    color:#222;
 
 
 }
@@ -653,567 +1116,46 @@ margin:5px;
 
 
 
-.product-image{
-
-
-    width:320px;
-
-    height:200px;
-
-
-    object-fit:cover;
-
-
-}
-
-
-
-
-
-.product-info{
-
-
-    padding:30px;
-
-    flex:1;
-
-
-}
-
-
-
-
-.product-info h2{
-
-
-    color:white;
-
-    font-size:28px;
-
-
-}
-
-
-
-
-.product-info p{
-
-
-    color:#cccccc;
-
-
-    line-height:1.8;
-
-
-}
-
-
-
-
-
-.tags{
-
-
-    margin-top:15px;
-
-
-}
-
-
-
-.tags span{
-
-
-    display:inline-block;
-
-
-    padding:
-
-    6px 16px;
-
-
-    margin-right:8px;
-
-
-    border-radius:20px;
-
-
-    background:
-
-    rgba(120,140,255,0.18);
-
-
-    color:#cbd5ff;
-
-
-    font-size:14px;
-
-
-}
-
-
-
-
-.detail-btn{
-
-
-    display:inline-block;
-
-
-    margin-top:25px;
-
-
-    padding:
-
-    10px 25px;
-
-
-    border-radius:25px;
-
-
-    background:
-
-    linear-gradient(
-        135deg,
-        #667eea,
-        #764ba2
-    );
-
-
-    color:white;
-
-
-    text-decoration:none;
-
-
-    transition:0.3s;
-
-
-}
-
-
-
-
-.detail-btn:hover{
-
-
-    transform:scale(1.05);
-
-
-}
-
-
-
-
-.notice{
-
-
-    margin-top:40px;
-
-
-    padding:20px;
-
-
-    background:
-
-    rgba(255,255,255,0.05);
-
-
-    border-radius:15px;
-
-
-    color:#aaaaaa;
-
-
-    text-align:center;
-
-
-}
-
-
-
-
-
-body{
-
-
-    background:#080808;
-
-}
-
-
-
-
-
-
-@media(max-width:700px){
-
-
-.product-card{
-
-
-    flex-direction:column;
-
-
-}
-
-
-.product-image{
-
-
-    width:100%;
-
-
-    height:220px;
-
-
-}
-
-
-
-}
-.project-page{
-
-max-width:900px;
-
-margin:60px auto;
-
-padding:30px;
-
-
-background:
-
-rgba(10,10,15,.9);
-
-
-border-radius:20px;
-
-
-color:white;
-
-
-}
-
-
-
-/* 项目截图展示 */
-
-.project-images{
-
-    display:flex;
-
-    gap:20px;
-
-    flex-wrap:wrap;
-
-    justify-content:center;
-
-}
-
-
-
-.project-image{
-
-
-    width:220px;
-
-
-    height:auto;
-
-
-    object-fit:contain;
-
-
-    border-radius:15px;
-
-
-    margin:10px;
-
-
-    border:
-
-    1px solid rgba(255,255,255,0.15);
-
-
-
-    background:
-
-    rgba(0,0,0,0.3);
-
-
-}
-.project-video{
-
-
-    width:320px;
-
-
-    max-height:500px;
-
-
-    border-radius:15px;
-
-
-    margin:10px;
-
-
-
-    border:
-
-    1px solid rgba(255,255,255,0.15);
-
-
-
-    background:black;
-
-
-}
-
-
-
-.download-btn{
-
-display:inline-block;
-
-
-padding:12px 30px;
-
-
-border-radius:25px;
-
-
-background:#111;
-
-
-border:1px solid #8b6cff;
-
-
-color:white;
-
-
-text-decoration:none;
-
-
-transition:.3s;
-
-
-}
-
-
-.download-btn:hover{
-
-transform:scale(1.05);
-
-}
-/* 首页项目卡片 */
-
-
-.project-card{
-
-
-background:
-
-rgba(20,20,25,0.8);
-
-
-
-border-radius:15px;
-
-
-
-padding:15px;
-
-
-
-margin:12px 0;
-
-
-
-border:
-
-1px solid rgba(255,255,255,0.12);
-
-
-
-transition:.3s;
-
-
-
-color:white;
-
-
-}
-
-
-
-
-
-.project-card:hover{
-
-
-transform:translateY(-5px);
-
-
-
-border-color:#8b6cff;
-
-
-
-box-shadow:
-
-0 10px 25px rgba(130,90,255,.25);
-
-
-}
-
-
-
-
-
-.projects a{
-
-
-text-decoration:none;
-
-
-}
-/* 返回按钮 */
-
-
-.back-btn{
-
-
-position:fixed;
-
-
-left:25px;
-
-
-top:25px;
-
-
-
-padding:10px 18px;
-
-
-
-border-radius:20px;
-
-
-
-background:
-
-rgba(10,10,15,.85);
-
-
-
-border:
-
-1px solid rgba(255,255,255,.15);
-
-
-
-color:white;
-
-
-
-text-decoration:none;
-
-
-
-z-index:9999;
-
-
-
-backdrop-filter:blur(10px);
-
-
-
-transition:.3s;
-
-
-}
-
-
-
-.back-btn:hover{
-
-
-transform:translateX(-5px);
-
-
-
-border-color:#8b6cff;
-
-
-}
-
-
-
-
-
-
-/* 项目评论 */
+/* =========================
+   评论框
+========================= */
 
 
 .comment-box{
 
 
-position:fixed;
+    position:fixed;
 
 
-
-right:25px;
-
+    right:25px;
 
 
-bottom:25px;
+    bottom:25px;
 
 
-
-width:260px;
-
+    width:260px;
 
 
-padding:15px;
+    padding:15px;
 
 
+    background:
 
-background:
-
-rgba(10,10,15,.9);
-
+    rgba(10,10,15,.9);
 
 
-border-radius:18px;
+    border-radius:18px;
 
 
+    border:
 
-border:
-
-1px solid rgba(255,255,255,.15);
-
+    1px solid rgba(255,255,255,.15);
 
 
-box-shadow:
-
-0 10px 30px rgba(0,0,0,.6);
-
-
-
-backdrop-filter:blur(10px);
-
-
-
-z-index:9999;
-
-
-
-color:white;
+    z-index:9999;
 
 
 }
-
 
 
 
@@ -1221,39 +1163,25 @@ color:white;
 .comment-box textarea{
 
 
-width:100%;
+    width:100%;
 
 
-
-height:70px;
-
+    height:70px;
 
 
-resize:none;
+    resize:none;
 
 
-
-border-radius:12px;
-
+    border-radius:12px;
 
 
-border:none;
+    padding:10px;
 
 
-
-padding:10px;
-
+    background:#111;
 
 
-background:#111;
-
-
-
-color:white;
-
-
-
-box-sizing:border-box;
+    color:white;
 
 
 }
@@ -1265,157 +1193,41 @@ box-sizing:border-box;
 .comment-box button{
 
 
-margin-top:8px;
+    width:100%;
 
 
-
-width:100%;
-
+    margin-top:8px;
 
 
-height:32px;
+    height:32px;
 
 
-
-border-radius:16px;
-
+    border-radius:16px;
 
 
-border:none;
+    background:#111;
 
 
-
-background:#111;
-
+    color:white;
 
 
-border:
-
-1px solid rgba(255,255,255,.2);
-
-
-
-color:white;
-
-
-
-cursor:pointer;
+    border:1px solid rgba(255,255,255,.2);
 
 
 }
 
 
 
-.comment-box button:hover{
+body.light .comment-box{
 
 
-border-color:#8b6cff;
+    background:white;
 
 
-}
-/* 周边卡片 */
+    color:#222;
 
-.product-card{
 
-
-display:flex;
-
-
-align-items:center;
-
-
-gap:15px;
-
-
-
-padding:15px;
-
-
-
-background:#111;
-
-
-
-border-radius:18px;
-
-
-
-border:
-
-1px solid rgba(255,255,255,.15);
-
-
-
-color:white;
-
-
-
-text-decoration:none;
-
-
-
-transition:.3s;
-
-
-}
-
-
-
-.product-card img{
-
-
-width:90px;
-
-
-height:90px;
-
-
-
-object-fit:cover;
-
-
-
-border-radius:15px;
-
-
-}
-
-
-
-.product-card:hover{
-
-
-transform:translateY(-3px);
-
-
-
-border-color:#8b6cff;
-
-
-}
-
-
-
-.product-card h3{
-
-
-margin:0 0 8px 0;
-
-
-}
-
-
-
-.product-card p{
-
-
-margin:0;
-
-
-font-size:14px;
-
-
-opacity:.7;
+    border-color:#ddd;
 
 
 }
@@ -1423,195 +1235,222 @@ opacity:.7;
 
 
 
+body.light .comment-box textarea{
 
 
-/* 项目卡片 */
-
-.projects a{
+    background:white;
 
 
-display:block;
-
-
-
-margin:10px 0;
-
-
-
-padding:12px 15px;
-
-
-
-background:#111;
-
-
-
-border-radius:14px;
-
-
-
-border:
-
-1px solid rgba(255,255,255,.15);
-
-
-
-color:white;
-
-
-
-text-decoration:none;
+    color:#222;
 
 
 }
 
 
 
-.projects a:hover{
+body.light .comment-box button{
 
 
-border-color:#8b6cff;
+    background:white;
 
 
+    color:#222;
 
-transform:translateX(5px);
+
+    border-color:#ddd;
 
 
 }
+
+
+
+
+/* =========================
+   搜索框
+========================= */
+
+
+.search-box{
+
+
+    position:fixed;
+
+
+    right:85px;
+
+
+    top:20px;
+
+
+    z-index:99999;
+
+
+}
+
+
+
+.search-box input{
+
+
+    width:220px;
+
+
+    height:42px;
+
+
+    padding:0 18px;
+
+
+    border-radius:22px;
+
+
+    background:
+
+    rgba(10,10,15,.85);
+
+
+    color:white;
+
+
+    border:1px solid rgba(255,255,255,.2);
+
+
+    outline:none;
+
+
+}
+
+
+
+.search-box input::placeholder{
+
+
+    color:#aaa;
+
+
+}
+
+
+
+
+body.light .search-box input{
+
+
+    background:white;
+
+
+    color:#222;
+
+
+    border-color:#ddd;
+
+
+}
+
+
+
+/* =========================
+   手机适配
+========================= */
+
+
+@media(max-width:700px){
+
+
+
+.container{
+
+
+    padding:15px;
+
+
+    flex-direction:column;
+
+
+}
+
+
+
+.left,
+.right{
+
+
+    width:100%;
+
+
+}
+
+
+
+
+.project-page,
+.products-page{
+
+
+    margin:20px auto;
+
+
+    padding:20px;
+
+
+}
+
+
+
+
+.article-grid{
+
+
+    grid-template-columns:1fr;
+
+
+}
+
+
+
+
 .product-grid{
 
 
-display:grid;
-
-
-grid-template-columns:repeat(2,1fr);
-
-
-gap:15px;
+    grid-template-columns:1fr;
 
 
 }
 
 
 
-.product-card{
+
+.nav-bar{
 
 
-display:block;
-
-
-background:#111;
-
-
-border-radius:16px;
-
-
-padding:12px;
-
-
-color:white;
-
-
-text-decoration:none;
-
-
-border:1px solid rgba(255,255,255,.15);
+    flex-direction:column;
 
 
 }
 
-
-
-.product-card img{
-
-
-width:100%;
-
-
-height:160px;
-
-
-object-fit:cover;
-
-
-border-radius:12px;
-
-
-}
-
-
-
-.product-card h3{
-
-
-font-size:16px;
-
-
-margin:10px 0;
-
-
-}
-
-
-
-.product-card p{
-
-
-font-size:13px;
-
-
-opacity:.7;
-
-
-}
-.product-page{
-
-max-width:900px;
-
-margin:auto;
-
-padding:40px;
-
-color:white;
-
-}
 
 
 
 .back-btn{
 
-position:fixed;
 
-top:20px;
+    width:100%;
 
-left:20px;
 
-padding:10px 18px;
+    text-align:center;
 
-background:#111;
-
-border-radius:12px;
-
-color:white;
-
-text-decoration:none;
 
 }
+
 
 
 
 
 .product-show{
 
-display:flex;
 
-align-items:center;
+    flex-direction:column;
 
-justify-content:center;
-
-gap:30px;
-
-margin:40px 0;
 
 }
 
@@ -1619,289 +1458,79 @@ margin:40px 0;
 
 .product-show img{
 
-width:500px;
 
-max-height:700px;
+    width:100%;
 
-object-fit:contain;
-
-border-radius:20px;
 
 }
 
 
 
-.switch-btn{
-
-
-width:50px;
-
-height:50px;
-
-border-radius:50%;
-
-background:#111;
-
-color:white;
-
-border:1px solid #555;
-
-font-size:22px;
-
-}
-
-
-
-
-.product-info{
-
-background:#111;
-
-padding:25px;
-
-border-radius:20px;
-
-}
-
-
-
-
-.tags span{
-
-
-display:inline-block;
-
-padding:8px 15px;
-
-margin:5px;
-
-background:#222;
-
-border-radius:20px;
-
-}
-
-
-
-
-
-.buy-btn{
-
-display:inline-block;
-
-padding:12px 25px;
-
-background:#222;
-
-color:white;
-
-border-radius:15px;
-
-text-decoration:none;
-
-}
-
-.article-grid {
-
-    display:grid;
-
-    grid-template-columns:repeat(3,1fr);
-
-    gap:8px;
-
-}
-
-
-.article-card {
-
-    padding:12px 16px;
-
-    min-height:0;
-
-}
-
-
-.article-card h3 {
-
-    margin:0;
-
-    font-size:16px;
-
-}
-/* =====================
-   手机适配
-   不影响电脑布局
-===================== */
-
-
-@media(max-width:700px){
-
-
-body{
-
-overflow-x:hidden;
-
-}
-
-
-
-.container{
-
-width:94%;
-
-padding:15px 0;
-
-}
-
-
-
-/* 原来的左右布局改上下 */
-
-.left,
-.right{
-
-width:100%;
-
-}
-
-
-
-/* 左右栏手机排列 */
-
-.container{
-
-display:flex;
-
-flex-direction:column;
-
-}
-
-
-
-
-
-/* 文章 */
-
-.article-grid{
-
-grid-template-columns:1fr;
-
-}
-
-
-
-/* 周边 */
-
-.product-grid{
-
-grid-template-columns:1fr;
-
-}
-
-
-
-.product-card img{
-
-width:100%;
-
-height:auto;
-
-}
-
-
-
-/* 轮播 */
-
-.carousel img{
-
-width:100%;
-
-height:auto;
-
-}
-
-
-
-
-
-/* 标题 */
-
-h1{
-
-font-size:28px;
-
-text-align:center;
-
-}
-
-
-
-h2{
-
-font-size:22px;
-
-}
-
-
-
-
-/* 项目 */
-
-.projects a{
-
-display:block;
-
-margin-bottom:10px;
-
-}
-
-
-
-
-
-/* 留言 */
-
-.comment-box{
-
-width:100%;
-
-}
-
-
-.comment-box textarea{
-
-width:100%;
-
-}
-
-
-
-
-
-/* 音乐 */
 
 .music-box{
 
-width:90%;
 
-left:5%;
+    width:90%;
 
-transform:none;
+
+    left:5%;
+
+
+    top:10px;
+
+
+}
+
+
+
+
+.comment-box{
+
+
+    width:90%;
+
+
+    right:5%;
+
 
 }
 
 
 
-.music-controls{
 
-display:flex;
+.search-box{
 
-flex-wrap:wrap;
 
-justify-content:center;
+    right:70px;
+
+
+    top:15px;
+
 
 }
 
+
+
+.search-box input{
+
+
+    width:130px;
+
+
+}
+
+
+
+#theme-btn{
+
+
+    right:15px;
+
+
+    top:15px;
+
+
+}
 
 
 }

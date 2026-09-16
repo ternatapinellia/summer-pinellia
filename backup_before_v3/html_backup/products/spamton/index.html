@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Deltarune Spamton 周边</title>
+
+<link rel="stylesheet" href="../../style.css">
+
+</head>
+
+
+<body>
+
+
+<a class="back-btn" href="../../index.html">
+← 返回首页
+</a>
+
+
+
+<div class="product-page">
+
+
+
+<h1>
+Deltarune Spamton 周边
+</h1>
+
+
+
+
+<div class="product-show">
+
+
+
+<button 
+class="switch-btn"
+onclick="prevImage()">
+
+◀
+
+</button>
+
+
+
+
+<img 
+id="productImage"
+src="../../images/products/spamton/1.png">
+
+
+
+
+
+<button
+class="switch-btn"
+onclick="nextImage()">
+
+▶
+
+</button>
+
+
+
+</div>
+
+
+
+
+
+<div class="product-info">
+
+
+<h2>
+商品类型
+</h2>
+
+
+<div class="tags">
+
+
+<span>
+拍立得
+</span>
+
+
+<span>
+徽章
+</span>
+
+
+<span>
+亚克力
+</span>
+
+
+<span>
+周边
+</span>
+
+
+</div>
+
+
+
+
+
+
+<h2>
+商品介绍
+</h2>
+
+
+<p>
+
+Deltarune Spamton 相关周边展示。
+
+包含拍立得、徽章、亚克力等商品。
+
+</p>
+
+
+
+
+
+<h2>
+购买链接
+</h2>
+
+
+<a class="buy-btn" href="#">
+
+购买地址
+
+</a>
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+<script>
+
+
+let images = [];
+
+
+for(let i = 1; i <= 18; i++){
+
+images.push(i + ".png");
+
+}
+
+
+
+let index = 0;
+
+
+
+let img =
+document.getElementById("productImage");
+
+
+
+
+
+function nextImage(){
+
+
+index++;
+
+
+if(index >= images.length){
+
+index = 0;
+
+}
+
+
+img.src =
+"../../images/products/spamton/"
++
+images[index];
+
+
+}
+
+
+
+
+
+
+function prevImage(){
+
+
+index--;
+
+
+if(index < 0){
+
+index = images.length - 1;
+
+}
+
+
+img.src =
+"../../images/products/spamton/"
++
+images[index];
+
+
+}
+
+
+
+</script>
+
+
+
+</body>
+
+
+</html>
