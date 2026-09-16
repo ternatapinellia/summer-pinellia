@@ -135,3 +135,328 @@ padding:15px;
 border-radius:15px;
 
 }
+/* ===== 周边展示 黑色主题 ===== */
+
+
+.products-page{
+
+    max-width:1000px;
+    margin:auto;
+    padding:40px;
+
+    color:#eeeeee;
+
+}
+
+
+
+.page-title{
+
+    font-size:36px;
+    text-align:center;
+
+    color:white;
+
+}
+
+
+
+.page-desc{
+
+    text-align:center;
+
+    color:#aaaaaa;
+
+    margin-bottom:40px;
+
+}
+
+
+
+
+.product-container{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:30px;
+
+}
+
+
+
+
+
+.product-card{
+
+
+    display:flex;
+
+    overflow:hidden;
+
+
+    background:
+
+    linear-gradient(
+        135deg,
+        rgba(40,40,50,0.95),
+        rgba(20,20,25,0.95)
+    );
+
+
+    border-radius:22px;
+
+
+    border:
+
+    1px solid rgba(255,255,255,0.08);
+
+
+    box-shadow:
+
+    0 10px 35px rgba(0,0,0,0.6);
+
+
+    transition:0.3s;
+
+
+}
+
+
+
+.product-card:hover{
+
+
+    transform:translateY(-8px);
+
+
+    box-shadow:
+
+    0 15px 45px rgba(80,120,255,0.25);
+
+
+}
+
+
+
+
+.product-image{
+
+
+    width:320px;
+
+    height:200px;
+
+
+    object-fit:cover;
+
+
+}
+
+
+
+
+
+.product-info{
+
+
+    padding:30px;
+
+    flex:1;
+
+
+}
+
+
+
+
+.product-info h2{
+
+
+    color:white;
+
+    font-size:28px;
+
+
+}
+
+
+
+
+.product-info p{
+
+
+    color:#cccccc;
+
+
+    line-height:1.8;
+
+
+}
+
+
+
+
+
+.tags{
+
+
+    margin-top:15px;
+
+
+}
+
+
+
+.tags span{
+
+
+    display:inline-block;
+
+
+    padding:
+
+    6px 16px;
+
+
+    margin-right:8px;
+
+
+    border-radius:20px;
+
+
+    background:
+
+    rgba(120,140,255,0.18);
+
+
+    color:#cbd5ff;
+
+
+    font-size:14px;
+
+
+}
+
+
+
+
+.detail-btn{
+
+
+    display:inline-block;
+
+
+    margin-top:25px;
+
+
+    padding:
+
+    10px 25px;
+
+
+    border-radius:25px;
+
+
+    background:
+
+    linear-gradient(
+        135deg,
+        #667eea,
+        #764ba2
+    );
+
+
+    color:white;
+
+
+    text-decoration:none;
+
+
+    transition:0.3s;
+
+
+}
+
+
+
+
+.detail-btn:hover{
+
+
+    transform:scale(1.05);
+
+
+}
+
+
+
+
+.notice{
+
+
+    margin-top:40px;
+
+
+    padding:20px;
+
+
+    background:
+
+    rgba(255,255,255,0.05);
+
+
+    border-radius:15px;
+
+
+    color:#aaaaaa;
+
+
+    text-align:center;
+
+
+}
+
+
+
+
+
+body{
+
+
+    background:#080808;
+
+}
+
+
+
+
+
+
+@media(max-width:700px){
+
+
+.product-card{
+
+
+    flex-direction:column;
+
+
+}
+
+
+.product-image{
+
+
+    width:100%;
+
+
+    height:220px;
+
+
+}
+
+
+
+}
