@@ -122,17 +122,39 @@ margin:5px;
 
 .music-box{
 
-position:fixed;
+    position:fixed;
 
-bottom:20px;
+    left:20px;
+    top:20px;
 
-left:20px;
+    right:auto;
+    bottom:auto;
 
-background:#222;
 
-padding:15px;
+    width:260px;
 
-border-radius:15px;
+    padding:15px;
+
+
+    background:rgba(20,20,25,0.9);
+
+
+    border-radius:15px;
+
+
+    border:1px solid rgba(255,255,255,0.1);
+
+
+    box-shadow:
+
+    0 8px 30px rgba(0,0,0,0.5);
+
+
+    color:white;
+
+
+    z-index:9999;
+
 
 }
 /* ===== 周边展示 黑色主题 ===== */

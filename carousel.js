@@ -1,10 +1,14 @@
 let images = [
 
-"images/cs1.png",
+"images/tv.png",
 
-"images/cs2.png",
+"images/tv1.png",
 
-"images/cs3.png"
+"images/tv2.png",
+
+"images/tv3.png",
+
+"images/tv4.png"
 
 ];
 
@@ -25,9 +29,10 @@ index++;
 if(index >= images.length)
 {
 
-index = 0;
+    index = 0;
 
 }
+
 
 
 banner.style.opacity = 0;
@@ -37,10 +42,10 @@ banner.style.opacity = 0;
 setTimeout(()=>{
 
 
-banner.src = images[index];
+    banner.src = images[index];
 
 
-banner.style.opacity = 1;
+    banner.style.opacity = 1;
 
 
 },500);
