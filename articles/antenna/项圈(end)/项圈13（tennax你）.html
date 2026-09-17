@@ -1,4 +1,4 @@
-﻿
+
 <!DOCTYPE html>
 <html lang="zh-CN">
 
@@ -143,91 +143,44 @@ placeholder="留下你的留言">
 
 
 
+
+
+<audio id="bgm" loop></audio>
+
+<div class="music-box">
+
+<div class="music-title">
+🎵 当前音乐：
+<span id="musicName">未播放</span>
+</div>
+
+<div class="music-controls">
+
+<button class="music-btn small" onclick="prevMusic()">⏮</button>
+
+<button id="playBtn" class="music-btn play" onclick="toggleMusic()">▶</button>
+
+<button class="music-btn small" onclick="nextMusic()">⏭</button>
+
+<select id="mode" onchange="changeMode()">
+<option value="loop">↻ 循环播放</option>
+<option value="single">↻ 单曲循环</option>
+<option value="random">🔀 随机播放</option>
+</select>
+
+</div>
+
+</div>
+
+
+
+
+
 <script src="../../../theme.js"></script>
 
 <script src="../../../script.js"></script>
 
 
-
-
-
-
-<audio id="bgm" loop></audio>
-
-
-<div class="music-box">
-
-
-<div class="music-title">
-
-<span class="music-icon">
-🎵
-</span>
-
-当前音乐：
-
-<span id="musicName">
-未播放
-</span>
-
-</div>
-
-
-<div class="music-line"></div>
-
-
-<div class="music-controls">
-
-
-<button class="music-btn small" onclick="prevMusic()">
-⏮
-</button>
-
-
-<button id="playBtn" class="music-btn play" onclick="toggleMusic()">
-▶
-</button>
-
-
-<button class="music-btn small" onclick="nextMusic()">
-⏭
-</button>
-
-
-<select id="mode" onchange="changeMode()">
-
-<option value="loop">
-↻ 循环播放
-</option>
-
-<option value="single">
-↻ 单曲循环
-</option>
-
-<option value="random">
-🔀 随机播放
-</option>
-
-</select>
-
-
-</div>
-
-
-</div>
-
-<script src="../../../../script.js"></script>
 </body>
 
 </html>
-
-
-
-
-
-
-
-
-
-
-

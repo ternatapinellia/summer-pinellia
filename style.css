@@ -1534,3 +1534,13 @@ body.light .search-box input{
 
 
 }
+/* 防止返回首页按钮被音乐播放器挡住 */
+.back-btn{
+    margin-bottom:100px;
+}
+
+
+/* 防止页面底部内容被播放器挡住 */
+.project-page{
+    padding-bottom:150px;
+}
