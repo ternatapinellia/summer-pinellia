@@ -1,4 +1,4 @@
-let rootPath = "";
+let rootPath = location.origin + "/";
 
 
 let depth = location.pathname
