@@ -1,120 +1,321 @@
-
-document.addEventListener(
-"DOMContentLoaded",
-()=>{
-
-
-let input=document.querySelector(
-"#site-search"
-);
-
-
-if(!input)return;
+let searchData = [];
 
 
 
-fetch(
-input.dataset.json
-)
 
-.then(r=>r.json())
+// ==========================
+// 加载搜索数据
+// ==========================
 
-.then(data=>{
-
-
-input.addEventListener(
-"input",
-()=>{
+async function loadSearchData(){
 
 
-let old=document.querySelector(
-"#search-result"
-);
+    try{
 
 
-if(old)
-old.remove();
+        let response =
+        await fetch(
+            "/search.json"
+        );
+
+
+        searchData =
+        await response.json();
 
 
 
-let key=input.value.trim();
+    }
+
+
+    catch(e){
+
+
+        console.log(
+            "搜索索引加载失败:",
+            e
+        );
+
+
+    }
+
+
+}
 
 
 
-if(!key)
-return;
 
 
 
-let box=document.createElement(
-"div"
-);
+// ==========================
+// 搜索功能
+// ==========================
 
 
-box.id="search-result";
-
-
-box.style.position="fixed";
-box.style.right="80px";
-box.style.top="70px";
-box.style.background="#111";
-box.style.color="white";
-box.style.padding="10px";
-box.style.borderRadius="15px";
-box.style.zIndex="99999";
+function doSearch(){
 
 
 
-data.filter(
-x=>
-
-x.title.includes(key)
-||
-x.content.includes(key)
-
-)
-.slice(0,10)
-.forEach(
-x=>{
-
-
-let a=document.createElement(
-"a"
-);
-
-
-a.href=x.url;
-
-a.innerText=x.title;
-
-
-a.style.display="block";
-
-a.style.color="white";
-
-a.style.padding="8px";
+    let box =
+    document.getElementById(
+        "site-search"
+    );
 
 
 
-box.appendChild(a);
+    let resultBox =
+    document.getElementById(
+        "searchResult"
+    );
+
+
+
+    if(!box || !resultBox){
+
+        return;
+
+    }
+
+
+
+
+
+
+    let keyword =
+    box.value
+    .trim()
+    .toLowerCase();
+
+
+
+
+
+    resultBox.innerHTML="";
+
+
+    // 没输入隐藏
+
+    if(keyword===""){
+
+
+        resultBox.style.display =
+        "none";
+
+
+        return;
+
+
+    }
+
+
+
+
+
+
+
+    let results =
+    searchData.filter(item=>{
+
+
+        let title =
+        (item.title || "")
+        .toLowerCase();
+
+
+
+        let content =
+        (item.content || "")
+        .toLowerCase();
+
+
+
+        return (
+
+            title.includes(keyword)
+
+            ||
+
+            content.includes(keyword)
+
+        );
+
+
+    });
+
+
+
+
+
+
+    // 有搜索才显示
+
+    resultBox.style.display =
+    "block";
+
+
+
+
+
+
+    if(results.length===0){
+
+
+        resultBox.innerHTML =
+
+        `
+
+        <div class="search-item">
+
+        没有找到相关内容
+
+        </div>
+
+        `;
+
+
+        return;
+
+
+    }
+
+
+
+
+
+
+
+    results.forEach(item=>{
+
+
+        let div =
+        document.createElement(
+            "div"
+        );
+
+
+
+        div.className =
+        "search-item";
+
+
+
+        div.innerHTML =
+
+
+        `
+
+        <a href="${item.path}">
+
+        📄 ${item.title}
+
+        </a>
+
+        `;
+
+
+
+        resultBox.appendChild(
+            div
+        );
+
+
+
+    });
 
 
 
 }
-);
 
 
 
-document.body.appendChild(
-box
-);
+
+
+
+
+
+// ==========================
+// 点击外部关闭
+// ==========================
+
+
+document.addEventListener(
+"click",
+function(e){
+
+
+
+    let box =
+    document.querySelector(
+        ".search-box"
+    );
+
+
+
+    let result =
+    document.getElementById(
+        "searchResult"
+    );
+
+
+
+    if(
+        box &&
+        !box.contains(e.target)
+    ){
+
+
+        if(result){
+
+            result.style.display =
+            "none";
+
+        }
+
+
+    }
 
 
 
 });
 
 
-});
+
+
+
+
+
+
+// ==========================
+// 初始化
+// ==========================
+
+
+window.addEventListener(
+"DOMContentLoaded",
+()=>{
+
+
+    loadSearchData();
+
+
+
+    let box =
+    document.getElementById(
+        "site-search"
+    );
+
+
+
+    if(box){
+
+
+        box.addEventListener(
+            "input",
+            doSearch
+        );
+
+
+    }
+
 
 
 });

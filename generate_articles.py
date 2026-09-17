@@ -2,10 +2,16 @@ from pathlib import Path
 from docx import Document
 import html
 import re
+import json
+
 
 
 SOURCE = Path("article_source")
 OUTPUT = Path("articles")
+
+
+# 搜索索引
+SEARCH_DATA = []
 
 
 
@@ -45,6 +51,7 @@ MUSIC_BLOCK = """
 </div>
 
 """
+
 
 
 ARTICLE_TEMPLATE = """
@@ -114,8 +121,6 @@ ARTICLE_TEMPLATE = """
 </div>
 
 
-
-<!-- 留言 -->
 
 <div class="comment-box">
 
@@ -228,16 +233,13 @@ INDEX_TEMPLATE = """
 
 <script src="{script}"></script>
 
+<script src="{search}"></script>
+
 
 </body>
 
 </html>
 """
-
-
-
-
-
 # ==========================
 # 自然排序
 # ==========================
@@ -288,6 +290,7 @@ def read_docx(file):
         return "<p>文件无法读取</p>"
 
 
+
     result = []
 
 
@@ -313,12 +316,36 @@ def read_docx(file):
             )
 
 
+
     if result:
 
         return "\n".join(result)
 
 
     return "<p>暂无内容</p>"
+
+
+
+
+
+
+# ==========================
+# 搜索文本清理
+# ==========================
+
+
+def clean_html(text):
+
+    return re.sub(
+
+        "<.*?>",
+
+        "",
+
+        text
+
+    )
+
 
 
 
@@ -339,9 +366,13 @@ def get_depth(output):
 
 
 
+
+
 def get_css_path(output):
 
     return "../"*get_depth(output)+"style.css"
+
+
 
 
 
@@ -351,15 +382,28 @@ def get_theme_path(output):
 
 
 
+
+
 def get_script_path(output):
 
     return "../"*get_depth(output)+"script.js"
 
 
 
+
+
+def get_search_path(output):
+
+    return "../"*get_depth(output)+"search.js"
+
+
+
+
+
 def get_home_path(output):
 
     return "../"*get_depth(output)+"index.html"
+
 
 
 
@@ -372,9 +416,9 @@ def get_parent_path():
 
 
 
+
 # ==========================
 # 判断入口目录
-# 保持原逻辑
 # ==========================
 
 
@@ -402,6 +446,10 @@ def is_entry_folder(output):
 def create_article(source, output):
 
 
+    global SEARCH_DATA
+
+
+
     docs = [
 
         x for x in natural_sort(
@@ -414,17 +462,45 @@ def create_article(source, output):
     ]
 
 
+
     index = docs.index(source)
 
 
+
+    article_content = read_docx(source)
+
+
+
+    # 加入搜索索引
+
+    SEARCH_DATA.append({
+
+        "title": source.stem,
+
+        "path": str(
+            output.relative_to(Path("."))
+        ).replace("\\","/"),
+
+        "content": clean_html(
+            article_content
+        )
+
+    })
+
+
+
+
     article_nav = []
+
 
 
     # 上一篇
 
     if index > 0:
 
+
         prev = docs[index-1]
+
 
         article_nav.append(
 
@@ -440,11 +516,16 @@ href="{prev.stem}.html">
         )
 
 
+
+
     # 下一篇
+
 
     if index < len(docs)-1:
 
+
         nxt = docs[index+1]
+
 
         article_nav.append(
 
@@ -461,13 +542,15 @@ href="{nxt.stem}.html">
 
 
 
+
+
     output.write_text(
 
         ARTICLE_TEMPLATE.format(
 
             title=html.escape(source.stem),
 
-            content=read_docx(source),
+            content=article_content,
 
             css=get_css_path(output),
 
@@ -503,6 +586,10 @@ href="{nxt.stem}.html">
 def create_index(folder, output):
 
 
+    global SEARCH_DATA
+
+
+
     folders = []
 
     articles = []
@@ -516,6 +603,7 @@ def create_index(folder, output):
 
 
         if item.is_dir():
+
 
 
             folders.append(
@@ -537,7 +625,27 @@ href="{item.name}/index.html">
 
 
 
-        elif item.suffix.lower() == ".docx":
+            SEARCH_DATA.append({
+
+                "title": item.name,
+
+                "path": str(
+                    (output.parent /
+                    item.name /
+                    "index.html")
+                    .relative_to(Path("."))
+                ).replace("\\","/"),
+
+                "content": item.name
+
+            })
+
+
+
+
+
+        elif item.suffix.lower()==".docx":
+
 
 
             if item.name.startswith("~$"):
@@ -565,9 +673,8 @@ href="{item.stem}.html">
 
 
 
-
-
     folder_html = ""
+
 
 
     if folders:
@@ -576,9 +683,7 @@ href="{item.stem}.html">
         folder_html = f"""
 
 <h2>
-
 目录
-
 </h2>
 
 
@@ -593,7 +698,9 @@ href="{item.stem}.html">
 
 
 
+
     article_html = ""
+
 
 
     if articles:
@@ -602,9 +709,7 @@ href="{item.stem}.html">
         article_html = f"""
 
 <h2>
-
 文章
-
 </h2>
 
 
@@ -615,12 +720,10 @@ href="{item.stem}.html">
 </div>
 
 """
+# ==========================
+# 完成目录生成
+# ==========================
 
-
-
-
-
-    # 保留你的返回逻辑
 
     if is_entry_folder(output):
 
@@ -667,23 +770,25 @@ href="{get_home_path(output)}">
 
         INDEX_TEMPLATE.format(
 
-    title=html.escape(folder.name),
+            title=html.escape(folder.name),
 
-    folders=folder_html,
+            folders=folder_html,
 
-    articles=article_html,
+            articles=article_html,
 
-    css=get_css_path(output),
+            css=get_css_path(output),
 
-    theme=get_theme_path(output),
+            theme=get_theme_path(output),
 
-    script=get_script_path(output),
+            script=get_script_path(output),
 
-    nav=nav,
+            search=get_search_path(output),
 
-    music=MUSIC_BLOCK
+            nav=nav,
 
-),
+            music=MUSIC_BLOCK
+
+        ),
 
         encoding="utf-8"
 
@@ -698,7 +803,7 @@ href="{get_home_path(output)}">
 
 
 # ==========================
-# 遍历
+# 遍历生成
 # ==========================
 
 
@@ -733,7 +838,8 @@ def process_folder(source, output):
 
 
 
-        elif item.suffix.lower() == ".docx":
+        elif item.suffix.lower()==".docx":
+
 
 
             if item.name.startswith("~$"):
@@ -746,7 +852,7 @@ def process_folder(source, output):
 
                 item,
 
-                output / (item.stem + ".html")
+                output / (item.stem+".html")
 
             )
 
@@ -778,13 +884,19 @@ def process_folder(source, output):
 def main():
 
 
+    global SEARCH_DATA
+
+
+
     if not SOURCE.exists():
+
 
         print(
             "没有找到 article_source"
         )
 
         return
+
 
 
 
@@ -797,14 +909,57 @@ def main():
     )
 
 
+
+
+
+    # 输出搜索索引
+
+    with open(
+
+        "search.json",
+
+        "w",
+
+        encoding="utf-8"
+
+    ) as f:
+
+
+        json.dump(
+
+            SEARCH_DATA,
+
+            f,
+
+            ensure_ascii=False,
+
+            indent=2
+
+        )
+
+
+
+
+
     print(
+
         "文章生成完成"
+
+    )
+
+    print(
+
+        "搜索索引生成完成"
+
     )
 
 
 
 
 
-if __name__ == "__main__":
+
+
+if __name__=="__main__":
+
 
     main()
