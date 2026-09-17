@@ -1720,3 +1720,151 @@ body.light .search-box input{
 
 
 }
+/* ==========================
+   右上角搜索
+========================== */
+
+
+.search-box {
+
+    position: fixed;
+
+    top: 20px;
+
+    right: 80px;
+
+    z-index: 9999;
+
+}
+
+
+
+#site-search {
+
+
+    width: 160px;
+
+
+    padding: 8px 12px;
+
+
+    font-size: 14px;
+
+
+    color: #333;
+
+
+    background: rgba(255,255,255,0.9);
+
+
+    border: 1px solid rgba(120,120,120,0.3);
+
+
+    border-radius: 15px;
+
+
+    outline: none;
+
+
+}
+
+
+
+#site-search::placeholder {
+
+    color:#777;
+
+}
+
+
+
+#site-search:focus {
+
+    background:white;
+
+}
+
+
+
+
+
+
+/* ==========================
+   搜索下拉结果
+========================== */
+
+
+#searchResult {
+
+
+    display:none;
+
+
+    position:absolute;
+
+
+    top:45px;
+
+
+    right:0;
+
+
+    width:260px;
+
+
+    max-height:350px;
+
+
+    overflow-y:auto;
+
+
+    background:rgba(255,255,255,0.95);
+
+
+    border-radius:12px;
+
+
+    padding:10px;
+
+
+    box-shadow:0 8px 25px rgba(0,0,0,0.2);
+
+
+}
+
+
+
+
+
+.search-item {
+
+
+    padding:10px;
+
+
+    margin:5px 0;
+
+
+    background:rgba(240,240,240,0.9);
+
+
+    border-radius:8px;
+
+
+}
+
+
+
+.search-item a {
+
+
+    color:#333;
+
+
+    text-decoration:none;
+
+
+    display:block;
+
+
+}
