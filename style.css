@@ -1541,7 +1541,49 @@ body > .back-btn{
 
     text-align:center !important;
 
-}{
+}
+/* 手机端重新排序 */
+
+.container{
+    display:flex;
+}
+
+
+.right{
+    display:flex;
+    flex-direction:column;
+}
+
+
+.right h1{
+    order:1;
+}
+
+
+.articles{
+    order:3;
+}
+
+
+.projects{
+    order:5;
+}
+
+
+.left{
+    display:flex;
+    flex-direction:column;
+}
+
+
+.carousel{
+    order:2;
+}
+
+
+.products{
+    order:4;
+}
 
     /* 音乐播放器 */
     .music-box{
