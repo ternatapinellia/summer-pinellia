@@ -2,6 +2,7 @@
    DNT Website Style
    Clean Version
    Part 1
+   Cleaned
 ========================= */
 
 
@@ -63,7 +64,6 @@ body.light{
 }
 
 
-/* 所有主要容器 */
 
 body.light .project-page,
 body.light .products-page{
@@ -95,6 +95,7 @@ body.light .products-page{
 
     border-radius:50%;
 
+
     display:flex;
 
     justify-content:center;
@@ -106,9 +107,8 @@ body.light .products-page{
 
     color:white;
 
-    border:
 
-    1px solid rgba(255,255,255,.3);
+    border:1px solid rgba(255,255,255,.3);
 
 
     cursor:pointer;
@@ -178,6 +178,7 @@ body.light #theme-btn{
 
 
 
+
 /* =========================
    页面通用容器
 ========================= */
@@ -208,6 +209,7 @@ body.light #theme-btn{
 
 
 
+
 /* =========================
    导航按钮
 ========================= */
@@ -233,19 +235,29 @@ body.light #theme-btn{
 
 
 .back-btn{
+
+
     display:inline-block;
+
 
     padding:10px 18px;
 
+
     border-radius:20px;
+
 
     background:#111;
 
+
     color:white;
+
 
     border:1px solid rgba(255,255,255,.15);
 
+
     transition:.3s;
+
+
 }
 
 
@@ -274,6 +286,7 @@ body.light .back-btn{
 
 
 }
+
 
 
 
@@ -322,9 +335,7 @@ body.light .back-btn{
     border-radius:15px;
 
 
-    border:
-
-    1px solid rgba(255,255,255,.15);
+    border:1px solid rgba(255,255,255,.15);
 
 
     transition:.3s;
@@ -365,12 +376,16 @@ body.light .article-card{
 
     background:#fafafa;
 
+
     color:#222;
+
 
     border-color:#ddd;
 
 
 }
+
+
 
 
 
@@ -402,6 +417,7 @@ body.light .article-card{
 
 
 
+
 /* =========================
    项目卡片
 ========================= */
@@ -429,9 +445,7 @@ body.light .article-card{
     border-radius:15px;
 
 
-    border:
-
-    1px solid rgba(255,255,255,.12);
+    border:1px solid rgba(255,255,255,.12);
 
 
     transition:.3s;
@@ -469,6 +483,7 @@ body.light .project-card{
 
 
 }
+
 
 
 
@@ -545,7 +560,6 @@ body.light .project-card{
 
 
 
-
 .product-card{
 
 
@@ -564,9 +578,7 @@ body.light .project-card{
     border-radius:18px;
 
 
-    border:
-
-    1px solid rgba(255,255,255,.15);
+    border:1px solid rgba(255,255,255,.15);
 
 
     transition:.3s;
@@ -632,7 +644,6 @@ body.light .project-card{
 
 
 
-
 body.light .product-card{
 
 
@@ -646,7 +657,6 @@ body.light .product-card{
 
 
 }
-
 
 
 
@@ -729,7 +739,6 @@ body.light .product-info{
 
 
 
-
 .tags span{
 
 
@@ -762,6 +771,7 @@ body.light .tags span{
 
 
 }
+
 
 
 
@@ -828,6 +838,7 @@ body.light .download-btn{
 
 
 
+
 /* =========================
    音乐播放器
 ========================= */
@@ -851,17 +862,13 @@ body.light .download-btn{
     padding:12px;
 
 
-    background:
-
-    rgba(8,8,12,.95);
+    background:rgba(8,8,12,.95);
 
 
     border-radius:18px;
 
 
-    border:
-
-    1px solid rgba(255,255,255,.12);
+    border:1px solid rgba(255,255,255,.12);
 
 
     box-shadow:
@@ -876,7 +883,6 @@ body.light .download-btn{
 
 
 }
-
 
 
 
@@ -897,7 +903,6 @@ body.light .download-btn{
 
 
 }
-
 
 
 
@@ -926,7 +931,6 @@ body.light .download-btn{
 
 
 
-
 .music-line{
 
 
@@ -940,8 +944,6 @@ body.light .download-btn{
 
 
 }
-
-
 
 
 
@@ -964,7 +966,6 @@ body.light .download-btn{
 
 
 }
-
 
 
 
@@ -993,7 +994,6 @@ body.light .download-btn{
 
 
 
-
 .music-btn:hover{
 
 
@@ -1001,7 +1001,6 @@ body.light .download-btn{
 
 
 }
-
 
 
 
@@ -1031,8 +1030,6 @@ body.light .download-btn{
 
 
 }
-
-
 
 
 
@@ -1104,6 +1101,8 @@ body.light .music-box select{
 
 
 
+
+
 /* =========================
    评论框
 ========================= */
@@ -1127,24 +1126,19 @@ body.light .music-box select{
     padding:15px;
 
 
-    background:
-
-    rgba(10,10,15,.9);
+    background:rgba(10,10,15,.9);
 
 
     border-radius:18px;
 
 
-    border:
-
-    1px solid rgba(255,255,255,.15);
+    border:1px solid rgba(255,255,255,.15);
 
 
     z-index:9999;
 
 
 }
-
 
 
 
@@ -1173,8 +1167,6 @@ body.light .music-box select{
 
 
 }
-
-
 
 
 
@@ -1222,7 +1214,6 @@ body.light .comment-box{
 
 
 
-
 body.light .comment-box textarea{
 
 
@@ -1249,6 +1240,8 @@ body.light .comment-box button{
 
 
 }
+
+
 
 
 
@@ -1292,9 +1285,7 @@ body.light .comment-box button{
     border-radius:22px;
 
 
-    background:
-
-    rgba(10,10,15,.85);
+    background:rgba(10,10,15,.85);
 
 
     color:white;
@@ -1320,7 +1311,6 @@ body.light .comment-box button{
 
 
 
-
 body.light .search-box input{
 
 
@@ -1337,375 +1327,337 @@ body.light .search-box input{
 
 
 
+
+
+
 /* =========================
-   手机适配
+   手机适配（唯一）
 ========================= */
 
 
 @media(max-width:700px){
 
 
-
-.container{
-
-
-    padding:15px;
+    .container{
 
 
-    flex-direction:column;
+        padding:15px;
+
+
+        flex-direction:column;
+
+
+    }
+
+
+
+    .left,
+    .right{
+
+
+        width:100%;
+
+
+    }
+
+
+
+    /* 手机排列顺序 */
+
+
+    .right{
+
+
+        display:flex;
+
+
+        flex-direction:column;
+
+
+    }
+
+
+
+    .right h1{
+
+        order:1;
+
+    }
+
+
+
+    .carousel{
+
+        order:2;
+
+    }
+
+
+
+    .articles{
+
+        order:3;
+
+    }
+
+
+
+    .products{
+
+        order:4;
+
+    }
+
+
+
+    .projects{
+
+        order:5;
+
+    }
+
+
+
+
+    .project-page,
+    .products-page{
+
+
+        margin:20px auto;
+
+
+        padding:20px;
+
+
+    }
+
+
+
+    .article-grid{
+
+
+        grid-template-columns:1fr;
+
+
+    }
+
+
+
+    .product-grid{
+
+
+        grid-template-columns:1fr;
+
+
+    }
+
+
+
+    .nav-bar{
+
+
+        flex-direction:column;
+
+
+    }
+
+
+
+    .back-btn{
+
+
+        width:100%;
+
+
+        text-align:center;
+
+
+    }
+
+
+
+    .product-show{
+
+
+        flex-direction:column;
+
+
+    }
+
+
+
+    .product-show img{
+
+
+        width:100%;
+
+
+    }
+
+
+
+    .music-box{
+
+
+        width:130px;
+
+
+        padding:6px;
+
+
+        left:8px;
+
+
+        top:8px;
+
+
+    }
+
+
+
+    .music-btn.small{
+
+
+        width:22px;
+
+
+        height:22px;
+
+
+    }
+
+
+
+    .music-btn.play{
+
+
+        width:30px;
+
+
+        height:30px;
+
+
+        font-size:14px;
+
+
+    }
+
+
+
+    .music-box select{
+
+
+        width:65px;
+
+
+        height:22px;
+
+
+    }
+
+
+
+    .comment-box{
+
+
+        width:140px;
+
+
+        right:8px;
+
+
+        bottom:8px;
+
+
+        padding:8px;
+
+
+    }
+
+
+
+    .comment-box textarea{
+
+
+        height:40px;
+
+
+    }
+
+
+
+    .search-box{
+
+
+        right:70px;
+
+
+        top:15px;
+
+
+    }
+
+
+
+    .search-box input{
+
+
+        width:130px;
+
+
+    }
+
+
+
+    #theme-btn{
+
+
+        right:15px;
+
+
+        top:15px;
+
+
+    }
 
 
 }
 
 
-
-.left,
-.right{
-
-
-    width:100%;
-
-
-}
-
-
-
-
-.project-page,
-.products-page{
-
-
-    margin:20px auto;
-
-
-    padding:20px;
-
-
-}
-
-
-
-
-.article-grid{
-
-
-    grid-template-columns:1fr;
-
-
-}
-
-
-
-
-.product-grid{
-
-
-    grid-template-columns:1fr;
-
-
-}
-
-
-
-
-.nav-bar{
-
-
-    flex-direction:column;
-
-
-}
-
-
+/* =========================
+   返回首页按钮
+========================= */
 
 
 .back-btn{
 
 
-    width:100%;
-
-
-    text-align:center;
-
-
-}
-
-
-
-
-
-.product-show{
-
-
-    flex-direction:column;
-
-
-}
-
-
-
-.product-show img{
-
-
-    width:100%;
-
-
-}
-
-
-
-
-.music-box{
-
-    width:150px;
-
-    left:10px;
-
-    top:10px;
-
-}
-
-
-.comment-box{
-
-    width:160px;
-
-    right:10px;
-
-    bottom:10px;
-
-}
-
-
-
-.search-box{
-
-
-    right:70px;
-
-
-    top:15px;
-
-
-}
-
-
-
-.search-box input{
-
-
-    width:130px;
-
-
-}
-
-
-
-#theme-btn{
-
-
-    right:15px;
-
-
-    top:15px;
-
-
-}
-
-
-}
-/* =========================
-   返回首页按钮居中
-========================= */
-
-body > .back-btn{
-
-    position:relative;
-
     display:block;
 
+
     width:160px;
 
-    margin:90px auto 0 auto;
+
+    margin:40px auto;
+
 
     text-align:center;
 
+
 }
 
-/* 强制周边页标题居中 */
+
+
+/* 标题居中 */
+
 
 .product-page h1,
 .products-page h1,
 .products-page > h1,
 .project-page > h1{
 
+
     text-align:center !important;
 
-}
-/* 手机端重新排序 */
-
-.container{
-    display:flex;
-}
-
-
-.right{
-    display:flex;
-    flex-direction:column;
-}
-
-
-.right h1{
-    order:1;
-}
-
-
-.articles{
-    order:3;
-}
-
-
-.projects{
-    order:5;
-}
-
-
-.left{
-    display:flex;
-    flex-direction:column;
-}
-
-
-.carousel{
-    order:2;
-}
-
-
-.products{
-    order:4;
-}
-
-    /* 音乐播放器 */
-    .music-box{
-
-        width:130px;
-        padding:6px;
-
-        left:8px;
-        top:8px;
-
-        border-radius:12px;
-
-    }
-
-
-    .music-title{
-        font-size:9px;
-    }
-
-
-    .music-icon{
-        font-size:12px;
-    }
-
-
-    #musicName{
-
-        font-size:9px;
-        margin-top:3px;
-
-    }
-
-
-    .music-line{
-
-        margin:5px 0;
-
-    }
-
-
-    .music-controls{
-
-        gap:4px;
-
-    }
-
-
-    .music-btn.small{
-
-        width:22px;
-        height:22px;
-
-        font-size:11px;
-
-    }
-
-
-    .music-btn.play{
-
-        width:30px;
-        height:30px;
-
-        font-size:14px;
-
-    }
-
-
-    .music-box select{
-
-        width:65px;
-        height:22px;
-
-        font-size:10px;
-
-    }
-
-
-
-    /* 留言面板 */
-
-    .comment-box{
-
-        width:140px;
-
-        right:8px;
-        bottom:8px;
-
-        padding:8px;
-
-        border-radius:12px;
-
-    }
-
-
-    .comment-box h3{
-
-        font-size:13px;
-
-        margin:3px 0;
-
-    }
-
-
-    .comment-box textarea{
-
-        height:40px;
-
-        padding:5px;
-
-        font-size:11px;
-
-    }
-
-
-    .comment-box button{
-
-        height:24px;
-
-        font-size:11px;
-
-        margin-top:5px;
-
-    }
 
 }
