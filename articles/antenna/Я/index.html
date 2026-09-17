@@ -1,4 +1,4 @@
-
+﻿
 <!DOCTYPE html>
 
 <html lang="zh-CN">
@@ -9,7 +9,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+
 <title>Я</title>
+
 
 <link rel="stylesheet" href="../../../style.css">
 
@@ -19,28 +21,9 @@
 <body>
 
 
-<!-- Search Box -->
-
-<div class="search-box">
-
-<input 
-id="site-search"
-placeholder="搜索..."
->
-
-</div>
-
-
-
-
-<!-- Theme Button -->
-
-<div id="theme-btn">
-
-☀️
-
-</div>
-
+<button id="theme-btn">
+🌙
+</button>
 
 
 <div class="container">
@@ -52,14 +35,16 @@ placeholder="搜索..."
 
 
 
-<a class="back-btn" href="../index.html">
+<a class="back-btn"
+href="../index.html">
 
 ← 返回上一级
 
 </a>
 
 
-<a class="back-btn" href="../../../index.html">
+<a class="back-btn"
+href="../../../index.html">
 
 ← 返回首页
 
@@ -93,7 +78,9 @@ placeholder="搜索..."
 href="angry sex（dnt nsfw）.html">
 
 <h3>
+
 📄 angry sex（dnt nsfw）
+
 </h3>
 
 </a>
@@ -102,7 +89,9 @@ href="angry sex（dnt nsfw）.html">
 href="你我的“未来”（3p夹心r18文学预警）.html">
 
 <h3>
+
 📄 你我的“未来”（3p夹心r18文学预警）
+
 </h3>
 
 </a>
@@ -111,7 +100,9 @@ href="你我的“未来”（3p夹心r18文学预警）.html">
 href="反差萌（？）-dntx你Я.html">
 
 <h3>
+
 📄 反差萌（？）-dntx你Я
+
 </h3>
 
 </a>
@@ -120,7 +111,9 @@ href="反差萌（？）-dntx你Я.html">
 href="家庭晚餐（tv鼠的r18）.html">
 
 <h3>
+
 📄 家庭晚餐（tv鼠的r18）
+
 </h3>
 
 </a>
@@ -129,7 +122,9 @@ href="家庭晚餐（tv鼠的r18）.html">
 href="惊喜or惊吓？（dntx你Я）.html">
 
 <h3>
+
 📄 惊喜or惊吓？（dntx你Я）
+
 </h3>
 
 </a>
@@ -138,7 +133,9 @@ href="惊喜or惊吓？（dntx你Я）.html">
 href="战利品（dnt的r18）.html">
 
 <h3>
+
 📄 战利品（dnt的r18）
+
 </h3>
 
 </a>
@@ -147,7 +144,9 @@ href="战利品（dnt的r18）.html">
 href="普通一日（异端文学r18）.html">
 
 <h3>
+
 📄 普通一日（异端文学r18）
+
 </h3>
 
 </a>
@@ -156,7 +155,9 @@ href="普通一日（异端文学r18）.html">
 href="普通一日（续）（r18）.html">
 
 <h3>
+
 📄 普通一日（续）（r18）
+
 </h3>
 
 </a>
@@ -174,14 +175,88 @@ href="普通一日（续）（r18）.html">
 
 
 
-
-
-
-
 <script src="../../../theme.js"></script>
-<script src="../../../search.js"></script>
 
+
+
+
+
+
+<audio id="bgm" loop></audio>
+
+
+<div class="music-box">
+
+
+<div class="music-title">
+
+<span class="music-icon">
+🎵
+</span>
+
+当前音乐：
+
+<span id="musicName">
+未播放
+</span>
+
+</div>
+
+
+<div class="music-line"></div>
+
+
+<div class="music-controls">
+
+
+<button class="music-btn small" onclick="prevMusic()">
+⏮
+</button>
+
+
+<button id="playBtn" class="music-btn play" onclick="toggleMusic()">
+▶
+</button>
+
+
+<button class="music-btn small" onclick="nextMusic()">
+⏭
+</button>
+
+
+<select id="mode" onchange="changeMode()">
+
+<option value="loop">
+↻ 循环播放
+</option>
+
+<option value="single">
+↻ 单曲循环
+</option>
+
+<option value="random">
+🔀 随机播放
+</option>
+
+</select>
+
+
+</div>
+
+
+</div>
+
+<script src="../../../../script.js"></script>
 </body>
 
-
 </html>
+
+
+
+
+
+
+
+
+
+

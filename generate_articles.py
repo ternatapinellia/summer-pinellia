@@ -1,6 +1,7 @@
 from pathlib import Path
 from docx import Document
 import html
+import re
 
 
 SOURCE = Path("article_source")
@@ -9,7 +10,7 @@ OUTPUT = Path("articles")
 
 
 # ==========================
-# 模板
+# HTML模板
 # ==========================
 
 
@@ -31,6 +32,12 @@ ARTICLE_TEMPLATE = """
 
 
 <body>
+
+
+<button id="theme-btn">
+🌙
+</button>
+
 
 <div class="container">
 
@@ -66,16 +73,57 @@ ARTICLE_TEMPLATE = """
 </div>
 
 
+
+<div class="nav-bar">
+
+{article_nav}
+
+</div>
+
+
+
+<!-- 留言 -->
+
+<div class="comment-box">
+
+
+<h3>
+留言
+</h3>
+
+
+<textarea
+id="message"
+placeholder="留下你的留言">
+</textarea>
+
+
+<button onclick="sendComment()">
+
+发送
+
+</button>
+
+
+</div>
+
+
+
 </div>
 
 </div>
+
+
+
+<script src="{theme}"></script>
+
+<script src="{script}"></script>
 
 
 </body>
 
 </html>
 """
-
 
 
 
@@ -91,7 +139,9 @@ INDEX_TEMPLATE = """
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+
 <title>{title}</title>
+
 
 <link rel="stylesheet" href="{css}">
 
@@ -99,6 +149,12 @@ INDEX_TEMPLATE = """
 
 
 <body>
+
+
+<button id="theme-btn">
+🌙
+</button>
+
 
 <div class="container">
 
@@ -128,12 +184,48 @@ INDEX_TEMPLATE = """
 </div>
 
 
+
+<script src="{theme}"></script>
+
+
 </body>
 
 </html>
 """
 
 
+
+
+
+# ==========================
+# 自然排序
+# ==========================
+
+
+def natural_sort(items):
+
+    return sorted(
+
+        items,
+
+        key=lambda x:[
+
+            int(text) if text.isdigit()
+
+            else text.lower()
+
+
+            for text in re.split(
+
+                r'(\d+)',
+
+                x.name
+
+            )
+
+        ]
+
+    )
 
 
 
@@ -162,10 +254,21 @@ def read_docx(file):
 
         text = p.text.strip()
 
+
         if text:
 
             result.append(
-                "<p>" + html.escape(text) + "</p>"
+
+                "<p>"
+
+                +
+
+                html.escape(text)
+
+                +
+
+                "</p>"
+
             )
 
 
@@ -180,34 +283,42 @@ def read_docx(file):
 
 
 
-
-
-
 # ==========================
 # 路径
 # ==========================
 
 
-def get_css_path(output):
+def get_depth(output):
 
-    depth = len(
+    return len(
+
         output.relative_to(OUTPUT).parts
+
     )
 
-    return "../" * depth + "style.css"
 
 
+def get_css_path(output):
+
+    return "../"*get_depth(output)+"style.css"
+
+
+
+def get_theme_path(output):
+
+    return "../"*get_depth(output)+"theme.js"
+
+
+
+def get_script_path(output):
+
+    return "../"*get_depth(output)+"script.js"
 
 
 
 def get_home_path(output):
 
-    depth = len(
-        output.relative_to(OUTPUT).parts
-    )
-
-    return "../" * depth + "index.html"
-
+    return "../"*get_depth(output)+"index.html"
 
 
 
@@ -220,11 +331,9 @@ def get_parent_path():
 
 
 
-
-
-
 # ==========================
 # 判断入口目录
+# 保持原逻辑
 # ==========================
 
 
@@ -233,34 +342,82 @@ def is_entry_folder(output):
     folder = output.parent.relative_to(OUTPUT)
 
 
-    # articles/index.html
-
-    if len(folder.parts) == 0:
+    if len(folder.parts)==0:
 
         return True
 
 
-    # 一级目录
-
-    if len(folder.parts) == 1:
+    if len(folder.parts)==1:
 
         return True
 
 
     return False
-
-
-
-
-
-
-
 # ==========================
 # 生成文章
 # ==========================
 
 
 def create_article(source, output):
+
+
+    docs = [
+
+        x for x in natural_sort(
+            list(source.parent.iterdir())
+        )
+
+        if x.suffix.lower() == ".docx"
+        and not x.name.startswith("~$")
+
+    ]
+
+
+    index = docs.index(source)
+
+
+    article_nav = []
+
+
+    # 上一篇
+
+    if index > 0:
+
+        prev = docs[index-1]
+
+        article_nav.append(
+
+f"""
+<a class="back-btn"
+href="{prev.stem}.html">
+
+← {html.escape(prev.stem)}
+
+</a>
+"""
+
+        )
+
+
+    # 下一篇
+
+    if index < len(docs)-1:
+
+        nxt = docs[index+1]
+
+        article_nav.append(
+
+f"""
+<a class="back-btn"
+href="{nxt.stem}.html">
+
+{html.escape(nxt.stem)} →
+
+</a>
+"""
+
+        )
+
 
 
     output.write_text(
@@ -273,7 +430,13 @@ def create_article(source, output):
 
             css=get_css_path(output),
 
-            home=get_home_path(output)
+            theme=get_theme_path(output),
+
+            script=get_script_path(output),
+
+            home=get_home_path(output),
+
+            article_nav="".join(article_nav)
 
         ),
 
@@ -303,11 +466,11 @@ def create_index(folder, output):
 
 
 
-    for item in sorted(folder.iterdir()):
+    for item in natural_sort(
+        list(folder.iterdir())
+    ):
 
 
-
-        # 文件夹
 
         if item.is_dir():
 
@@ -319,7 +482,9 @@ f"""
 href="{item.name}/index.html">
 
 <h3>
+
 📁 {html.escape(item.name)}
+
 </h3>
 
 </a>
@@ -328,8 +493,6 @@ href="{item.name}/index.html">
             )
 
 
-
-        # docx
 
         elif item.suffix.lower() == ".docx":
 
@@ -347,53 +510,15 @@ f"""
 href="{item.stem}.html">
 
 <h3>
+
 📄 {html.escape(item.stem)}
+
 </h3>
 
 </a>
 """
 
             )
-
-
-
-
-
-    # 返回按钮
-
-    if is_entry_folder(output):
-
-
-        nav = f"""
-
-<a class="back-btn" href="{get_home_path(output)}">
-
-← 返回首页
-
-</a>
-
-"""
-
-
-    else:
-
-
-        nav = f"""
-
-<a class="back-btn" href="{get_parent_path()}">
-
-← 返回上一级
-
-</a>
-
-
-<a class="back-btn" href="{get_home_path(output)}">
-
-← 返回首页
-
-</a>
-
-"""
 
 
 
@@ -452,6 +577,48 @@ href="{item.stem}.html">
 
 
 
+    # 保留你的返回逻辑
+
+    if is_entry_folder(output):
+
+
+        nav = f"""
+
+<a class="back-btn"
+href="{get_home_path(output)}">
+
+← 返回首页
+
+</a>
+
+"""
+
+
+    else:
+
+
+        nav = f"""
+
+<a class="back-btn"
+href="{get_parent_path()}">
+
+← 返回上一级
+
+</a>
+
+
+<a class="back-btn"
+href="{get_home_path(output)}">
+
+← 返回首页
+
+</a>
+
+"""
+
+
+
+
 
     output.write_text(
 
@@ -464,6 +631,8 @@ href="{item.stem}.html">
             articles=article_html,
 
             css=get_css_path(output),
+
+            theme=get_theme_path(output),
 
             nav=nav
 
@@ -499,7 +668,9 @@ def process_folder(source, output):
 
 
 
-    for item in source.iterdir():
+    for item in natural_sort(
+        list(source.iterdir())
+    ):
 
 
         if item.is_dir():
@@ -523,6 +694,7 @@ def process_folder(source, output):
                 continue
 
 
+
             create_article(
 
                 item,
@@ -530,6 +702,8 @@ def process_folder(source, output):
                 output / (item.stem + ".html")
 
             )
+
+
 
 
 
@@ -559,7 +733,9 @@ def main():
 
     if not SOURCE.exists():
 
-        print("没有找到 article_source")
+        print(
+            "没有找到 article_source"
+        )
 
         return
 
@@ -574,7 +750,9 @@ def main():
     )
 
 
-    print("文章生成完成")
+    print(
+        "文章生成完成"
+    )
 
 
 
