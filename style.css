@@ -2059,3 +2059,173 @@ body.light .search-box input{
 
 
 }
+/* ==========================
+   手机浏览器兼容搜索
+========================== */
+
+
+.search-box {
+
+    position:absolute;
+
+    top:20px;
+
+    right:70px;
+
+    z-index:99999;
+
+
+}
+
+
+
+#site-search {
+
+
+    width:160px;
+
+    height:35px;
+
+
+    padding:0 12px;
+
+
+    border-radius:18px;
+
+
+    border:1px solid rgba(0,0,0,.2);
+
+
+    background:rgba(255,255,255,.9);
+
+
+}
+
+
+
+
+
+#searchResult {
+
+
+    display:none;
+
+
+    position:absolute;
+
+
+    top:45px;
+
+
+    right:0;
+
+
+    width:260px;
+
+
+    max-width:80vw;
+
+
+    max-height:300px;
+
+
+    overflow-y:auto;
+
+
+    -webkit-overflow-scrolling:touch;
+
+
+    background:#fff;
+
+
+    border-radius:12px;
+
+
+    box-shadow:0 5px 20px rgba(0,0,0,.25);
+
+
+    z-index:999999;
+
+
+}
+
+
+
+
+
+.search-item {
+
+
+    padding:12px;
+
+
+    border-bottom:1px solid #eee;
+
+
+}
+
+
+
+
+
+.search-item a {
+
+
+    color:#333;
+
+
+    text-decoration:none;
+
+
+    display:block;
+
+
+}
+
+
+
+
+
+
+/* 手机 */
+
+@media(max-width:768px){
+
+
+.search-box{
+
+
+    top:15px;
+
+
+    right:55px;
+
+
+}
+
+
+
+#site-search{
+
+
+    width:120px;
+
+
+}
+
+
+
+#searchResult{
+
+
+    width:230px;
+
+
+    max-height:50vh;
+
+
+}
+
+
+
+}
