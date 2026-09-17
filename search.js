@@ -312,6 +312,16 @@ window.addEventListener(
             "input",
             doSearch
         );
+box.addEventListener(
+"keyup",
+doSearch
+);
+
+
+box.addEventListener(
+"change",
+doSearch
+);
 
 
     }
