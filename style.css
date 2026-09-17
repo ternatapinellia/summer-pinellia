@@ -1868,3 +1868,42 @@ body.light .search-box input{
 
 
 }
+@media (max-width:768px){
+
+
+.search-box{
+
+    top:15px;
+
+    right:60px;
+
+}
+
+
+
+#site-search{
+
+    width:120px;
+
+    font-size:14px;
+
+}
+
+
+
+#searchResult{
+
+
+    right:-40px;
+
+
+    width:220px;
+
+
+    max-height:300px;
+
+
+}
+
+
+}
