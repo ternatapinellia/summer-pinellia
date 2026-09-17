@@ -247,31 +247,22 @@ window.toggleMusic=function(){
 
 window.nextMusic=function(){
 
-
-
     currentMusic++;
 
-
-
     if(currentMusic >= musics.length){
-
         currentMusic=0;
-
     }
 
+    audio.src = musics[currentMusic];
 
-
-    loadMusic();
-
-
+    musicName.innerText =
+    musics[currentMusic]
+    .split("/")
+    .pop();
 
     audio.play();
 
-
-
     saveMusicState();
-
-
 
 }
 
@@ -286,32 +277,22 @@ window.nextMusic=function(){
 
 window.prevMusic=function(){
 
-
-
     currentMusic--;
 
-
-
     if(currentMusic < 0){
-
-        currentMusic =
-        musics.length-1;
-
+        currentMusic = musics.length-1;
     }
 
+    audio.src = musics[currentMusic];
 
-
-    loadMusic();
-
-
+    musicName.innerText =
+    musics[currentMusic]
+    .split("/")
+    .pop();
 
     audio.play();
 
-
-
     saveMusicState();
-
-
 
 }
 
