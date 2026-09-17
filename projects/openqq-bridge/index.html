@@ -66,51 +66,27 @@ OpenQQ Bridge 是用于 SeaDice 与 OpenQQ 身份兼容的数据桥接工具。
 <p>
 本版支持：
 </p>
+<ul>
+<li> 多 SeaDice 实例分别配置 Bridge 端口。
+</li>
+
+<li>在 SeaDice 插件配置页面填写发件邮箱、SMTP 授权码、SMTP 服务器和端口。
+</li>
+
+<li>.旧QQ邮箱测试：向配置中的发件邮箱发送测试邮件。
+</li>
+
+<li>.旧QQ绑定 <旧QQ> <旧群>：自动向 <旧QQ>@qq.com 发送 6 位验证码。
+</li>
+
+<li>.旧QQ验证码 <验证码>：验证成功后才执行数据迁移。 验证码 5 分钟有效，最多错误 5 次。
+</li>
+
+<li>.旧QQ+旧群已绑定其他 OpenQQ 身份时拒绝再次绑定。
+</li>
 
 
-
-<p>
-1. 多 SeaDice 实例分别配置 Bridge 端口。
-</p>
-
-
-
-<p>
-2. 在 SeaDice 插件配置页面填写发件邮箱、SMTP 授权码、SMTP 服务器和端口。
-</p>
-
-
-
-<p>
-3. .旧QQ邮箱测试：向配置中的发件邮箱发送测试邮件。
-</p>
-
-
-
-<p>
-4. .旧QQ绑定 <旧QQ> <旧群>：自动向 <旧QQ>@qq.com 发送 6 位验证码。
-</p>
-
-
-
-<p>
-5. .旧QQ验证码 <验证码>：验证成功后才执行数据迁移。
-</p>
-
-
-
-<p>
-6. 验证码 5 分钟有效，最多错误 5 次。
-</p>
-
-
-
-<p>
-7. 旧QQ+旧群已绑定其他 OpenQQ 身份时拒绝再次绑定。
-</p>
-
-
-
+</ul>
 <p>
 使用方式：
 双击启动openqq.exe，然后保持运行，不能关闭
@@ -136,17 +112,25 @@ OpenQQ Bridge 是用于 SeaDice 与 OpenQQ 身份兼容的数据桥接工具。
 下载
 </h2>
 
-
+<a class="download-btn" href="OpenQQBridge-v2.0.zip" download>
+直接下载
+</a>
 
 <a 
 class="download-btn"
 href="https://github.com/ternatapinellia/summer-pinellia/releases/tag/bridge"
 target="_blank">
 
-下载Github Release
+Github Release
 </a>
 
+<a class="download-btn"
+href="https://pan.baidu.com/s/1KRQ3B_IDUMfzVu6DoChhWw?pwd=open"
+target="_blank">
 
+百度云链接
+
+</a>
 <p>
 
 如果下载后无法打开，
@@ -208,7 +192,7 @@ TIPS：因为文件只读取海豹的data和datalog的db文件，所以有的角
 
 
 <textarea
-d="message"
+id="message"
 placeholder="留下你的留言">
 </textarea>
 
@@ -229,8 +213,7 @@ placeholder="留下你的留言">
 
 
 
-<script src="../../theme.js"></script>
-<script src="../../search.js"></script>
+
 
 
 

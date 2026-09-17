@@ -2229,3 +2229,16 @@ body.light .search-box input{
 
 
 }
+.project-main-image{
+
+    width:100%;
+
+    max-width:100%;
+
+    height:auto;
+
+    display:block;
+
+    margin:0 auto;
+
+}
