@@ -1,7 +1,6 @@
 let rootPath = "/";
 
 
-
 let musics = [
 
 rootPath + "music/01 - A Real Boy!.mp3",
@@ -24,10 +23,9 @@ rootPath + "music/17 - DNT Tenna.mp3",
 rootPath + "music/18 - DNT TV WORLD.mp3",
 rootPath + "music/19 - DNS WHAT I GOT YOU WANT IT.mp3",
 rootPath + "music/20 - ★【TV WORLD】★ (1).mp3",
-rootPath + "music/21 - its tv time.mp3",
+rootPath + "music/21 - its tv time.mp3"
 
 ];
-
 
 
 
@@ -102,7 +100,6 @@ function updateMusicUI(){
 
 
 
-
 function setMusic(index){
 
 
@@ -123,9 +120,7 @@ function setMusic(index){
 
 
 
-
 function loadMusic(){
-
 
 
     let saved =
@@ -137,14 +132,17 @@ function loadMusic(){
 
     if(saved !== null){
 
+
         currentMusic =
         Number(saved);
+
 
     }
 
 
 
     setMusic(currentMusic);
+
 
 
 
@@ -162,11 +160,12 @@ function loadMusic(){
 
             if(time){
 
+
                 audio.currentTime =
                 Number(time);
 
-            }
 
+            }
 
 
         },
@@ -176,16 +175,7 @@ function loadMusic(){
     );
 
 
-
 }
-
-
-
-
-
-
-
-
 window.toggleMusic=function(){
 
 
@@ -198,7 +188,26 @@ window.toggleMusic=function(){
     if(audio.paused){
 
 
-        audio.play();
+        audio.play()
+        .then(()=>{
+
+
+            localStorage.setItem(
+                "autoPlay",
+                "true"
+            );
+
+
+        })
+        .catch(e=>{
+
+            console.log(
+                "播放失败:",
+                e
+            );
+
+        });
+
 
 
         if(btn){
@@ -206,12 +215,6 @@ window.toggleMusic=function(){
             btn.innerHTML="⏸";
 
         }
-
-
-        localStorage.setItem(
-            "autoPlay",
-            "true"
-        );
 
 
     }
@@ -222,11 +225,18 @@ window.toggleMusic=function(){
         audio.pause();
 
 
+        localStorage.setItem(
+            "autoPlay",
+            "false"
+        );
+
+
         if(btn){
 
             btn.innerHTML="▶";
 
         }
+
 
     }
 
@@ -261,7 +271,18 @@ window.nextMusic=function(){
     );
 
 
-    audio.play();
+    audio.play()
+    .catch(e=>{
+
+        console.log(e);
+
+    });
+
+
+    localStorage.setItem(
+        "autoPlay",
+        "true"
+    );
 
 
     saveMusicState();
@@ -299,8 +320,19 @@ window.prevMusic=function(){
 
 
 
-    audio.play();
+    audio.play()
+    .catch(e=>{
 
+        console.log(e);
+
+    });
+
+
+
+    localStorage.setItem(
+        "autoPlay",
+        "true"
+    );
 
 
     saveMusicState();
@@ -324,7 +356,6 @@ audio.onended=function(){
 
 
 };
-
 
 
 
@@ -376,8 +407,19 @@ if(songSelect){
 
 
 
-        audio.play();
+        audio.play()
+        .catch(e=>{
 
+            console.log(e);
+
+        });
+
+
+
+        localStorage.setItem(
+            "autoPlay",
+            "true"
+        );
 
 
         saveMusicState();
@@ -389,6 +431,7 @@ if(songSelect){
 
 
 }
+
 
 
 
@@ -485,117 +528,169 @@ window.addEventListener(
 
 
 
+
 loadMusic();
 
 
 
 
+// 自动恢复播放
 
-window.sendComment =
-async function(){
-
-
-let box =
-document.getElementById(
-"message"
+let autoPlay =
+localStorage.getItem(
+    "autoPlay"
 );
 
 
 
-if(!box){
-
-return;
-
-}
+if(autoPlay === "true"){
 
 
-
-let text =
-box.value.trim();
-
-
-
-if(text===""){
-
-alert("请输入留言");
-
-return;
-
-}
+    audio.addEventListener(
+        "canplay",
+        ()=>{
 
 
+            audio.play()
+            .catch(e=>{
 
 
-try{
+                console.log(
+                    "浏览器阻止自动播放",
+                    e
+                );
 
 
-let response =
-await fetch(
-"/api/comment",
-{
+            });
 
 
-method:"POST",
-
-
-headers:{
-
-
-"Content-Type":
-"application/json"
-
-
-},
-
-
-body:JSON.stringify({
-
-message:text
-
-})
-
-
-});
-
-
-
-let result =
-await response.json();
-
-
-
-if(result.success){
-
-
-alert("留言发送成功");
-
-box.value="";
+        },
+        {
+            once:true
+        }
+    );
 
 
 }
-
-else{
-
-
-alert("留言发送失败");
+window.sendComment =
+async function(){
 
 
-}
+    let box =
+    document.getElementById(
+        "message"
+    );
 
 
 
-}
+    if(!box){
 
-catch(e){
+        return;
 
-
-alert("网络错误");
-
-
-console.log(e);
+    }
 
 
-}
+
+    let text =
+    box.value.trim();
+
+
+
+    if(text===""){
+
+
+        alert(
+            "请输入留言"
+        );
+
+
+        return;
+
+
+    }
+
+
+
+
+    try{
+
+
+        let response =
+        await fetch(
+            "/api/comment",
+            {
+
+
+                method:"POST",
+
+
+                headers:{
+
+
+                    "Content-Type":
+                    "application/json"
+
+
+                },
+
+
+                body:JSON.stringify({
+
+                    message:text
+
+                })
+
+
+            }
+
+        );
+
+
+
+        let result =
+        await response.json();
+
+
+
+        if(result.success){
+
+
+            alert(
+                "留言发送成功"
+            );
+
+
+            box.value="";
+
+
+        }
+
+        else{
+
+
+            alert(
+                "留言发送失败"
+            );
+
+
+        }
+
+
+
+    }
+
+    catch(e){
+
+
+        alert(
+            "网络错误"
+        );
+
+
+        console.log(e);
+
+
+    }
 
 
 };
