@@ -8,9 +8,7 @@ let depth = location.pathname
 
 
 if(depth > 1){
-
     rootPath = "../".repeat(depth-1);
-
 }
 
 
@@ -37,12 +35,17 @@ rootPath + "music/07 - Spamton.mp3"
 
 let currentMusic = 0;
 
-let audio = document.getElementById("bgm");
 
-let musicName = document.getElementById("musicName");
+let audio =
+document.getElementById("bgm");
 
-let playMode = "loop";
 
+let musicName =
+document.getElementById("musicName");
+
+
+let songSelect =
+document.getElementById("songSelect");
 
 
 
@@ -65,6 +68,7 @@ function saveMusicState(){
         audio.currentTime
     );
 
+
 }
 
 
@@ -72,29 +76,7 @@ function saveMusicState(){
 
 
 
-
-function loadMusic(){
-
-
-    let savedIndex =
-    localStorage.getItem("musicIndex");
-
-
-
-    if(savedIndex !== null){
-
-        currentMusic =
-        Number(savedIndex);
-
-    }
-
-
-
-
-    audio.src =
-    musics[currentMusic];
-
-
+function updateMusicUI(){
 
 
     if(musicName){
@@ -107,10 +89,71 @@ function loadMusic(){
     }
 
 
+    if(songSelect){
+
+        songSelect.value =
+        currentMusic;
+
+    }
 
 
-    let savedTime =
-    localStorage.getItem("musicTime");
+}
+
+
+
+
+
+
+
+function setMusic(index){
+
+
+    currentMusic = index;
+
+
+    audio.src =
+    musics[currentMusic];
+
+
+    updateMusicUI();
+
+
+}
+
+
+
+
+
+
+
+function loadMusic(){
+
+
+
+    let saved =
+    localStorage.getItem(
+        "musicIndex"
+    );
+
+
+
+    if(saved !== null){
+
+        currentMusic =
+        Number(saved);
+
+    }
+
+
+
+    setMusic(currentMusic);
+
+
+
+    let time =
+    localStorage.getItem(
+        "musicTime"
+    );
 
 
 
@@ -119,49 +162,12 @@ function loadMusic(){
         ()=>{
 
 
-            if(savedTime){
+            if(time){
 
                 audio.currentTime =
-                Number(savedTime);
+                Number(time);
 
             }
-
-
-
-            let autoPlay =
-            localStorage.getItem("autoPlay");
-
-
-
-            if(autoPlay === "true"){
-
-
-    audio.play()
-    .then(()=>{
-
-
-        let btn =
-        document.getElementById("playBtn");
-
-
-        if(btn){
-
-            btn.innerHTML="⏸";
-
-        }
-
-
-    })
-    .catch(()=>{
-
-        console.log(
-        "浏览器阻止自动播放"
-        );
-
-    });
-
-
-}
 
 
 
@@ -182,29 +188,19 @@ function loadMusic(){
 
 
 
-
 window.toggleMusic=function(){
 
 
-
     let btn =
-    document.getElementById("playBtn");
-
+    document.getElementById(
+        "playBtn"
+    );
 
 
     if(audio.paused){
 
 
-
         audio.play();
-
-
-
-        localStorage.setItem(
-            "autoPlay",
-            "true"
-        );
-
 
 
         if(btn){
@@ -214,14 +210,18 @@ window.toggleMusic=function(){
         }
 
 
+        localStorage.setItem(
+            "autoPlay",
+            "true"
+        );
+
+
     }
 
     else{
 
 
-
         audio.pause();
-
 
 
         if(btn){
@@ -233,10 +233,7 @@ window.toggleMusic=function(){
     }
 
 
-
 }
-
-
 
 
 
@@ -247,22 +244,30 @@ window.toggleMusic=function(){
 
 window.nextMusic=function(){
 
+
     currentMusic++;
 
-    if(currentMusic >= musics.length){
+
+    if(
+        currentMusic >= musics.length
+    ){
+
         currentMusic=0;
+
     }
 
-    audio.src = musics[currentMusic];
 
-    musicName.innerText =
-    musics[currentMusic]
-    .split("/")
-    .pop();
+
+    setMusic(
+        currentMusic
+    );
+
 
     audio.play();
 
+
     saveMusicState();
+
 
 }
 
@@ -273,26 +278,36 @@ window.nextMusic=function(){
 
 
 
-
-
 window.prevMusic=function(){
+
+
 
     currentMusic--;
 
+
+
     if(currentMusic < 0){
-        currentMusic = musics.length-1;
+
+        currentMusic =
+        musics.length-1;
+
     }
 
-    audio.src = musics[currentMusic];
 
-    musicName.innerText =
-    musics[currentMusic]
-    .split("/")
-    .pop();
+
+    setMusic(
+        currentMusic
+    );
+
+
 
     audio.play();
 
+
+
     saveMusicState();
+
+
 
 }
 
@@ -307,208 +322,75 @@ window.prevMusic=function(){
 audio.onended=function(){
 
 
-
-    if(playMode=="single"){
-
-
-        audio.currentTime=0;
-
-        audio.play();
+    nextMusic();
 
 
-    }
-
-
-    else if(playMode=="random"){
+};
 
 
 
-        currentMusic =
-        Math.floor(
-            Math.random()*musics.length
+
+
+
+
+
+
+if(songSelect){
+
+
+
+    musics.forEach(
+        (music,index)=>{
+
+
+            let option =
+            document.createElement(
+                "option"
+            );
+
+
+            option.value=index;
+
+
+            option.innerText =
+            music.split("/")
+            .pop();
+
+
+            songSelect.appendChild(
+                option
+            );
+
+
+        }
+    );
+
+
+
+
+    songSelect.onchange=function(){
+
+
+
+        setMusic(
+            Number(this.value)
         );
 
 
 
-        loadMusic();
-
-
         audio.play();
 
 
 
-    }
+        saveMusicState();
 
 
-    else{
 
+    };
 
-        nextMusic();
 
 
-    }
-
-
-
-};
-
-
-
-
-
-
-
-
-
-window.changeMode=function(){
-
-
-
-    let mode =
-    document.getElementById("mode");
-
-
-
-    if(mode){
-
-
-        playMode =
-        mode.value;
-
-
-
-        localStorage.setItem(
-            "playMode",
-            playMode
-        );
-
-
-    }
-
-
-
-};
-
-
-
-
-
-
-
-
-
-window.sendComment=async function(){
-
-
-
-    let box =
-    document.getElementById("message");
-
-
-
-    if(!box){
-
-        return;
-
-    }
-
-
-
-    let text =
-    box.value.trim();
-
-
-
-    if(text===""){
-
-
-        alert("请输入留言");
-
-        return;
-
-    }
-
-
-
-
-    try{
-
-
-        let response =
-        await fetch(
-            "/api/comment",
-            {
-
-
-            method:"POST",
-
-
-            headers:{
-
-
-                "Content-Type":
-                "application/json"
-
-
-            },
-
-
-            body:JSON.stringify({
-
-
-                message:text
-
-
-            })
-
-
-        });
-
-
-
-        let result =
-        await response.json();
-
-
-
-        if(result.success){
-
-
-            alert("留言发送成功");
-
-
-            box.value="";
-
-
-        }
-
-        else{
-
-
-            alert("留言发送失败");
-
-
-        }
-
-
-
-    }
-
-
-    catch(e){
-
-
-        alert("网络错误");
-
-
-        console.log(e);
-
-
-    }
-
-
-
-};
+}
 
 
 
@@ -520,8 +402,11 @@ audio.addEventListener(
     "play",
     ()=>{
 
+
         let btn =
-        document.getElementById("playBtn");
+        document.getElementById(
+            "playBtn"
+        );
 
 
         if(btn){
@@ -530,8 +415,12 @@ audio.addEventListener(
 
         }
 
+
     }
 );
+
+
+
 
 
 
@@ -539,8 +428,11 @@ audio.addEventListener(
     "pause",
     ()=>{
 
+
         let btn =
-        document.getElementById("playBtn");
+        document.getElementById(
+            "playBtn"
+        );
 
 
         if(btn){
@@ -549,8 +441,15 @@ audio.addEventListener(
 
         }
 
+
     }
 );
+
+
+
+
+
+
 
 audio.addEventListener(
     "timeupdate",
@@ -559,16 +458,13 @@ audio.addEventListener(
 
         if(!audio.paused){
 
-
             saveMusicState();
-
 
         }
 
 
     }
 );
-
 
 
 
@@ -581,15 +477,10 @@ window.addEventListener(
     "beforeunload",
     ()=>{
 
-
         saveMusicState();
-
 
     }
 );
-
-
-
 
 
 
@@ -602,20 +493,114 @@ loadMusic();
 
 
 
-
-let savedMode =
-localStorage.getItem("playMode");
-
+window.sendComment =
+async function(){
 
 
-if(savedMode){
+let box =
+document.getElementById(
+"message"
+);
 
 
-    playMode=savedMode;
+
+if(!box){
+
+return;
+
+}
+
+
+
+let text =
+box.value.trim();
+
+
+
+if(text===""){
+
+alert("请输入留言");
+
+return;
+
+}
+
+
+
+
+try{
+
+
+let response =
+await fetch(
+"/api/comment",
+{
+
+
+method:"POST",
+
+
+headers:{
+
+
+"Content-Type":
+"application/json"
+
+
+},
+
+
+body:JSON.stringify({
+
+message:text
+
+})
+
+
+});
+
+
+
+let result =
+await response.json();
+
+
+
+if(result.success){
+
+
+alert("留言发送成功");
+
+box.value="";
 
 
 }
 
+else{
+
+
+alert("留言发送失败");
+
+
+}
+
+
+
+}
+
+catch(e){
+
+
+alert("网络错误");
+
+
+console.log(e);
+
+
+}
+
+
+};
 
 
 
