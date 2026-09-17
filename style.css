@@ -1907,3 +1907,155 @@ body.light .search-box input{
 
 
 }
+/* ==========================
+   手机端搜索修复
+========================== */
+
+.search-box {
+
+    position: fixed;
+
+    top: 15px;
+
+    right: 60px;
+
+    z-index: 99999;
+
+}
+
+
+
+#site-search {
+
+    width: 130px;
+
+    height: 34px;
+
+    padding: 6px 12px;
+
+    font-size: 14px;
+
+    border-radius: 18px;
+
+    background: rgba(255,255,255,0.95);
+
+    color: #333;
+
+    border: 1px solid #ccc;
+
+}
+
+
+
+#searchResult {
+
+    position: fixed !important;
+
+
+    top: 60px !important;
+
+
+    right: 15px !important;
+
+
+    left: auto !important;
+
+
+    transform: none !important;
+
+
+    width: 260px !important;
+
+
+    max-width: calc(100vw - 30px);
+
+
+    max-height: 60vh;
+
+
+    overflow-y: auto;
+
+
+    background: rgba(255,255,255,0.97);
+
+
+    border-radius: 12px;
+
+
+    padding: 10px;
+
+
+    box-shadow: 0 5px 20px rgba(0,0,0,.25);
+
+
+    z-index: 999999 !important;
+
+}
+
+
+
+.search-item {
+
+    display:block;
+
+    padding:12px;
+
+    margin:6px 0;
+
+    background:rgba(240,240,240,.9);
+
+    border-radius:10px;
+
+}
+
+
+
+.search-item a {
+
+    display:block;
+
+    color:#333;
+
+    text-decoration:none;
+
+    font-size:14px;
+
+}
+
+
+
+
+
+@media(max-width:768px){
+
+
+    #theme-btn {
+
+        right:15px;
+
+        top:15px;
+
+    }
+
+
+
+    .search-box {
+
+        right:55px;
+
+        top:15px;
+
+    }
+
+
+
+    #searchResult {
+
+        top:60px !important;
+
+        right:10px !important;
+
+    }
+
+
+}
