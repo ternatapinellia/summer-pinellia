@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>SWAP SPAMTON 桌宠</title>
+
+<link rel="stylesheet" href="../../style.css">
+
+</head>
+
+
+<body>
+
+
+
+
+
+<!-- Theme Button -->
+
+<div id="theme-btn">
+
+☀️
+
+</div>
+
+
+
+
+<a class="back-btn" href="../../index.html">
+← 返回首页
+</a>
+
+
+
+<div class="project-page">
+
+
+
+<h1>
+SWAPSPAMTON windows电脑桌宠
+</h1>
+
+
+<h2>
+项目简介
+</h2>
+
+
+
+<p>
+
+SWAP SPAMTON桌宠是一款 Windows 桌面宠物程序。
+
+支持桌面互动、语音、提醒、便签、商店、小游戏等功能。
+
+</p>
+
+
+
+
+<h2>
+使用说明
+</h2>
+
+
+
+<p>
+
+左键点击桌宠可以进行互动和显示对话。
+
+右键点击桌宠可以打开菜单以及退出程序。
+
+控制面板、商店界面、便签界面同样可以通过右键退出。
+
+
+</p>
+
+
+
+<p>
+
+支持中英文切换。
+
+如果不需要互动功能，可以暂停、隐藏桌宠，
+或者关闭自动对话。
+
+关闭自动对话后，会停止时间间隔对话以及点击桌宠触发的对话。
+
+</p>
+
+
+
+<p>
+
+支持调节桌宠音量，也可以关闭声音。
+
+固定时间会有喝水、吃饭、睡觉提醒。
+
+支持 Windows 开机自启动。
+
+右键菜单中的便签功能可以记录日常灵感或重要事件。
+
+</p>
+
+
+
+<p>
+
+点击小游戏可自行游玩多种已配置完毕的游戏。
+
+按住 Ctrl 并滚动鼠标滚轮，可以调整桌宠大小。
+
+</p>
+
+
+<h2>
+下载
+</h2>
+
+<a class="download-btn" href="swapspamton deskpetV1.0.zip" download>
+直接下载
+</a>
+
+<a
+
+class="download-btn"
+
+href="https://github.com/ternatapinellia/swapspamton-desktoppet/releases/tag/v1.0"
+
+target="_blank">
+
+Github Release
+
+</a>
+
+<a class="download-btn"
+href=""
+target="_blank">
+
+百度云网盘链接
+暂无
+</a>
+<h2>
+使用提示
+</h2>
+
+
+
+<p>
+
+下载 Release 压缩包后解压，
+
+直接双击SPT-DeskPet.exe即可使用。
+
+</p>
+
+
+
+<p>
+
+如果下载后无法打开，
+
+或者打开后立即关闭，
+
+请检查 Windows 安全中心和防火墙是否允许该软件运行。
+
+大概率是被防火墙拦截。
+
+</p>
+
+</div>
+
+
+<div class="comment-box">
+<h3>
+留言
+</h3>
+
+
+<textarea
+id="message"
+placeholder="留下你的留言">
+</textarea>
+
+
+
+<button onclick="sendComment()">
+
+发送
+
+</button>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<audio id="bgm" loop></audio>
+
+
+<div class="music-box">
+
+
+<div class="music-title">
+
+<span class="music-icon">
+🎵
+</span>
+
+当前音乐：
+
+<span id="musicName">
+未播放
+</span>
+
+</div>
+
+
+<div class="music-line"></div>
+
+
+<div class="music-controls">
+
+
+<button class="music-btn small" onclick="prevMusic()">
+⏮
+</button>
+
+
+<button id="playBtn" class="music-btn play" onclick="toggleMusic()">
+▶
+</button>
+
+
+<button class="music-btn small" onclick="nextMusic()">
+⏭
+</button>
+
+
+<select id="songSelect"></select>
+
+
+</div>
+
+
+</div>
+
+
+
+
+<script src="../../theme.js"></script>
+<script src="../../script.js"></script></body>
+
+
+</html>
+
+
+
+
+
+
+
+
+
