@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>windows compet</title>
+
+<link rel="stylesheet" href="../../style.css">
+
+</head>
+
+
+<body>
+
+
+
+
+
+<!-- Theme Button -->
+
+<div id="theme-btn">
+
+☀️
+
+</div>
+
+
+
+
+<a class="back-btn" href="../../index.html">
+← 返回首页
+</a>
+
+
+
+<div class="project-page">
+
+
+
+<h1>
+Windows桌面打字&手柄识别工具，含三角符文各种角色皮肤
+</h1>
+
+
+<h2>
+项目简介
+</h2>
+
+
+
+<p>
+
+Windows桌面打字&手柄识别工具，含三角符文各种角色皮肤
+
+工具是x发布的compet的补丁包，支持手柄识别以及游戏时候的按键和手柄识别，理论上其他打字桌宠可通用（如果是py代码版本的）
+</p>
+
+
+
+
+<h2>
+使用说明
+</h2>
+
+
+
+<p>
+
+gamepad-package.exe解压后文件夹中数十个文件需要放置到和桌宠软件exe同目录下。使用的时候请首先按下gamepadsetting.bat来配置手柄按键，目前按键键位按照xbox手柄键位书写。而后按下start.vbs进行启动。
+
+</p>
+
+
+
+<p>
+ggdw为swapspamton的皮肤包。addispam为ads时期spamton的皮肤包，dnt为defernull tenna的皮肤包，解压后即可使用，如软件支持zip导入，也可直接导入。
+</p>
+
+
+
+<p>
+
+config.json中可以查看各个桌宠的按键配置规范，f18-f24和上下左右按键等为原本配置的手柄键位。
+
+
+</p>
+
+
+
+<p>
+
+不支持开机自启，需要自启请自行将start.vbs添加到开机自启的注册表中。
+
+</p>
+
+
+
+<h2>
+下载
+</h2>
+
+<a class="download-btn" href="gamepad-package.zip" download>
+下载手柄按键补丁包
+</a>
+<a class="download-btn" href="addispam.zip" download>
+下载addispam皮肤包
+</a>
+
+<a
+
+class="download-btn"
+
+href="ggdw.zip" download>
+
+下载swapspamton皮肤包
+
+</a>
+<a class="download-btn"
+href="anton.zip">
+下载dfntn皮肤包
+</a>
+<a class="download-btn"
+href="https://github.com/ternatapinellia/compet/tree/main"
+target="_blank">
+github release
+
+
+
+</a>
+<h2>
+使用提示
+</h2>
+
+
+
+
+<p>
+
+如果下载后无法打开，
+
+或者打开后立即关闭，
+
+请检查 Windows 安全中心和防火墙是否允许该软件运行。
+
+大概率是被防火墙拦截。
+
+</p>
+
+</div>
+
+
+<div class="comment-box">
+<h3>
+留言
+</h3>
+
+
+<textarea
+id="message"
+placeholder="留下你的留言">
+</textarea>
+
+
+
+<button onclick="sendComment()">
+
+发送
+
+</button>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<audio id="bgm" loop></audio>
+
+
+<div class="music-box">
+
+
+<div class="music-title">
+
+<span class="music-icon">
+🎵
+</span>
+
+当前音乐：
+
+<span id="musicName">
+未播放
+</span>
+
+</div>
+
+
+<div class="music-line"></div>
+
+
+<div class="music-controls">
+
+
+<button class="music-btn small" onclick="prevMusic()">
+⏮
+</button>
+
+
+<button id="playBtn" class="music-btn play" onclick="toggleMusic()">
+▶
+</button>
+
+
+<button class="music-btn small" onclick="nextMusic()">
+⏭
+</button>
+
+
+<select id="songSelect"></select>
+
+
+</div>
+
+
+</div>
+
+
+
+
+<script src="../../theme.js"></script>
+<script src="../../script.js"></script></body>
+
+
+</html>
+
+
+
+
+
+
+
+
+
