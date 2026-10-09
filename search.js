@@ -14,9 +14,8 @@ async function loadSearchData(){
 
 
         let response =
-        await fetch(
-            "/search.json"
-        );
+        var lang = (localStorage.getItem("lang") === "en") ? "en" : "zh";
+        await fetch("/search_" + lang + ".json");
 
 
         searchData =
@@ -329,3 +328,11 @@ doSearch
 
 
 });
+
+// ==========================
+// 语言切换后重新加载索引
+// ==========================
+
+window.reloadSearchData = function () {
+    loadSearchData();
+};
