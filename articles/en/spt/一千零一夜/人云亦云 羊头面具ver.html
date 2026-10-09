@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Echoing Others&#x27; Opinions Sheep Head Mask ver</title>
+<link rel="stylesheet" href="../../../../style.css">
+</head>
+<body>
+
+<div id="lang-btn" class="lang-switch" title="切换到中文" onclick="switchLang()">中文</div>
+<button id="theme-btn">🌙</button>
+
+<div class="search-box">
+<input id="site-search" placeholder="Search articles...">
+<div id="searchResult"></div>
+</div>
+
+<div class="container">
+<div class="project-page">
+
+<div class="nav-bar">
+<a class="back-btn" href="index.html">← Back</a>
+<a class="back-btn" href="../../../../index.html">← Home</a>
+</div>
+
+<h1>Echoing Others&#x27; Opinions Sheep Head Mask ver</h1>
+
+<div class="article-content">
+<p>Stepping on the stone steps, through the misty clouds, the scholar wearing a white and loose robe came in and out of this prestigious academy. He touched the marble columns and looked up. Many people were sitting in a circle, probably arguing about something, so much so that their faces were red, and perhaps no one could convince anyone else.</p>
+<p>After all, clever words and flattery, and theories outlined with vivid rhetoric, may sound convincing at first, but everyone tends to hold onto their own views, making it difficult for others to persuade them.</p>
+<p>The young man noticed this. He saw that some of them wore masks with sheep faces; they were probably on the same side, as they were sitting together, speaking with certainty about something. Then there were others who didn’t wear masks; they had different expressions, each holding their own opinion, seemingly in disagreement, each speaking for their own side.</p>
+<p>So the young man thought that perhaps he could also express some opinions. Thus, he walked up the steps, went over to the people sitting in a circle, and listened to what exactly they were saying.</p>
+</div>
+
+<div class="nav-bar">
+<a class="back-btn" href="不原谅也没关系-自白.html">← It&#x27;s okay not to forgive - Confession</a><a class="back-btn" href="狄康卡-怪谈和森林.html">Dikonka - Ghost Stories and the Forest →</a>
+</div>
+
+<div class="comment-box">
+<h3>Comments</h3>
+<textarea id="message" placeholder="Leave a comment"></textarea>
+<button onclick="sendComment()">Send</button>
+</div>
+
+</div>
+</div>
+
+<audio id="bgm" loop></audio>
+
+<div class="music-box">
+<div class="music-title"><span class="music-icon">🎵</span> Now playing: <span id="musicName">Not playing</span></div>
+<div class="music-line"></div>
+<div class="music-controls">
+<button class="music-btn small" onclick="prevMusic()">⏮</button>
+<button id="playBtn" class="music-btn play" onclick="toggleMusic()">▶</button>
+<button class="music-btn small" onclick="nextMusic()">⏭</button>
+<select id="songSelect"></select>
+</div>
+</div>
+
+<script src="../../../../theme.js"></script>
+<script src="../../../../script.js"></script>
+<script src="../../../../search.js"></script>
+<script>
+(function () {
+  var lang = localStorage.getItem("lang") || "zh";
+  document.documentElement.lang = lang === "en" ? "en" : "zh-CN";
+  window.switchLang = function () {
+    var cur = localStorage.getItem("lang") || "zh";
+    var next = cur === "zh" ? "en" : "zh";
+    localStorage.setItem("lang", next);
+    var p = window.location.pathname;
+    window.location.href = p.replace("/articles/" + cur + "/", "/articles/" + next + "/");
+  };
+  if (lang === "en" && window.location.pathname.indexOf("/articles/zh/") !== -1) {
+    window.location.pathname = window.location.pathname.replace("/articles/zh/", "/articles/en/");
+  } else if (lang === "zh" && window.location.pathname.indexOf("/articles/en/") !== -1) {
+    window.location.pathname = window.location.pathname.replace("/articles/en/", "/articles/zh/");
+  }
+})();
+</script>
+
+</body>
+</html>

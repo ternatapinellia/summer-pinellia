@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>coffee cup</title>
+<link rel="stylesheet" href="../../../../style.css">
+</head>
+<body>
+
+<div id="lang-btn" class="lang-switch" title="切换到中文" onclick="switchLang()">中文</div>
+<button id="theme-btn">🌙</button>
+
+<div class="search-box">
+<input id="site-search" placeholder="Search articles...">
+<div id="searchResult"></div>
+</div>
+
+<div class="container">
+<div class="project-page">
+
+<div class="nav-bar">
+<a class="back-btn" href="../index.html">← Back</a>
+<a class="back-btn" href="../../../../index.html">← Home</a>
+</div>
+
+<h1>coffee cup</h1>
+
+
+
+<h2>Articles</h2>
+<div class="article-grid"><a class="article-card" href="上.html"><h3>📄 up</h3></a><a class="article-card" href="下.html"><h3>📄 down</h3></a><a class="article-card" href="咖啡杯1-9.html"><h3>📄 Coffee Cups 1-9</h3></a><a class="article-card" href="咖啡杯1-Battatx你.html"><h3>📄 Coffee cup 1-Battatx you</h3></a><a class="article-card" href="咖啡杯2-Battatx你.html"><h3>📄 Coffee cup 2-Battatx you</h3></a><a class="article-card" href="咖啡杯3-Battatx你.html"><h3>📄 Coffee cup 3-Battatx you</h3></a><a class="article-card" href="咖啡杯4-Battatx你.html"><h3>📄 Coffee cup 4-Battatx you</h3></a><a class="article-card" href="咖啡杯5-Battatx你.html"><h3>📄 Coffee cup 5-Battatx you</h3></a><a class="article-card" href="咖啡杯6-Battatx你.html"><h3>📄 Coffee cup 6-Battatx you</h3></a><a class="article-card" href="咖啡杯7-Battatx你.html"><h3>📄 Coffee cup 7-Battatx you</h3></a><a class="article-card" href="咖啡杯8-Battatx你.html"><h3>📄 Coffee cup 8-Battatx you</h3></a><a class="article-card" href="咖啡杯9-Battatx你.html"><h3>📄 Coffee cup 9-Battatx you</h3></a><a class="article-card" href="咖啡杯10（第一部完结）-Battatx你.html"><h3>📄 Coffee Cup 10 (End of Part One) - Battatx You</h3></a><a class="article-card" href="咖啡杯11-Battatx你.html"><h3>📄 Coffee cup 11-Battatx you</h3></a><a class="article-card" href="咖啡杯12-Battatx你.html"><h3>📄 Coffee cup 12-Battatx you</h3></a><a class="article-card" href="咖啡杯13-Battatx你.html"><h3>📄 Coffee cup 13-Battatx you</h3></a><a class="article-card" href="咖啡杯14-Battatx你.html"><h3>📄 Coffee cup 14-Battatx you</h3></a><a class="article-card" href="咖啡杯15-Battatx你.html"><h3>📄 Coffee cup 15-Battatx you</h3></a><a class="article-card" href="咖啡杯16-Battatx你.html"><h3>📄 Coffee cup 16-Battatx you</h3></a><a class="article-card" href="咖啡杯17-Battatx你.html"><h3>📄 Coffee cup 17-Battatx you</h3></a><a class="article-card" href="咖啡杯18-Battatx你.html"><h3>📄 Coffee cup 18-Battatx you</h3></a><a class="article-card" href="咖啡杯19-Battatx你.html"><h3>📄 Coffee cup 19-Battatx you</h3></a><a class="article-card" href="咖啡杯20（正文end）-Battatx你.html"><h3>📄 Coffee Cup 20 (End of text) - Battatx You</h3></a><a class="article-card" href="咖啡杯21（番外1）-Battatx你(1).html"><h3>📄 Coffee Cup 21 (Extra 1) - Battatx You (1)</h3></a><a class="article-card" href="咖啡杯21（番外1）-Battatx你.html"><h3>📄 Coffee Cup 21 (Extra 1) - Battatx You</h3></a><a class="article-card" href="咖啡杯22（番外2）-Battatx你.html"><h3>📄 Coffee Cup 22 (Extra 2) - Battatx You</h3></a><a class="article-card" href="咖啡杯23（番外3）-Battatx你.html"><h3>📄 Coffee Cup 23 (Extra 3) - Battatx You</h3></a><a class="article-card" href="咖啡杯24（番外4）-Battatx你.html"><h3>📄 Coffee Cup 24 (Extra 4) - Battatx You</h3></a><a class="article-card" href="咖啡杯25（r18番外）-Battatx你.html"><h3>📄 Coffee Cup 25 (R18 Extra) - Battatx You</h3></a><a class="article-card" href="咖啡杯.html"><h3>📄 coffee cup</h3></a></div>
+
+</div>
+</div>
+
+<audio id="bgm" loop></audio>
+
+<div class="music-box">
+<div class="music-title"><span class="music-icon">🎵</span> Now playing: <span id="musicName">Not playing</span></div>
+<div class="music-line"></div>
+<div class="music-controls">
+<button class="music-btn small" onclick="prevMusic()">⏮</button>
+<button id="playBtn" class="music-btn play" onclick="toggleMusic()">▶</button>
+<button class="music-btn small" onclick="nextMusic()">⏭</button>
+<select id="songSelect"></select>
+</div>
+</div>
+
+<script src="../../../../theme.js"></script>
+<script src="../../../../script.js"></script>
+<script src="../../../../search.js"></script>
+<script>
+(function () {
+  var lang = localStorage.getItem("lang") || "zh";
+  document.documentElement.lang = lang === "en" ? "en" : "zh-CN";
+  window.switchLang = function () {
+    var cur = localStorage.getItem("lang") || "zh";
+    var next = cur === "zh" ? "en" : "zh";
+    localStorage.setItem("lang", next);
+    var p = window.location.pathname;
+    window.location.href = p.replace("/articles/" + cur + "/", "/articles/" + next + "/");
+  };
+  if (lang === "en" && window.location.pathname.indexOf("/articles/zh/") !== -1) {
+    window.location.pathname = window.location.pathname.replace("/articles/zh/", "/articles/en/");
+  } else if (lang === "zh" && window.location.pathname.indexOf("/articles/en/") !== -1) {
+    window.location.pathname = window.location.pathname.replace("/articles/en/", "/articles/zh/");
+  }
+})();
+</script>
+
+</body>
+</html>

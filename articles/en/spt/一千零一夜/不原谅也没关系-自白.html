@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>It&#x27;s okay not to forgive - Confession</title>
+<link rel="stylesheet" href="../../../../style.css">
+</head>
+<body>
+
+<div id="lang-btn" class="lang-switch" title="切换到中文" onclick="switchLang()">中文</div>
+<button id="theme-btn">🌙</button>
+
+<div class="search-box">
+<input id="site-search" placeholder="Search articles...">
+<div id="searchResult"></div>
+</div>
+
+<div class="container">
+<div class="project-page">
+
+<div class="nav-bar">
+<a class="back-btn" href="index.html">← Back</a>
+<a class="back-btn" href="../../../../index.html">← Home</a>
+</div>
+
+<h1>It&#x27;s okay not to forgive - Confession</h1>
+
+<div class="article-content">
+<p>I don’t know what I should say anymore. Maybe all language and words are powerless, forever unable to express my true thoughts. But I can only use these; I have nothing else. Only the time immersed in words truly belongs to me. There are so many things to consider in living in this world, so many things to be busy with every day; to survive, to achieve personal happiness and fulfillment, there are so many efforts to be made... yet I only wish to have time that truly belongs to me. I already have a lot of such time, but I can’t help myself from letting my thoughts sink into the abyss.</p>
+<p>... If I could only immerse myself in the vast ocean of books, if I could only curl up in the narrow gaps between dim bookshelves, lose myself in reading a book, record my thoughts and ideas, how wonderful that would be. Unfortunately, this is just an unrealistic dream, probably never achievable. I am human, and being human means needing to survive, needing to act, not just hide away. Although I am weary of all this, I must continue in order to live.</p>
+<p>... I must continue, even though I am tired of all this, even though my heart screams that what I need is rest, complete relaxation, to immerse myself in my own world without concern, otherwise I will never truly feel happiness. But perhaps I am using reason to suppress emotion. My inner experience tells me to let it all end, to let my life end here too, as there is little attachment left for this world. Yet my reason tells me that to live better, I must do these things, I must live more orderly in order to live better.</p>
+<p>But what’s the point of living better? Is it just to die better, with no regrets? I cannot understand any of this, and I have no right to explain. I admit, perhaps I cannot see through my own heart. But I don’t want to fake happiness. I don’t want to face others with a false face, though sometimes I still subconsciously put on armor and wear a mask, because I know it’s the only way to satisfy them, the only way to make others happy.</p>
+<p>... But why do that? Even if I don’t, why should other people’s thoughts matter to me? Why should I care about them? I cannot explain or understand. Perhaps I am just a child who has never grown up, still needing others to tell me the answers, because I am trapped, trapped in a certain day, unable to ever leave. Everything is probably just a disguise for the self. If it didn’t bring pain, that would be good. Yet it does bring pain and embarrassment, perhaps because my inner self is struggling with it.</p>
+<p>I am trying, trying to make my life look a little better, yet it seems useless. Who can tell me that my life has meaning? Or can I even tell myself that I must continue living? Why are we born, and why do we die? If I had never lived, I would not have felt this pain. But if I had never lived, perhaps I wouldn’t have experienced even fleeting moments of beauty. Should we endure all the pain of life just for those brief moments of happiness?</p>
+<p>... What is my connection with this world? I don’t really know. What I do know is that I probably don’t truly love anything or like anything, I only have fleeting moments of joy. I also don’t truly hate anything, but have I even lost the ability to feel that way? From the bottom of my heart, I want to hate something, yet that feeling has faded over time.</p>
+<p>... Or maybe that isn’t a bad thing. Perhaps completely forgetting the past is not impossible. Maybe all my attempts now are just efforts to love something, attempts to give myself an object to be persistent about. Am I overthinking? Should I not think about these things? Can I just escape? But I don’t want a life of passive acceptance; I want the courage to face it all.</p>
+<p>Yet my courage seems to have gradually worn away. In the end, isn’t all this just the struggle of an ignorant child? What am I, after all?</p>
+<p>... Or perhaps being nothing at all would be the best ending.</p>
+</div>
+
+<div class="nav-bar">
+<a class="back-btn" href="一千零一夜2-sptx你.html">← One Thousand and One Nights 2-sptx you</a><a class="back-btn" href="人云亦云 羊头面具ver.html">Echoing Others&#x27; Opinions Sheep Head Mask ver →</a>
+</div>
+
+<div class="comment-box">
+<h3>Comments</h3>
+<textarea id="message" placeholder="Leave a comment"></textarea>
+<button onclick="sendComment()">Send</button>
+</div>
+
+</div>
+</div>
+
+<audio id="bgm" loop></audio>
+
+<div class="music-box">
+<div class="music-title"><span class="music-icon">🎵</span> Now playing: <span id="musicName">Not playing</span></div>
+<div class="music-line"></div>
+<div class="music-controls">
+<button class="music-btn small" onclick="prevMusic()">⏮</button>
+<button id="playBtn" class="music-btn play" onclick="toggleMusic()">▶</button>
+<button class="music-btn small" onclick="nextMusic()">⏭</button>
+<select id="songSelect"></select>
+</div>
+</div>
+
+<script src="../../../../theme.js"></script>
+<script src="../../../../script.js"></script>
+<script src="../../../../search.js"></script>
+<script>
+(function () {
+  var lang = localStorage.getItem("lang") || "zh";
+  document.documentElement.lang = lang === "en" ? "en" : "zh-CN";
+  window.switchLang = function () {
+    var cur = localStorage.getItem("lang") || "zh";
+    var next = cur === "zh" ? "en" : "zh";
+    localStorage.setItem("lang", next);
+    var p = window.location.pathname;
+    window.location.href = p.replace("/articles/" + cur + "/", "/articles/" + next + "/");
+  };
+  if (lang === "en" && window.location.pathname.indexOf("/articles/zh/") !== -1) {
+    window.location.pathname = window.location.pathname.replace("/articles/zh/", "/articles/en/");
+  } else if (lang === "zh" && window.location.pathname.indexOf("/articles/en/") !== -1) {
+    window.location.pathname = window.location.pathname.replace("/articles/en/", "/articles/zh/");
+  }
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>We are friends with benefits end</title>
+<link rel="stylesheet" href="../../../../style.css">
+</head>
+<body>
+
+<div id="lang-btn" class="lang-switch" title="切换到中文" onclick="switchLang()">中文</div>
+<button id="theme-btn">🌙</button>
+
+<div class="search-box">
+<input id="site-search" placeholder="Search articles...">
+<div id="searchResult"></div>
+</div>
+
+<div class="container">
+<div class="project-page">
+
+<div class="nav-bar">
+<a class="back-btn" href="../index.html">← Back</a>
+<a class="back-btn" href="../../../../index.html">← Home</a>
+</div>
+
+<h1>We are friends with benefits end</h1>
+
+
+
+<h2>Articles</h2>
+<div class="article-grid"><a class="article-card" href="我们是泡友关系 1.html"><h3>📄 We are hookup buddies 1</h3></a><a class="article-card" href="我们是泡友关系 2.html"><h3>📄 We are hookup buddies 2</h3></a><a class="article-card" href="我们是泡友关系 3.html"><h3>📄 We are hookup buddies 3</h3></a><a class="article-card" href="我们是泡友关系 4.html"><h3>📄 We are hookup buddies 4</h3></a><a class="article-card" href="我们是泡友关系 5.html"><h3>📄 We are hookup buddies 5</h3></a><a class="article-card" href="我们是泡友关系 6.html"><h3>📄 We are hookup buddies 6</h3></a><a class="article-card" href="我们是泡友关系 7.html"><h3>📄 We are hookup buddies 7</h3></a><a class="article-card" href="我们是泡友关系 8.html"><h3>📄 We are hookup buddies 8</h3></a><a class="article-card" href="我们是泡友关系 9（end）.html"><h3>📄 We are hookup friends 9 (end)</h3></a><a class="article-card" href="我们是泡友关系-if线抢婚番外.html"><h3>📄 We Are FWB-if Line Snatching Marriage Extra</h3></a><a class="article-card" href="我们是泡友关系-r18番外1.html"><h3>📄 We Are Hookup Buddies - R18 Extra 1</h3></a><a class="article-card" href="我们是泡友关系-r18番外2.html"><h3>📄 We Are Friends with Benefits - R18 Extra 2</h3></a><a class="article-card" href="泡友关系前传1.html"><h3>📄 The Prequel to a Casual Relationship 1</h3></a><a class="article-card" href="泡友关系前传2.html"><h3>📄 The Prequel to Buddy-in-the-Bath Relationship 2</h3></a><a class="article-card" href="泡友关系前传3.html"><h3>📄 Casual Friends Relationship: Prequel 3</h3></a><a class="article-card" href="泡友关系前传4（end）.html"><h3>📄 Friends with Benefits Prequel 4 (end)</h3></a><a class="article-card" href="泡友关系前传.html"><h3>📄 The Prequel to a Casual Hookup Relationship</h3></a></div>
+
+</div>
+</div>
+
+<audio id="bgm" loop></audio>
+
+<div class="music-box">
+<div class="music-title"><span class="music-icon">🎵</span> Now playing: <span id="musicName">Not playing</span></div>
+<div class="music-line"></div>
+<div class="music-controls">
+<button class="music-btn small" onclick="prevMusic()">⏮</button>
+<button id="playBtn" class="music-btn play" onclick="toggleMusic()">▶</button>
+<button class="music-btn small" onclick="nextMusic()">⏭</button>
+<select id="songSelect"></select>
+</div>
+</div>
+
+<script src="../../../../theme.js"></script>
+<script src="../../../../script.js"></script>
+<script src="../../../../search.js"></script>
+<script>
+(function () {
+  var lang = localStorage.getItem("lang") || "zh";
+  document.documentElement.lang = lang === "en" ? "en" : "zh-CN";
+  window.switchLang = function () {
+    var cur = localStorage.getItem("lang") || "zh";
+    var next = cur === "zh" ? "en" : "zh";
+    localStorage.setItem("lang", next);
+    var p = window.location.pathname;
+    window.location.href = p.replace("/articles/" + cur + "/", "/articles/" + next + "/");
+  };
+  if (lang === "en" && window.location.pathname.indexOf("/articles/zh/") !== -1) {
+    window.location.pathname = window.location.pathname.replace("/articles/zh/", "/articles/en/");
+  } else if (lang === "zh" && window.location.pathname.indexOf("/articles/en/") !== -1) {
+    window.location.pathname = window.location.pathname.replace("/articles/en/", "/articles/zh/");
+  }
+})();
+</script>
+
+</body>
+</html>

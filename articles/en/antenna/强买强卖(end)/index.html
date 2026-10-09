@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Forced buying and selling (end)</title>
+<link rel="stylesheet" href="../../../../style.css">
+</head>
+<body>
+
+<div id="lang-btn" class="lang-switch" title="切换到中文" onclick="switchLang()">中文</div>
+<button id="theme-btn">🌙</button>
+
+<div class="search-box">
+<input id="site-search" placeholder="Search articles...">
+<div id="searchResult"></div>
+</div>
+
+<div class="container">
+<div class="project-page">
+
+<div class="nav-bar">
+<a class="back-btn" href="../index.html">← Back</a>
+<a class="back-btn" href="../../../../index.html">← Home</a>
+</div>
+
+<h1>Forced buying and selling (end)</h1>
+
+
+
+<h2>Articles</h2>
+<div class="article-grid"><a class="article-card" href="强买强卖1（tennax你）.html"><h3>📄 Forced buying and selling 1 (tennax you)</h3></a><a class="article-card" href="强买强卖2（tennax你）.html"><h3>📄 Forced Selling and Buying 2 (tennax you)</h3></a><a class="article-card" href="强买强卖3（tennax你）.html"><h3>📄 Forced Selling and Buying 3 (tennax you)</h3></a><a class="article-card" href="强买强卖4（tennax你）.html"><h3>📄 Forced Selling and Buying 4 (tennax you)</h3></a><a class="article-card" href="强买强卖5（tennax你）.html"><h3>📄 Forced buying and selling 5 (tennax you)</h3></a><a class="article-card" href="强买强卖6（tennax你）.html"><h3>📄 Forced Selling and Buying 6 (tennax you)</h3></a><a class="article-card" href="强买强卖7（tennax你）（18+）.html"><h3>📄 Forced Buying and Selling 7 (tennax you) (18+)</h3></a><a class="article-card" href="强买强卖8（tennax你）（18+）.html"><h3>📄 Forced Buying and Selling 8 (tennax you) (18+)</h3></a><a class="article-card" href="强买强卖9（tennax你）.html"><h3>📄 Forced buying and selling 9 (tennax you)</h3></a><a class="article-card" href="强买强卖10（tennax你）.html"><h3>📄 Forced buying and selling 10 (tennax you)</h3></a><a class="article-card" href="强买强卖11（tennax你）.html"><h3>📄 Forced buying and selling 11 (tennax you)</h3></a><a class="article-card" href="强买强卖12（tennax你）（18+）.html"><h3>📄 Forced Buying and Selling 12 (tennax you) (18+)</h3></a><a class="article-card" href="强买强卖13（tennax你）（18+）.html"><h3>📄 Forced buying and selling 13 (tennax you) (18+)</h3></a><a class="article-card" href="强买强卖14（tennax你）.html"><h3>📄 Forced buying and selling 14 (tennax you)</h3></a><a class="article-card" href="强买强卖15（tennax你）.html"><h3>📄 Forced buying and selling 15 (tennax you)</h3></a><a class="article-card" href="强买强卖16（tennax你）（18+）.html"><h3>📄 Forced Buying and Selling 16 (tennax you) (18+)</h3></a><a class="article-card" href="强买强卖17（tennax你）（18+）.html"><h3>📄 Forced buying and selling 17 (tennax you) (18+)</h3></a><a class="article-card" href="强买强卖18（tennax你）（18+）.html"><h3>📄 Forced buying and selling 18 (tennax you) (18+)</h3></a><a class="article-card" href="强买强卖19（tennax你）.html"><h3>📄 Forced buying and selling 19 (tennax you)</h3></a><a class="article-card" href="强买强卖20（tennax你）.html"><h3>📄 Forced buying and selling 20 (tennax you)</h3></a><a class="article-card" href="强买强卖21（tennax你）.html"><h3>📄 Forced buying and selling 21 (tennax you)</h3></a><a class="article-card" href="强买强卖22（tennax你）（18+）.html"><h3>📄 Forced Buying and Selling 22 (tennax you) (18+)</h3></a><a class="article-card" href="强买强卖23(tennax你）（18+）.html"><h3>📄 Forced buying and selling 23 (tennax you) (18+)</h3></a><a class="article-card" href="强买强卖24（tennax你）（18+）.html"><h3>📄 Forced Buying and Selling 24 (tennax you) (18+)</h3></a><a class="article-card" href="强买强卖25（tennax你）（end）.html"><h3>📄 Forced buying and selling 25 (tennax you) (end)</h3></a><a class="article-card" href="强买强卖合并.html"><h3>📄 Forced merger</h3></a></div>
+
+</div>
+</div>
+
+<audio id="bgm" loop></audio>
+
+<div class="music-box">
+<div class="music-title"><span class="music-icon">🎵</span> Now playing: <span id="musicName">Not playing</span></div>
+<div class="music-line"></div>
+<div class="music-controls">
+<button class="music-btn small" onclick="prevMusic()">⏮</button>
+<button id="playBtn" class="music-btn play" onclick="toggleMusic()">▶</button>
+<button class="music-btn small" onclick="nextMusic()">⏭</button>
+<select id="songSelect"></select>
+</div>
+</div>
+
+<script src="../../../../theme.js"></script>
+<script src="../../../../script.js"></script>
+<script src="../../../../search.js"></script>
+<script>
+(function () {
+  var lang = localStorage.getItem("lang") || "zh";
+  document.documentElement.lang = lang === "en" ? "en" : "zh-CN";
+  window.switchLang = function () {
+    var cur = localStorage.getItem("lang") || "zh";
+    var next = cur === "zh" ? "en" : "zh";
+    localStorage.setItem("lang", next);
+    var p = window.location.pathname;
+    window.location.href = p.replace("/articles/" + cur + "/", "/articles/" + next + "/");
+  };
+  if (lang === "en" && window.location.pathname.indexOf("/articles/zh/") !== -1) {
+    window.location.pathname = window.location.pathname.replace("/articles/zh/", "/articles/en/");
+  } else if (lang === "zh" && window.location.pathname.indexOf("/articles/en/") !== -1) {
+    window.location.pathname = window.location.pathname.replace("/articles/en/", "/articles/zh/");
+  }
+})();
+</script>
+
+</body>
+</html>

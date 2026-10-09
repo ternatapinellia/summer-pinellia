@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seven Days Eden 2 (tennax you)</title>
+<link rel="stylesheet" href="../../../../style.css">
+</head>
+<body>
+
+<div id="lang-btn" class="lang-switch" title="切换到中文" onclick="switchLang()">中文</div>
+<button id="theme-btn">🌙</button>
+
+<div class="search-box">
+<input id="site-search" placeholder="Search articles...">
+<div id="searchResult"></div>
+</div>
+
+<div class="container">
+<div class="project-page">
+
+<div class="nav-bar">
+<a class="back-btn" href="index.html">← Back</a>
+<a class="back-btn" href="../../../../index.html">← Home</a>
+</div>
+
+<h1>Seven Days Eden 2 (tennax you)</h1>
+
+<div class="article-content">
+<p>Today is the second day.</p>
+<p>Walking out of your room, you see Tenna sitting there dazedly. Only when he sees you come out does he turn his head to look at you, the screen still pitch black.</p>
+<p>You lift your head to look at him, your eyes slightly curved, smiling as you say: “So, Mr. Tenna, what is your wish for today?”</p>
+<p>Tenna hesitates for a moment before speaking: “Uh… I think, no, I mean, maybe you could help me organize a show?”</p>
+<p>“So, this is your wish for today?”</p>
+<p>“No… I mean. Never mind, I mean yes.”</p>
+<p>“Of course, no problem, I will make your wish come true.”</p>
+<p>“…If, I mean, I hope my show can be seen by more people, liked by more people, what would you do?”</p>
+<p>“Is this also your wish?”</p>
+<p>Tenna remains silent and does not answer your question, but you receive an affirmative answer from it.</p>
+<p>So you think seriously for a moment and give your answer: “</p>
+</div>
+
+<div class="nav-bar">
+<a class="back-btn" href="七日伊甸1（tennax你）.html">← Seven Days Eden 1 (tennax you)</a><a class="back-btn" href="七日伊甸5（tennax你）.html">Seven Days Eden 5 (tennax you) →</a>
+</div>
+
+<div class="comment-box">
+<h3>Comments</h3>
+<textarea id="message" placeholder="Leave a comment"></textarea>
+<button onclick="sendComment()">Send</button>
+</div>
+
+</div>
+</div>
+
+<audio id="bgm" loop></audio>
+
+<div class="music-box">
+<div class="music-title"><span class="music-icon">🎵</span> Now playing: <span id="musicName">Not playing</span></div>
+<div class="music-line"></div>
+<div class="music-controls">
+<button class="music-btn small" onclick="prevMusic()">⏮</button>
+<button id="playBtn" class="music-btn play" onclick="toggleMusic()">▶</button>
+<button class="music-btn small" onclick="nextMusic()">⏭</button>
+<select id="songSelect"></select>
+</div>
+</div>
+
+<script src="../../../../theme.js"></script>
+<script src="../../../../script.js"></script>
+<script src="../../../../search.js"></script>
+<script>
+(function () {
+  var lang = localStorage.getItem("lang") || "zh";
+  document.documentElement.lang = lang === "en" ? "en" : "zh-CN";
+  window.switchLang = function () {
+    var cur = localStorage.getItem("lang") || "zh";
+    var next = cur === "zh" ? "en" : "zh";
+    localStorage.setItem("lang", next);
+    var p = window.location.pathname;
+    window.location.href = p.replace("/articles/" + cur + "/", "/articles/" + next + "/");
+  };
+  if (lang === "en" && window.location.pathname.indexOf("/articles/zh/") !== -1) {
+    window.location.pathname = window.location.pathname.replace("/articles/zh/", "/articles/en/");
+  } else if (lang === "zh" && window.location.pathname.indexOf("/articles/en/") !== -1) {
+    window.location.pathname = window.location.pathname.replace("/articles/en/", "/articles/zh/");
+  }
+})();
+</script>
+
+</body>
+</html>

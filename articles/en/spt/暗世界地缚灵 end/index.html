@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dark World Ground-Bound Spirit end</title>
+<link rel="stylesheet" href="../../../../style.css">
+</head>
+<body>
+
+<div id="lang-btn" class="lang-switch" title="切换到中文" onclick="switchLang()">中文</div>
+<button id="theme-btn">🌙</button>
+
+<div class="search-box">
+<input id="site-search" placeholder="Search articles...">
+<div id="searchResult"></div>
+</div>
+
+<div class="container">
+<div class="project-page">
+
+<div class="nav-bar">
+<a class="back-btn" href="../index.html">← Back</a>
+<a class="back-btn" href="../../../../index.html">← Home</a>
+</div>
+
+<h1>Dark World Ground-Bound Spirit end</h1>
+
+
+
+<h2>Articles</h2>
+<div class="article-grid"><a class="article-card" href="【上】.html"><h3>📄 [Part 1]</h3></a><a class="article-card" href="【下】.html"><h3>📄 Part 2</h3></a><a class="article-card" href="【中】.html"><h3>📄 [Middle]</h3></a><a class="article-card" href="上.html"><h3>📄 up</h3></a><a class="article-card" href="暗世界地缚灵1（sptx你）.html"><h3>📄 Dark World Bound Spirit 1 (sptx You)</h3></a><a class="article-card" href="暗世界地缚灵2（sptx你）.html"><h3>📄 Dark World Bound Spirit 2 (sptx you)</h3></a><a class="article-card" href="暗世界地缚灵3（sptx你）.html"><h3>📄 Dark World Bound Spirit 3 (sptx You)</h3></a><a class="article-card" href="暗世界地缚灵4（sptx你）.html"><h3>📄 Dark World Bound Spirit 4 (sptx you)</h3></a><a class="article-card" href="暗世界地缚灵5（sptx你）.html"><h3>📄 Dark World Bound Spirit 5 (sptx you)</h3></a><a class="article-card" href="暗世界地缚灵6（sptx你）.html"><h3>📄 Dark World Bound Spirit 6 (sptx you)</h3></a><a class="article-card" href="暗世界地缚灵7（sptx你）.html"><h3>📄 Dark World Bound Spirit 7 (sptx you)</h3></a><a class="article-card" href="暗世界地缚灵8（sptx你）.html"><h3>📄 Dark World Bound Spirit 8 (sptx you)</h3></a><a class="article-card" href="暗世界地缚灵9（sptx你）.html"><h3>📄 Dark World Earthbound Spirit 9 (sptx you)</h3></a><a class="article-card" href="暗世界地缚灵10（sptx你）.html"><h3>📄 Dark World Earthbound Spirit 10 (sptx you)</h3></a><a class="article-card" href="暗世界地缚灵11（sptx你）.html"><h3>📄 Dark World Bound Spirit 11 (sptx you)</h3></a><a class="article-card" href="暗世界地缚灵12（sptx你）.html"><h3>📄 Dark World Bound Spirit 12 (sptx you)</h3></a><a class="article-card" href="暗世界地缚灵13（sptx你）.html"><h3>📄 Dark World Earthbound Spirit 13 (sptx you)</h3></a><a class="article-card" href="暗世界地缚灵14（sptx你）.html"><h3>📄 Dark World Bound Spirit 14 (sptx you)</h3></a><a class="article-card" href="暗世界地缚灵15（sptx你）.html"><h3>📄 Dark World Bound Spirit 15 (sptx you)</h3></a><a class="article-card" href="暗世界地缚灵16（sptx你）.html"><h3>📄 Dark World Bound Spirit 16 (sptx you)</h3></a><a class="article-card" href="暗世界地缚灵17（sptx你）.html"><h3>📄 Dark World Bound Spirit 17 (sptx you)</h3></a><a class="article-card" href="暗世界地缚灵18（sptx你）.html"><h3>📄 Dark World Bound Spirit 18 (sptx you)</h3></a><a class="article-card" href="暗世界地缚灵19（sptx你）.html"><h3>📄 Dark World Bound Spirit 19 (sptx you)</h3></a><a class="article-card" href="暗世界地缚灵20（end）（sptx你）.html"><h3>📄 Dark World Spirit Bound 20 (end) (sptx you)</h3></a><a class="article-card" href="暗世界地缚灵合集.html"><h3>📄 Dark World Bound Spirits Collection</h3></a></div>
+
+</div>
+</div>
+
+<audio id="bgm" loop></audio>
+
+<div class="music-box">
+<div class="music-title"><span class="music-icon">🎵</span> Now playing: <span id="musicName">Not playing</span></div>
+<div class="music-line"></div>
+<div class="music-controls">
+<button class="music-btn small" onclick="prevMusic()">⏮</button>
+<button id="playBtn" class="music-btn play" onclick="toggleMusic()">▶</button>
+<button class="music-btn small" onclick="nextMusic()">⏭</button>
+<select id="songSelect"></select>
+</div>
+</div>
+
+<script src="../../../../theme.js"></script>
+<script src="../../../../script.js"></script>
+<script src="../../../../search.js"></script>
+<script>
+(function () {
+  var lang = localStorage.getItem("lang") || "zh";
+  document.documentElement.lang = lang === "en" ? "en" : "zh-CN";
+  window.switchLang = function () {
+    var cur = localStorage.getItem("lang") || "zh";
+    var next = cur === "zh" ? "en" : "zh";
+    localStorage.setItem("lang", next);
+    var p = window.location.pathname;
+    window.location.href = p.replace("/articles/" + cur + "/", "/articles/" + next + "/");
+  };
+  if (lang === "en" && window.location.pathname.indexOf("/articles/zh/") !== -1) {
+    window.location.pathname = window.location.pathname.replace("/articles/zh/", "/articles/en/");
+  } else if (lang === "zh" && window.location.pathname.indexOf("/articles/en/") !== -1) {
+    window.location.pathname = window.location.pathname.replace("/articles/en/", "/articles/zh/");
+  }
+})();
+</script>
+
+</body>
+</html>

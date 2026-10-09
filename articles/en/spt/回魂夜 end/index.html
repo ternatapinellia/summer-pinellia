@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resurrection Night end</title>
+<link rel="stylesheet" href="../../../../style.css">
+</head>
+<body>
+
+<div id="lang-btn" class="lang-switch" title="切换到中文" onclick="switchLang()">中文</div>
+<button id="theme-btn">🌙</button>
+
+<div class="search-box">
+<input id="site-search" placeholder="Search articles...">
+<div id="searchResult"></div>
+</div>
+
+<div class="container">
+<div class="project-page">
+
+<div class="nav-bar">
+<a class="back-btn" href="../index.html">← Back</a>
+<a class="back-btn" href="../../../../index.html">← Home</a>
+</div>
+
+<h1>Resurrection Night end</h1>
+
+
+
+<h2>Articles</h2>
+<div class="article-grid"><a class="article-card" href="【合并】回魂夜.html"><h3>📄 [Merge] The Night of Returning Souls</h3></a><a class="article-card" href="回魂夜1（sptx你）（18+）.html"><h3>📄 Haunted Night 1 (sptx you) (18+)</h3></a><a class="article-card" href="回魂夜2（sptx你）（18+）.html"><h3>📄 Haunted Night 2 (sptx you) (18+)</h3></a><a class="article-card" href="回魂夜3（sptx你）（18+）.html"><h3>📄 Haunted Night 3 (sptx you) (18+)</h3></a><a class="article-card" href="回魂夜4（sptx你）（18+）.html"><h3>📄 Haunted Night 4 (sptx you) (18+)</h3></a><a class="article-card" href="回魂夜5（sptx你）（18+）.html"><h3>📄 Haunted Night 5 (sptx you) (18+)</h3></a><a class="article-card" href="回魂夜6（sptx你）（18+）.html"><h3>📄 Haunted Night 6 (sptx you) (18+)</h3></a><a class="article-card" href="回魂夜7（sptx你）（18+）.html"><h3>📄 Haunted Night 7 (sptx you) (18+)</h3></a><a class="article-card" href="回魂夜8（sptx你）（18+）.html"><h3>📄 Haunted Night 8 (sptx you) (18+)</h3></a><a class="article-card" href="回魂夜9（sptx你）（18+）.html"><h3>📄 Haunted Night 9 (sptx you) (18+)</h3></a><a class="article-card" href="回魂夜10（sptx你）（18+）.html"><h3>📄 Haunted Night 10 (sptx you) (18+)</h3></a></div>
+
+</div>
+</div>
+
+<audio id="bgm" loop></audio>
+
+<div class="music-box">
+<div class="music-title"><span class="music-icon">🎵</span> Now playing: <span id="musicName">Not playing</span></div>
+<div class="music-line"></div>
+<div class="music-controls">
+<button class="music-btn small" onclick="prevMusic()">⏮</button>
+<button id="playBtn" class="music-btn play" onclick="toggleMusic()">▶</button>
+<button class="music-btn small" onclick="nextMusic()">⏭</button>
+<select id="songSelect"></select>
+</div>
+</div>
+
+<script src="../../../../theme.js"></script>
+<script src="../../../../script.js"></script>
+<script src="../../../../search.js"></script>
+<script>
+(function () {
+  var lang = localStorage.getItem("lang") || "zh";
+  document.documentElement.lang = lang === "en" ? "en" : "zh-CN";
+  window.switchLang = function () {
+    var cur = localStorage.getItem("lang") || "zh";
+    var next = cur === "zh" ? "en" : "zh";
+    localStorage.setItem("lang", next);
+    var p = window.location.pathname;
+    window.location.href = p.replace("/articles/" + cur + "/", "/articles/" + next + "/");
+  };
+  if (lang === "en" && window.location.pathname.indexOf("/articles/zh/") !== -1) {
+    window.location.pathname = window.location.pathname.replace("/articles/zh/", "/articles/en/");
+  } else if (lang === "zh" && window.location.pathname.indexOf("/articles/en/") !== -1) {
+    window.location.pathname = window.location.pathname.replace("/articles/en/", "/articles/zh/");
+  }
+})();
+</script>
+
+</body>
+</html>

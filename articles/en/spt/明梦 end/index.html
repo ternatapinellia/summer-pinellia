@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lucid dream end</title>
+<link rel="stylesheet" href="../../../../style.css">
+</head>
+<body>
+
+<div id="lang-btn" class="lang-switch" title="切换到中文" onclick="switchLang()">中文</div>
+<button id="theme-btn">🌙</button>
+
+<div class="search-box">
+<input id="site-search" placeholder="Search articles...">
+<div id="searchResult"></div>
+</div>
+
+<div class="container">
+<div class="project-page">
+
+<div class="nav-bar">
+<a class="back-btn" href="../index.html">← Back</a>
+<a class="back-btn" href="../../../../index.html">← Home</a>
+</div>
+
+<h1>Lucid dream end</h1>
+
+
+
+<h2>Articles</h2>
+<div class="article-grid"><a class="article-card" href="明梦1（dnbsx你）.html"><h3>📄 Lucid Dream 1 (dnbsx you)</h3></a><a class="article-card" href="明梦2（dnbsx你）.html"><h3>📄 Bright Dream 2 (dnbsx you)</h3></a><a class="article-card" href="明梦3（dnbsx你）.html"><h3>📄 Bright Dream 3 (dnbsx you)</h3></a><a class="article-card" href="明梦4（dnbsx你）.html"><h3>📄 Bright Dream 4 (dnbsx you)</h3></a><a class="article-card" href="明梦5（dnbsx你）.html"><h3>📄 Bright Dream 5 (dnbsx you)</h3></a><a class="article-card" href="明梦6（dnbsx你）.html"><h3>📄 Bright Dream 6 (dnbsx you)</h3></a><a class="article-card" href="明梦7（dnbsx你）.html"><h3>📄 Bright Dream 7 (dnbsx you)</h3></a><a class="article-card" href="明梦8（dnbsx你）.html"><h3>📄 Bright Dream 8 (dnbsx you)</h3></a><a class="article-card" href="明梦9（dnbsx你）.html"><h3>📄 Bright Dream 9 (dnbsx you)</h3></a><a class="article-card" href="明梦10（dnbsx你）.html"><h3>📄 Bright Dream 10 (dnbsx you)</h3></a><a class="article-card" href="明梦11（dnbsx你）.html"><h3>📄 Bright Dream 11 (dnbsx you)</h3></a><a class="article-card" href="明梦12（dnbsx你）.html"><h3>📄 Bright Dream 12 (dnbsx you)</h3></a><a class="article-card" href="明梦13（dnbsx你）.html"><h3>📄 Bright Dream 13 (dnbsx you)</h3></a><a class="article-card" href="明梦14（dnbsx你）.html"><h3>📄 Bright Dream 14 (dnbsx you)</h3></a><a class="article-card" href="明梦15（dnbsx你）.html"><h3>📄 Bright Dream 15 (dnbsx you)</h3></a><a class="article-card" href="明梦16（dnbsx你）.html"><h3>📄 Bright Dream 16 (dnbsx you)</h3></a><a class="article-card" href="明梦17（dnbsx你）.html"><h3>📄 Bright Dream 17 (dnbsx you)</h3></a><a class="article-card" href="明梦18（dnbsx你）.html"><h3>📄 Bright Dream 18 (dnbsx you)</h3></a><a class="article-card" href="明梦19（dnbsx你）.html"><h3>📄 Bright Dream 19 (dnbsx you)</h3></a><a class="article-card" href="明梦20（dnbsx你）（end）.html"><h3>📄 Bright Dream 20 (dnbsx you) (end)</h3></a></div>
+
+</div>
+</div>
+
+<audio id="bgm" loop></audio>
+
+<div class="music-box">
+<div class="music-title"><span class="music-icon">🎵</span> Now playing: <span id="musicName">Not playing</span></div>
+<div class="music-line"></div>
+<div class="music-controls">
+<button class="music-btn small" onclick="prevMusic()">⏮</button>
+<button id="playBtn" class="music-btn play" onclick="toggleMusic()">▶</button>
+<button class="music-btn small" onclick="nextMusic()">⏭</button>
+<select id="songSelect"></select>
+</div>
+</div>
+
+<script src="../../../../theme.js"></script>
+<script src="../../../../script.js"></script>
+<script src="../../../../search.js"></script>
+<script>
+(function () {
+  var lang = localStorage.getItem("lang") || "zh";
+  document.documentElement.lang = lang === "en" ? "en" : "zh-CN";
+  window.switchLang = function () {
+    var cur = localStorage.getItem("lang") || "zh";
+    var next = cur === "zh" ? "en" : "zh";
+    localStorage.setItem("lang", next);
+    var p = window.location.pathname;
+    window.location.href = p.replace("/articles/" + cur + "/", "/articles/" + next + "/");
+  };
+  if (lang === "en" && window.location.pathname.indexOf("/articles/zh/") !== -1) {
+    window.location.pathname = window.location.pathname.replace("/articles/zh/", "/articles/en/");
+  } else if (lang === "zh" && window.location.pathname.indexOf("/articles/en/") !== -1) {
+    window.location.pathname = window.location.pathname.replace("/articles/en/", "/articles/zh/");
+  }
+})();
+</script>
+
+</body>
+</html>

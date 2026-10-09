@@ -2252,7 +2252,7 @@ body.light .search-box input{
 
     position:fixed;
 
-    right:82px;
+    right:auto;
 
     top:20px;
 
@@ -2307,6 +2307,7 @@ body.light .search-box input{
 }
 
 body.light .lang-btn{
+    position:fixed;
 
     background:white;
 
@@ -2319,10 +2320,11 @@ body.light .lang-btn{
 @media (max-width:700px){
 
     .lang-btn{
+    position:fixed;
 
-        right:70px;
+        right:auto;
 
-        top:15px;
+        top:20px;
 
         height:40px;
 
@@ -2343,7 +2345,7 @@ body.light .lang-btn{
 
     position:fixed;
 
-    right:82px;
+    right:auto;
 
     top:20px;
 
@@ -2376,6 +2378,7 @@ body.light .lang-btn{
 }
 
 body.light .lang-switch{
+    position:fixed;
 
     background:white;
 
@@ -2388,16 +2391,198 @@ body.light .lang-switch{
 @media (max-width:700px){
 
     .lang-switch{
+    position:fixed;
 
-        right:70px;
+        right:auto;
 
-        top:15px;
+        top:20px;
 
         height:40px;
 
         padding:0 12px;
 
         font-size:13px;
+
+    }
+
+}
+
+
+/* =========================================
+   顶栏统一布局（最后生效，覆盖历史重复规则）
+   右上角依次为：搜索框 → 语言按钮 → 主题按钮
+   音乐播放器在左上角，互不干扰
+========================================= */
+
+#theme-btn,
+.lang-btn,
+.lang-switch{
+
+    position:fixed !important;
+    top:20px !important;
+    left:auto !important;
+    z-index:100000 !important;
+
+}
+
+#theme-btn{
+
+    right:25px !important;
+
+}
+
+.lang-btn,
+.lang-switch{
+
+    right:82px !important;
+
+    height:45px !important;
+    min-width:56px !important;
+
+    padding:0 16px !important;
+
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+
+    border-radius:22px !important;
+
+    background:#111;
+    color:#fff;
+
+    border:1px solid rgba(255,255,255,.3) !important;
+
+    cursor:pointer;
+    font-size:14px;
+    font-weight:600;
+    line-height:1;
+    user-select:none;
+
+}
+
+.search-box{
+
+    position:fixed !important;
+    top:20px !important;
+    right:196px !important;
+    left:auto !important;
+
+    z-index:99999 !important;
+
+}
+
+body.light .lang-btn,
+body.light .lang-switch{
+
+    background:#fff;
+    color:#222;
+    border-color:#ccc !important;
+
+}
+
+@media (max-width:768px){
+
+    #theme-btn,
+    .lang-btn,
+    .lang-switch{
+
+        top:15px !important;
+
+    }
+
+    #theme-btn{
+
+        right:15px !important;
+
+    }
+
+    .lang-btn,
+    .lang-switch{
+
+        right:64px !important;
+
+        height:40px !important;
+        min-width:50px !important;
+        padding:0 12px !important;
+        font-size:13px;
+
+    }
+
+    .search-box{
+
+        top:15px !important;
+        right:168px !important;
+
+    }
+
+    #site-search{
+
+        width:96px !important;
+
+    }
+
+}
+
+
+/* ===== SEARCH BOX SIZE (final) ===== */
+
+/* 搜索框与顶部按钮同高（45px），同一水平线 */
+.search-box{
+
+    position:fixed !important;
+    top:20px !important;
+    right:196px !important;
+    left:auto !important;
+    z-index:99999 !important;
+
+}
+
+.search-box input,
+#site-search{
+
+    width:220px !important;
+    height:45px !important;
+
+    padding:0 20px !important;
+
+    border-radius:22px !important;
+
+    font-size:15px !important;
+
+    background:rgba(10,10,15,.85) !important;
+    color:#fff !important;
+
+    border:1px solid rgba(255,255,255,.3) !important;
+
+    outline:none !important;
+
+}
+
+body.light .search-box input,
+body.light #site-search{
+
+    background:#fff !important;
+    color:#222 !important;
+    border-color:#ccc !important;
+
+}
+
+@media (max-width:768px){
+
+    .search-box{
+
+        top:15px !important;
+        right:176px !important;
+
+    }
+
+    .search-box input,
+    #site-search{
+
+        width:120px !important;
+        height:40px !important;
+        padding:0 14px !important;
+        font-size:13px !important;
 
     }
 

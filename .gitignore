@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# 临时/调试文件
+tools/_*.py
+tools/_*.json
+tools/_*.txt
+gen_log*.txt
+
+# 编辑器
+.vscode/
+.idea/
+Thumbs.db
+.DS_Store

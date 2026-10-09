@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Я</title>
+<link rel="stylesheet" href="../../../../style.css">
+</head>
+<body>
+
+<div id="lang-btn" class="lang-switch" title="Switch to English" onclick="switchLang()">EN</div>
+<button id="theme-btn">🌙</button>
+
+<div class="search-box">
+<input id="site-search" placeholder="搜索文章...">
+<div id="searchResult"></div>
+</div>
+
+<div class="container">
+<div class="project-page">
+
+<div class="nav-bar">
+<a class="back-btn" href="../index.html">← 返回上一级</a>
+<a class="back-btn" href="../../../../index.html">← 返回首页</a>
+</div>
+
+<h1>Я</h1>
+
+
+
+<h2>文章</h2>
+<div class="article-grid"><a class="article-card" href="angry sex（dnt nsfw）.html"><h3>📄 angry sex（dnt nsfw）</h3></a><a class="article-card" href="你我的“未来”（3p夹心r18文学预警）.html"><h3>📄 你我的“未来”（3p夹心r18文学预警）</h3></a><a class="article-card" href="反差萌（？）-dntx你Я.html"><h3>📄 反差萌（？）-dntx你Я</h3></a><a class="article-card" href="家庭晚餐（tv鼠的r18）.html"><h3>📄 家庭晚餐（tv鼠的r18）</h3></a><a class="article-card" href="惊喜or惊吓？（dntx你Я）.html"><h3>📄 惊喜or惊吓？（dntx你Я）</h3></a><a class="article-card" href="战利品（dnt的r18）.html"><h3>📄 战利品（dnt的r18）</h3></a><a class="article-card" href="普通一日（异端文学r18）.html"><h3>📄 普通一日（异端文学r18）</h3></a><a class="article-card" href="普通一日（续）（r18）.html"><h3>📄 普通一日（续）（r18）</h3></a></div>
+
+</div>
+</div>
+
+<audio id="bgm" loop></audio>
+
+<div class="music-box">
+<div class="music-title"><span class="music-icon">🎵</span> 当前音乐：<span id="musicName">未播放</span></div>
+<div class="music-line"></div>
+<div class="music-controls">
+<button class="music-btn small" onclick="prevMusic()">⏮</button>
+<button id="playBtn" class="music-btn play" onclick="toggleMusic()">▶</button>
+<button class="music-btn small" onclick="nextMusic()">⏭</button>
+<select id="songSelect"></select>
+</div>
+</div>
+
+<script src="../../../../theme.js"></script>
+<script src="../../../../script.js"></script>
+<script src="../../../../search.js"></script>
+<script>
+(function () {
+  var lang = localStorage.getItem("lang") || "zh";
+  document.documentElement.lang = lang === "en" ? "en" : "zh-CN";
+  window.switchLang = function () {
+    var cur = localStorage.getItem("lang") || "zh";
+    var next = cur === "zh" ? "en" : "zh";
+    localStorage.setItem("lang", next);
+    var p = window.location.pathname;
+    window.location.href = p.replace("/articles/" + cur + "/", "/articles/" + next + "/");
+  };
+  if (lang === "en" && window.location.pathname.indexOf("/articles/zh/") !== -1) {
+    window.location.pathname = window.location.pathname.replace("/articles/zh/", "/articles/en/");
+  } else if (lang === "zh" && window.location.pathname.indexOf("/articles/en/") !== -1) {
+    window.location.pathname = window.location.pathname.replace("/articles/en/", "/articles/zh/");
+  }
+})();
+</script>
+
+</body>
+</html>
