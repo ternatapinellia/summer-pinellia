@@ -2333,3 +2333,72 @@ body.light .lang-btn{
     }
 
 }
+
+
+/* =========================
+   文章页语言切换按钮（生成器模板使用 .lang-switch）
+========================= */
+
+.lang-switch{
+
+    position:fixed;
+
+    right:82px;
+
+    top:20px;
+
+    height:45px;
+
+    padding:0 16px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:22px;
+
+    background:#111;
+
+    color:white;
+
+    border:1px solid rgba(255,255,255,.3);
+
+    cursor:pointer;
+
+    font-size:14px;
+
+    user-select:none;
+
+    z-index:99999;
+
+}
+
+body.light .lang-switch{
+
+    background:white;
+
+    color:#222;
+
+    border-color:#ccc;
+
+}
+
+@media (max-width:700px){
+
+    .lang-switch{
+
+        right:70px;
+
+        top:15px;
+
+        height:40px;
+
+        padding:0 12px;
+
+        font-size:13px;
+
+    }
+
+}

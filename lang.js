@@ -237,6 +237,20 @@
       }
     });
 
+    // --- internal links (zh <-> en article trees) ---
+    Array.prototype.forEach.call(document.querySelectorAll("a[href]"), function (a) {
+      if (a.__zhHref === undefined) a.__zhHref = a.getAttribute("href");
+      var h = a.__zhHref;
+      if (!h) return;
+      if (lang === "en") {
+        if (h.indexOf("articles/zh/") !== -1) {
+          a.setAttribute("href", h.replace("articles/zh/", "articles/en/"));
+        }
+      } else {
+        a.setAttribute("href", h);
+      }
+    });
+
     // --- title ---
     if (document.__zhTitle === undefined) document.__zhTitle = document.title;
     if (lang === "en") {
@@ -248,6 +262,11 @@
 
     // --- html lang ---
     document.documentElement.lang = LANGS[lang].html_lang;
+
+    // --- search index follows language ---
+    if (typeof window.reloadSearchData === "function") {
+      try { window.reloadSearchData(); } catch (e) {}
+    }
 
     // --- button state ---
     var btn = document.getElementById("lang-btn");
