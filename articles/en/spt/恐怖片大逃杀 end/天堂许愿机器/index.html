@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Heaven Wish Machine</title>
+<link rel="stylesheet" href="../../../../../style.css">
+</head>
+<body>
+
+<div id="lang-btn" class="lang-switch" title="切换到中文" onclick="switchLang()">中文</div>
+<button id="theme-btn">🌙</button>
+
+<div class="search-box">
+<input id="site-search" placeholder="Search articles...">
+<div id="searchResult"></div>
+</div>
+
+<div class="container">
+<div class="project-page">
+
+<div class="nav-bar">
+<a class="back-btn" href="../index.html">← Back</a>
+<a class="back-btn" href="../../../../../index.html">← Home</a>
+</div>
+
+<h1>Heaven Wish Machine</h1>
+
+
+
+<h2>Articles</h2>
+<div class="article-grid"><a class="article-card" href="恐怖游戏【合并】.html"><h3>📄 Horror Game [Merge]</h3></a><a class="article-card" href="恐怖游戏端口1-林中古屋.html"><h3>📄 Horror Game Port 1 - Old House in the Forest</h3></a><a class="article-card" href="恐怖游戏端口2-间章-月曜日.html"><h3>📄 Horror Game Port 2 - Interlude - Monday</h3></a><a class="article-card" href="恐怖游戏端口3-火上浇油.html"><h3>📄 Horror Game Port 3 - Adding Fuel to the Fire</h3></a><a class="article-card" href="恐怖游戏端口4-间章-火曜日.html"><h3>📄 Horror Game Port 4 - Interlude - Tuesday</h3></a><a class="article-card" href="恐怖游戏端口5-末日游戏.html"><h3>📄 Horror Game Port 5 - Doomsday Game</h3></a><a class="article-card" href="恐怖游戏端口6-间章-水曜日.html"><h3>📄 Horror Game Port 6 - Interlude - Wednesday</h3></a><a class="article-card" href="恐怖游戏端口7-无尽深渊.html"><h3>📄 Horror Game Port 7 - Endless Abyss</h3></a><a class="article-card" href="恐怖游戏端口8-间章-木曜日.html"><h3>📄 Horror Game Port 8 - Interlude - Thursday</h3></a><a class="article-card" href="恐怖游戏端口9-旅店惊梦.html"><h3>📄 Horror Game Port 9 - Hotel Fright Dream</h3></a><a class="article-card" href="恐怖游戏端口10-间章-金曜日.html"><h3>📄 Horror Game Port 10 - Interlude - Friday</h3></a><a class="article-card" href="恐怖游戏端口11-生死抉择.html"><h3>📄 Horror Game Port 11 - Life or Death Choice</h3></a><a class="article-card" href="恐怖游戏端口12-间章-土曜日.html"><h3>📄 Horror Game Port 12 - Interlude - Saturday</h3></a><a class="article-card" href="恐怖游戏端口13-罪恶审判.html"><h3>📄 Horror Game Port 13 - Judgment of Sin</h3></a><a class="article-card" href="恐怖游戏端口14-间章-日曜日.html"><h3>📄 Horror Game Port 14 - Interlude - Sunday</h3></a></div>
+
+</div>
+</div>
+
+<audio id="bgm" loop></audio>
+
+<div class="music-box">
+<div class="music-title"><span class="music-icon">🎵</span> Now playing: <span id="musicName">Not playing</span></div>
+<div class="music-line"></div>
+<div class="music-controls">
+<button class="music-btn small" onclick="prevMusic()">⏮</button>
+<button id="playBtn" class="music-btn play" onclick="toggleMusic()">▶</button>
+<button class="music-btn small" onclick="nextMusic()">⏭</button>
+<select id="songSelect"></select>
+</div>
+</div>
+
+<script src="../../../../../theme.js"></script>
+<script src="../../../../../script.js"></script>
+<script src="../../../../../search.js"></script>
+<script>
+(function () {
+  var lang = localStorage.getItem("lang") || "zh";
+  document.documentElement.lang = lang === "en" ? "en" : "zh-CN";
+  window.switchLang = function () {
+    var cur = localStorage.getItem("lang") || "zh";
+    var next = cur === "zh" ? "en" : "zh";
+    localStorage.setItem("lang", next);
+    var p = window.location.pathname;
+    window.location.href = p.replace("/articles/" + cur + "/", "/articles/" + next + "/");
+  };
+  if (lang === "en" && window.location.pathname.indexOf("/articles/zh/") !== -1) {
+    window.location.pathname = window.location.pathname.replace("/articles/zh/", "/articles/en/");
+  } else if (lang === "zh" && window.location.pathname.indexOf("/articles/en/") !== -1) {
+    window.location.pathname = window.location.pathname.replace("/articles/en/", "/articles/zh/");
+  }
+})();
+</script>
+
+</body>
+</html>

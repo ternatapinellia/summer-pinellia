@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bird of Paradise 1</title>
+<link rel="stylesheet" href="../../../../style.css">
+</head>
+<body>
+
+<div id="lang-btn" class="lang-switch" title="切换到中文" onclick="switchLang()">中文</div>
+<button id="theme-btn">🌙</button>
+
+<div class="search-box">
+<input id="site-search" placeholder="Search articles...">
+<div id="searchResult"></div>
+</div>
+
+<div class="container">
+<div class="project-page">
+
+<div class="nav-bar">
+<a class="back-btn" href="index.html">← Back</a>
+<a class="back-btn" href="../../../../index.html">← Home</a>
+</div>
+
+<h1>Bird of Paradise 1</h1>
+
+<div class="article-content">
+<p>One step, two steps, three steps. You silently count your steps, calculating how much distance is left, while quietly loading ammunition into your gun—but you do not disengage the safety. After all, you don’t necessarily have to really kill anyone, so it’s not too late to decide at that moment.</p>
+<p>You just want to completely say goodbye to your past today. After all—at this moment, you no longer need to put on any disguise. Even though you know that saying goodbye to the past is cruel, painful, and hard to let go of.</p>
+<p>You look up at the desk straight ahead, behind which Spamton is sitting, his hands already tied and resting on the back of the chair—but he says nothing as you slowly walk toward him. At this moment, he tentatively realizes that he is indeed completely powerless to escape—after some unknown fainting, he arrived in this place, and for some unknown reason, perhaps due to being injected with some kind of medicine, he is now completely immobilized.</p>
+<p>So he just looks at you expressionlessly, at this little guy he once thought would stir up little trouble, or rather, to him, had always just been a plaything for idle amusement, a small pet that could entertain him, slowly walking toward him. He admits that you can indeed make him happy, of course, Spamton also knows that much of it is feigned, but he doesn’t care! Or rather, he ignores it.</p>
+<p>After all, he had always thought he could control everything, including you, whom to him was just a toy. But today, he miscalculated. Probably due to his previous underestimation and neglect, Spamton finds himself inadvertently having to tip his head back to look at you.</p>
+<p>Finally, you arrive in front of him, watching him lift his head and look at you expressionlessly, perhaps with a hint of complex meaning in his eyes, but you don’t care. You simply smile satisfactorily, then lift your gun, the black muzzle pressed against his forehead.</p>
+<p>“Mr. Spamton,” you say slowly, “have you ever imagined this scene?”</p>
+<p>“[No], I haven’t,” ironically, he pulls a smile, just as flashy as before, yet with a sense of superiority, “I thought this was a scene from a [movie poster], or maybe we were filming a [remarkable blooper reel].”</p>
+<p>You let out a cold laugh: “…No, this is real, not some parody scene. But I will not kill you; I am here to say goodbye to my past. And then… I want you to watch me seize your former glory.”</p>
+<p>Then, you put down the gun on the table with a crisp “click.” Instead, you raise your hand, forming a gun shape, aimed at your temple. Then, mimicking pulling the trigger, you press your finger. Your head tilts, expressionless, staring at Spamton.</p>
+<p>“All right, from now on, my past and I will have no connection; I will become another me, and naturally, you will have nothing to do with me,” you say lightly, putting away the gun, then turning around and walking away expressionlessly. You are still afraid you might turn back and lift the gun again to do something.</p>
+<p>Yet at this moment, you hear Spamton’s voice, for some reason sounding provocatively: “Then, I will [watch eagerly] for your [great show].”</p>
+</div>
+
+<div class="nav-bar">
+
+</div>
+
+<div class="comment-box">
+<h3>Comments</h3>
+<textarea id="message" placeholder="Leave a comment"></textarea>
+<button onclick="sendComment()">Send</button>
+</div>
+
+</div>
+</div>
+
+<audio id="bgm" loop></audio>
+
+<div class="music-box">
+<div class="music-title"><span class="music-icon">🎵</span> Now playing: <span id="musicName">Not playing</span></div>
+<div class="music-line"></div>
+<div class="music-controls">
+<button class="music-btn small" onclick="prevMusic()">⏮</button>
+<button id="playBtn" class="music-btn play" onclick="toggleMusic()">▶</button>
+<button class="music-btn small" onclick="nextMusic()">⏭</button>
+<select id="songSelect"></select>
+</div>
+</div>
+
+<script src="../../../../theme.js"></script>
+<script src="../../../../script.js"></script>
+<script src="../../../../search.js"></script>
+<script>
+(function () {
+  var lang = localStorage.getItem("lang") || "zh";
+  document.documentElement.lang = lang === "en" ? "en" : "zh-CN";
+  window.switchLang = function () {
+    var cur = localStorage.getItem("lang") || "zh";
+    var next = cur === "zh" ? "en" : "zh";
+    localStorage.setItem("lang", next);
+    var p = window.location.pathname;
+    window.location.href = p.replace("/articles/" + cur + "/", "/articles/" + next + "/");
+  };
+  if (lang === "en" && window.location.pathname.indexOf("/articles/zh/") !== -1) {
+    window.location.pathname = window.location.pathname.replace("/articles/zh/", "/articles/en/");
+  } else if (lang === "zh" && window.location.pathname.indexOf("/articles/en/") !== -1) {
+    window.location.pathname = window.location.pathname.replace("/articles/en/", "/articles/zh/");
+  }
+})();
+</script>
+
+</body>
+</html>

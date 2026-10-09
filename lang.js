@@ -6,14 +6,14 @@
   "文章": "Article",
   "DR SPT 与 DN SPT 相关作品": "DR SPT and DN SPT-related works",
   "DR Tenna 与 DN Tenna 相关作品": "DR Tenna and works related to DN Tenna",
-  "Battat 相关作品": "Works related to Batat",
+  "Battat 相关作品": "Works related to Battat",
   "项目": "Project",
-  "△ 三角符文相关": "△ Triangular runes related",
+  "△ 三角符文相关": "△ Deltarune",
   "DELTARUNE Tenna 乙女游戏【施工中】": "DELTARUNE Tenna Otome Game [Under Construction]",
   "DNT桌宠": "DNT desktop pet",
   "Windows桌面宠物程序": "Windows desktop pet program",
   "SWAP SPAMTON桌宠": "SWAP SPAMTON: Table pet",
-  "Windows桌面打字&手柄识别工具，含三角符文各种角色皮肤": "Windows desktop typing and controller recognition tool, includes various character skins with triangular runes",
+  "Windows桌面打字&手柄识别工具，含三角符文各种角色皮肤": "Windows desktop typing & controller recognition tool, includes various Deltarune character skins",
   "OpenQQ同步桥": "OpenQQ Sync Bridge",
   "SeaDice OpenQQ数据同步工具": "SeaDice OpenQQ data synchronization tool",
   "开放平台Webhook部署工具": "Open-platform Webhook deployment tool",
@@ -158,7 +158,7 @@
   "点击小游戏可自行游玩多种已配置完毕的游戏。 按住 Ctrl 并滚动鼠标滚轮，可以调整桌宠大小。": "Click on mini-games to play various pre-configured games. Hold Ctrl and scroll the mouse wheel to adjust the size of the desktop pet.",
   "百度云网盘链接 暂无": "Baidu Cloud link: Not available",
   "下载压缩包后解压， 直接双击SPT-DeskPet.exe即可使用。": "After downloading the compressed package, unzip it and double-click SPT-DeskPet.exe to use.",
-  "Windows桌面打字&手柄识别工具，含三角符文各种角色皮肤 工具是x发布的compet的补丁包，compet原软件链接：https://github.com/morningmeal/morningmeal_ComPet": "Windows desktop typing & gamepad recognition tool, including triangular runes and various character skins. The tool is the patch package for ComPet released by x, original software link: https://github.com/morningmeal/morningmeal_ComPet",
+  "Windows桌面打字&手柄识别工具，含三角符文各种角色皮肤 工具是x发布的compet的补丁包，compet原软件链接：https://github.com/morningmeal/morningmeal_ComPet": "Windows desktop typing & gamepad recognition tool, including various Deltarune character skins. The tool is the patch package for ComPet released by x, original software link: https://github.com/morningmeal/morningmeal_ComPet",
   "该补丁包支持手柄识别以及游戏时候的按键和手柄识别，理论上其他打字桌宠可通用（如果是py代码版本的）": "This patch package supports gamepad recognition and key/gamepad recognition during gameplay. In theory, it can be used with other typing desktop pets (if it is a py code version).",
   "gamepad-package.exe解压后文件夹中数十个文件需要放置到和桌宠软件exe同目录下。该补丁针对软件名，只能使用compet.exe该软件名。": "After unzipping gamepad-package.exe, dozens of files in the folder need to be placed in the same directory as the desktop pet software exe. This patch is specific to the software name and can only be used with compet.exe.",
   "使用的时候请首先按下gamepadsetting.bat来配置手柄按键，目前按键键位按照xbox手柄键位书写。而后按下start.vbs进行启动。": "When using, first press gamepadsetting.bat to configure the gamepad keys; the current key mapping follows Xbox controller layout. Then press start.vbs to launch.",
@@ -173,7 +173,10 @@
   "下载dr big shot皮肤包": "Download DR big shot skin pack",
   "tenna相关皮肤包": "Tenna-related skin packs",
   "下载dfntn皮肤包": "Download dfntn skin pack",
-  "其他链接": "Other links"
+  "其他链接": "Other links",
+  "搜索文章...": "Search articles...",
+  "搜索...": "Search...",
+  "搜索文章": "Search articles"
 };
   var LANGS = {
   "zh": {
@@ -271,10 +274,14 @@
     // --- button state ---
     var btn = document.getElementById("lang-btn");
     if (btn) {
-      Array.prototype.forEach.call(btn.querySelectorAll("[data-lang]"), function (sp) {
-        if (sp.getAttribute("data-lang") === lang) sp.className = "active";
-        else sp.className = "";
-      });
+      // 只显示“将要切换到的语言”，与文章页一致
+      if (lang === "en") {
+        btn.textContent = "中文";
+        btn.setAttribute("title", "切换到中文");
+      } else {
+        btn.textContent = "EN";
+        btn.setAttribute("title", "Switch to English");
+      }
     }
   }
 
@@ -284,7 +291,12 @@
     apply(next);
   };
 
-  function boot() { apply(current()); }
+  function boot() {
+    if (document.querySelector(".search-box")) {
+      document.body.classList.add("has-search");
+    }
+    apply(current());
+  }
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", boot);
   } else {

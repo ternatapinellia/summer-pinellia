@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seven Days Eden 5 (tennax you)</title>
+<link rel="stylesheet" href="../../../../style.css">
+</head>
+<body>
+
+<div id="lang-btn" class="lang-switch" title="切换到中文" onclick="switchLang()">中文</div>
+<button id="theme-btn">🌙</button>
+
+<div class="search-box">
+<input id="site-search" placeholder="Search articles...">
+<div id="searchResult"></div>
+</div>
+
+<div class="container">
+<div class="project-page">
+
+<div class="nav-bar">
+<a class="back-btn" href="index.html">← Back</a>
+<a class="back-btn" href="../../../../index.html">← Home</a>
+</div>
+
+<h1>Seven Days Eden 5 (tennax you)</h1>
+
+<div class="article-content">
+<p>Staring at each other, soaking in the warm water and light, and then hugging, transmitting body heat.</p>
+<p>Exchanging rain and dew, in that moment there was softness and warmth, in that moment, they only had each other, briefly parting in the next instant, and the remaining raindrops also fell downward, leaving behind traces of lingering, clinging beauty.</p>
+<p>His hand hesitated, uncertain, feeling upward along the white branches, clinging, passing by the flowers along the way, until reaching the top, until it could touch the fruit hanging on the treetop. On the soft flower buds, that fruit was still soft, not yet ripe, only showing a hint of pink, perhaps waiting for the moment to ripen.</p>
+<p>As the bud swayed, accompanied by the rustling sound of brushing and the crisp sound of raindrops falling, that fruit gradually ripened, becoming firmer and more resilient, tempting predators to come and pick it, or perhaps it was merely a wonderful trap.</p>
+<p>The branches swayed, and in the next moment, the climber who had originally reached for the fruit fell onto the soft ground. It was a lush meadow, blooming with countless flowers. It had originally been dry and warm under the sun, but at this moment, it became damp, carrying the coolness of dew, yet also the sweetness of nectar.</p>
+<p>Deeply exploring that cluster of flowers, it might have only been a visit, wetting the flowers with rain and dew, then entwining around the branches, thick stems and flower branches wound together, almost crushing the trembling yet still upright flowers. Then the flowers at the top of the stems began kissing another flower, and again, the nectar fell, wetting this cluster of flowers together with the dew, leaving only tangible moisture, leaving only softness.</p>
+</div>
+
+<div class="nav-bar">
+<a class="back-btn" href="七日伊甸2（tennax你）.html">← Seven Days Eden 2 (tennax you)</a>
+</div>
+
+<div class="comment-box">
+<h3>Comments</h3>
+<textarea id="message" placeholder="Leave a comment"></textarea>
+<button onclick="sendComment()">Send</button>
+</div>
+
+</div>
+</div>
+
+<audio id="bgm" loop></audio>
+
+<div class="music-box">
+<div class="music-title"><span class="music-icon">🎵</span> Now playing: <span id="musicName">Not playing</span></div>
+<div class="music-line"></div>
+<div class="music-controls">
+<button class="music-btn small" onclick="prevMusic()">⏮</button>
+<button id="playBtn" class="music-btn play" onclick="toggleMusic()">▶</button>
+<button class="music-btn small" onclick="nextMusic()">⏭</button>
+<select id="songSelect"></select>
+</div>
+</div>
+
+<script src="../../../../theme.js"></script>
+<script src="../../../../script.js"></script>
+<script src="../../../../search.js"></script>
+<script>
+(function () {
+  var lang = localStorage.getItem("lang") || "zh";
+  document.documentElement.lang = lang === "en" ? "en" : "zh-CN";
+  window.switchLang = function () {
+    var cur = localStorage.getItem("lang") || "zh";
+    var next = cur === "zh" ? "en" : "zh";
+    localStorage.setItem("lang", next);
+    var p = window.location.pathname;
+    window.location.href = p.replace("/articles/" + cur + "/", "/articles/" + next + "/");
+  };
+  if (lang === "en" && window.location.pathname.indexOf("/articles/zh/") !== -1) {
+    window.location.pathname = window.location.pathname.replace("/articles/zh/", "/articles/en/");
+  } else if (lang === "zh" && window.location.pathname.indexOf("/articles/en/") !== -1) {
+    window.location.pathname = window.location.pathname.replace("/articles/en/", "/articles/zh/");
+  }
+})();
+</script>
+
+</body>
+</html>

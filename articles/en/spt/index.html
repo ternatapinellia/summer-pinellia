@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>spt</title>
+<link rel="stylesheet" href="../../../style.css">
+</head>
+<body>
+
+<div id="lang-btn" class="lang-switch" title="切换到中文" onclick="switchLang()">中文</div>
+<button id="theme-btn">🌙</button>
+
+<div class="search-box">
+<input id="site-search" placeholder="Search articles...">
+<div id="searchResult"></div>
+</div>
+
+<div class="container">
+<div class="project-page">
+
+<div class="nav-bar">
+<a class="back-btn" href="../../../index.html">← Home</a>
+</div>
+
+<h1>spt</h1>
+
+<h2>Contents</h2>
+<div class="article-grid"><a class="article-card" href="Spamton.zip end/index.html"><h3>📁 Spamton.zip end</h3></a><a class="article-card" href="vagrant end/index.html"><h3>📁 vagrant end</h3></a><a class="article-card" href="Я/index.html"><h3>📁 R18</h3></a><a class="article-card" href="一千零一夜/index.html"><h3>📁 One Thousand and One Nights</h3></a><a class="article-card" href="原是网恋诈骗 end/index.html"><h3>📁 It turned out to be an online dating scam. End</h3></a><a class="article-card" href="回魂夜 end/index.html"><h3>📁 Resurrection Night end</h3></a><a class="article-card" href="天堂鸟/index.html"><h3>📁 Bird of Paradise</h3></a><a class="article-card" href="契约爱人/index.html"><h3>📁 Contract Lover</h3></a><a class="article-card" href="恐怖片大逃杀 end/index.html"><h3>📁 Horror movie Battle Royale end</h3></a><a class="article-card" href="我们是泡友关系 end/index.html"><h3>📁 We are friends with benefits end</h3></a><a class="article-card" href="时行 end/index.html"><h3>📁 Time passes end</h3></a><a class="article-card" href="明梦 end/index.html"><h3>📁 Lucid dream end</h3></a><a class="article-card" href="暗世界地缚灵 end/index.html"><h3>📁 Dark World Ground-Bound Spirit end</h3></a><a class="article-card" href="模特合约 end/index.html"><h3>📁 Model contract end</h3></a><a class="article-card" href="粉红冒险旅程/index.html"><h3>📁 Pink Adventure Journey</h3></a><a class="article-card" href="雇佣症/index.html"><h3>📁 Employment Syndrome</h3></a></div>
+
+<h2>Articles</h2>
+<div class="article-grid"><a class="article-card" href="【合并】卖木柴的小女孩+临终关怀+一饭情+原是网恋诈骗+泡友关系.html"><h3>📄 [Merged] The little girl selling firewood, end-of-life care, one meal&#x27;s affection, originally an online romance scam, casual dating relationship</h3></a><a class="article-card" href="临终关怀1-Sptx你.html"><h3>📄 Hospice 1-Sptx you</h3></a><a class="article-card" href="临终关怀2-Sptx你.html"><h3>📄 Hospice Care 2-Sptx You</h3></a><a class="article-card" href="临终关怀3（end）-Sptx你.html"><h3>📄 Hospice Care 3 (end) - Sptx you</h3></a><a class="article-card" href="临终关怀合并版.html"><h3>📄 Combined Edition of Hospice Care</h3></a><a class="article-card" href="临终关怀番外（r18）-Sptx你.html"><h3>📄 End-of-Life Care Side Story (R18) - Sptx You</h3></a><a class="article-card" href="卖木柴的小女孩-Sptx你.html"><h3>📄 The Little Match Girl - Sptx you</h3></a><a class="article-card" href="异世界奇幻漂流【上】（sptx你）(1).html"><h3>📄 Otherworld Fantasy Drift [Part 1] (sptx You) (1)</h3></a><a class="article-card" href="异世界奇幻漂流【上】（sptx你）.html"><h3>📄 Otherworld Fantasy Drifting [Part 1] (sptx you)</h3></a><a class="article-card" href="异世界奇幻漂流【下】（sptx你）.html"><h3>📄 Otherworld Fantasy Drifting [Part 2] (sptx you)</h3></a><a class="article-card" href="电脑流氓软件1-Sptx你(1).html"><h3>📄 Computer rogue software 1-Sptx you(1)</h3></a><a class="article-card" href="电脑流氓软件1-Sptx你.html"><h3>📄 Computer rogue software 1-Sptx you</h3></a><a class="article-card" href="电脑流氓软件2-Sptx你.html"><h3>📄 Computer rogue software 2-Sptx you</h3></a><a class="article-card" href="电脑流氓软件3（end）-Sptx你.html"><h3>📄 Computer Rogue Software 3 (end) - Sptx You</h3></a><a class="article-card" href="金牌宠物1-sptx你(1).html"><h3>📄 Gold Medal Pet 1-sptx You(1)</h3></a><a class="article-card" href="金牌宠物1-sptx你.html"><h3>📄 Gold Medal Pet 1-sptx you</h3></a><a class="article-card" href="金牌宠物2-sptx你.html"><h3>📄 Gold Medal Pet 2-sptx you</h3></a><a class="article-card" href="金牌宠物3（end）-sptx你.html"><h3>📄 Gold Medal Pet 3 (end) - sptx you</h3></a></div>
+
+</div>
+</div>
+
+<audio id="bgm" loop></audio>
+
+<div class="music-box">
+<div class="music-title"><span class="music-icon">🎵</span> Now playing: <span id="musicName">Not playing</span></div>
+<div class="music-line"></div>
+<div class="music-controls">
+<button class="music-btn small" onclick="prevMusic()">⏮</button>
+<button id="playBtn" class="music-btn play" onclick="toggleMusic()">▶</button>
+<button class="music-btn small" onclick="nextMusic()">⏭</button>
+<select id="songSelect"></select>
+</div>
+</div>
+
+<script src="../../../theme.js"></script>
+<script src="../../../script.js"></script>
+<script src="../../../search.js"></script>
+<script>
+(function () {
+  var lang = localStorage.getItem("lang") || "zh";
+  document.documentElement.lang = lang === "en" ? "en" : "zh-CN";
+  window.switchLang = function () {
+    var cur = localStorage.getItem("lang") || "zh";
+    var next = cur === "zh" ? "en" : "zh";
+    localStorage.setItem("lang", next);
+    var p = window.location.pathname;
+    window.location.href = p.replace("/articles/" + cur + "/", "/articles/" + next + "/");
+  };
+  if (lang === "en" && window.location.pathname.indexOf("/articles/zh/") !== -1) {
+    window.location.pathname = window.location.pathname.replace("/articles/zh/", "/articles/en/");
+  } else if (lang === "zh" && window.location.pathname.indexOf("/articles/en/") !== -1) {
+    window.location.pathname = window.location.pathname.replace("/articles/en/", "/articles/zh/");
+  }
+})();
+</script>
+
+</body>
+</html>

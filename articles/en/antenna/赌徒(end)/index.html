@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gambler (end)</title>
+<link rel="stylesheet" href="../../../../style.css">
+</head>
+<body>
+
+<div id="lang-btn" class="lang-switch" title="切换到中文" onclick="switchLang()">中文</div>
+<button id="theme-btn">🌙</button>
+
+<div class="search-box">
+<input id="site-search" placeholder="Search articles...">
+<div id="searchResult"></div>
+</div>
+
+<div class="container">
+<div class="project-page">
+
+<div class="nav-bar">
+<a class="back-btn" href="../index.html">← Back</a>
+<a class="back-btn" href="../../../../index.html">← Home</a>
+</div>
+
+<h1>Gambler (end)</h1>
+
+
+
+<h2>Articles</h2>
+<div class="article-grid"><a class="article-card" href="赌徒1（dntx你）.html"><h3>📄 Gambler 1 (dntx you)</h3></a><a class="article-card" href="赌徒2（dntx你）.html"><h3>📄 Gambler 2 (dntx you)</h3></a><a class="article-card" href="赌徒3（dntx你）.html"><h3>📄 Gambler 3 (dntx you)</h3></a><a class="article-card" href="赌徒4（dntx你）.html"><h3>📄 Gambler 4 (dntx you)</h3></a><a class="article-card" href="赌徒5（dntx你）.html"><h3>📄 Gambler 5 (dntx you)</h3></a><a class="article-card" href="赌徒6（dntx你）.html"><h3>📄 Gambler 6 (dntx you)</h3></a><a class="article-card" href="赌徒7（dntx你）.html"><h3>📄 Gambler 7 (dntx you)</h3></a><a class="article-card" href="赌徒8（dntx你）.html"><h3>📄 Gambler 8 (dntx you)</h3></a><a class="article-card" href="赌徒9（dntx你）.html"><h3>📄 Gambler 9 (dntx you)</h3></a><a class="article-card" href="赌徒10（dntx你）.html"><h3>📄 Gambler 10 (dntx you)</h3></a><a class="article-card" href="赌徒11（dntx你）.html"><h3>📄 Gambler 11 (dntx you)</h3></a><a class="article-card" href="赌徒12（dntx你）（有18+）.html"><h3>📄 Gambler 12 (dntx you) (18+)</h3></a><a class="article-card" href="赌徒13（dntx你）（有18+）.html"><h3>📄 Gambler 13 (dntx you) (18+)</h3></a><a class="article-card" href="赌徒14（dntx你）（有18+）.html"><h3>📄 Gambler 14 (dntx you) (18+)</h3></a><a class="article-card" href="赌徒15（dntx你）.html"><h3>📄 Gambler 15 (dntx you)</h3></a><a class="article-card" href="赌徒16（dntx你）.html"><h3>📄 Gambler 16 (dntx you)</h3></a><a class="article-card" href="赌徒17（dntx你）.html"><h3>📄 Gambler 17 (dntx you)</h3></a><a class="article-card" href="赌徒18（dntx你）.html"><h3>📄 Gambler 18 (dntx you)</h3></a><a class="article-card" href="赌徒19（dntx你）.html"><h3>📄 Gambler 19 (dntx you)</h3></a><a class="article-card" href="赌徒20（dntx你）（有18+）.html"><h3>📄 Gambler 20 (dntx you) (has 18)</h3></a><a class="article-card" href="赌徒21（dntx你）（有18+）.html"><h3>📄 Gambler 21 (dntx you) (18+)</h3></a><a class="article-card" href="赌徒22（dntx你）（有18+）.html"><h3>📄 Gambler 22 (dntx you) (18+)</h3></a><a class="article-card" href="赌徒23（dntx你）（有18+）.html"><h3>📄 Gambler 23 (dntx you) (18+)</h3></a><a class="article-card" href="赌徒24（dntx你）.html"><h3>📄 Gambler 24 (dntx you)</h3></a><a class="article-card" href="赌徒25（dntx你）.html"><h3>📄 Gambler 25 (dntx you)</h3></a><a class="article-card" href="赌徒26（dntx你）.html"><h3>📄 Gambler 26 (dntx you)</h3></a><a class="article-card" href="赌徒27（dntx你）（end）.html"><h3>📄 Gambler 27 (dntx you) (end)</h3></a><a class="article-card" href="赌徒【合并】.html"><h3>📄 Gambler [Merge]</h3></a></div>
+
+</div>
+</div>
+
+<audio id="bgm" loop></audio>
+
+<div class="music-box">
+<div class="music-title"><span class="music-icon">🎵</span> Now playing: <span id="musicName">Not playing</span></div>
+<div class="music-line"></div>
+<div class="music-controls">
+<button class="music-btn small" onclick="prevMusic()">⏮</button>
+<button id="playBtn" class="music-btn play" onclick="toggleMusic()">▶</button>
+<button class="music-btn small" onclick="nextMusic()">⏭</button>
+<select id="songSelect"></select>
+</div>
+</div>
+
+<script src="../../../../theme.js"></script>
+<script src="../../../../script.js"></script>
+<script src="../../../../search.js"></script>
+<script>
+(function () {
+  var lang = localStorage.getItem("lang") || "zh";
+  document.documentElement.lang = lang === "en" ? "en" : "zh-CN";
+  window.switchLang = function () {
+    var cur = localStorage.getItem("lang") || "zh";
+    var next = cur === "zh" ? "en" : "zh";
+    localStorage.setItem("lang", next);
+    var p = window.location.pathname;
+    window.location.href = p.replace("/articles/" + cur + "/", "/articles/" + next + "/");
+  };
+  if (lang === "en" && window.location.pathname.indexOf("/articles/zh/") !== -1) {
+    window.location.pathname = window.location.pathname.replace("/articles/zh/", "/articles/en/");
+  } else if (lang === "zh" && window.location.pathname.indexOf("/articles/en/") !== -1) {
+    window.location.pathname = window.location.pathname.replace("/articles/en/", "/articles/zh/");
+  }
+})();
+</script>
+
+</body>
+</html>

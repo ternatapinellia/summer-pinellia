@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>重要之物（end）</title>
+<link rel="stylesheet" href="../../../../style.css">
+</head>
+<body>
+
+<div id="lang-btn" class="lang-switch" title="Switch to English" onclick="switchLang()">EN</div>
+<button id="theme-btn">🌙</button>
+
+<div class="search-box">
+<input id="site-search" placeholder="搜索文章...">
+<div id="searchResult"></div>
+</div>
+
+<div class="container">
+<div class="project-page">
+
+<div class="nav-bar">
+<a class="back-btn" href="../index.html">← 返回上一级</a>
+<a class="back-btn" href="../../../../index.html">← 返回首页</a>
+</div>
+
+<h1>重要之物（end）</h1>
+
+
+
+<h2>文章</h2>
+<div class="article-grid"><a class="article-card" href="重要之物1（dntx你）.html"><h3>📄 重要之物1（dntx你）</h3></a><a class="article-card" href="重要之物2（dntx你）.html"><h3>📄 重要之物2（dntx你）</h3></a><a class="article-card" href="重要之物3（dntx你）.html"><h3>📄 重要之物3（dntx你）</h3></a><a class="article-card" href="重要之物4（dntx你）.html"><h3>📄 重要之物4（dntx你）</h3></a><a class="article-card" href="重要之物5（dntx你）.html"><h3>📄 重要之物5（dntx你）</h3></a><a class="article-card" href="重要之物6（dntx你）.html"><h3>📄 重要之物6（dntx你）</h3></a><a class="article-card" href="重要之物7（dntx你）.html"><h3>📄 重要之物7（dntx你）</h3></a><a class="article-card" href="重要之物8（dntx你）.html"><h3>📄 重要之物8（dntx你）</h3></a><a class="article-card" href="重要之物9（dntx你）.html"><h3>📄 重要之物9（dntx你）</h3></a><a class="article-card" href="重要之物10（dntx你）.html"><h3>📄 重要之物10（dntx你）</h3></a><a class="article-card" href="重要之物11（dntx你）.html"><h3>📄 重要之物11（dntx你）</h3></a><a class="article-card" href="重要之物12（dntx你）.html"><h3>📄 重要之物12（dntx你）</h3></a><a class="article-card" href="重要之物13（dntx你）.html"><h3>📄 重要之物13（dntx你）</h3></a><a class="article-card" href="重要之物14（dntx你）.html"><h3>📄 重要之物14（dntx你）</h3></a><a class="article-card" href="重要之物15（dntx你）.html"><h3>📄 重要之物15（dntx你）</h3></a><a class="article-card" href="重要之物16（dntx你）.html"><h3>📄 重要之物16（dntx你）</h3></a><a class="article-card" href="重要之物17（dntx你）.html"><h3>📄 重要之物17（dntx你）</h3></a><a class="article-card" href="重要之物18（dntx你）（18+）.html"><h3>📄 重要之物18（dntx你）（18+）</h3></a><a class="article-card" href="重要之物19（dntx你）（18+）.html"><h3>📄 重要之物19（dntx你）（18+）</h3></a><a class="article-card" href="重要之物20（dntx你）（18+）.html"><h3>📄 重要之物20（dntx你）（18+）</h3></a><a class="article-card" href="重要之物21（dntx你）（18+）.html"><h3>📄 重要之物21（dntx你）（18+）</h3></a><a class="article-card" href="重要之物22（dntx你）.html"><h3>📄 重要之物22（dntx你）</h3></a><a class="article-card" href="重要之物23（dntx你）.html"><h3>📄 重要之物23（dntx你）</h3></a><a class="article-card" href="重要之物24（dntx你）.html"><h3>📄 重要之物24（dntx你）</h3></a><a class="article-card" href="重要之物25（dntx你）（18+）.html"><h3>📄 重要之物25（dntx你）（18+）</h3></a><a class="article-card" href="重要之物26（dntx你）（18+）.html"><h3>📄 重要之物26（dntx你）（18+）</h3></a><a class="article-card" href="重要之物27（dntx你）（end）.html"><h3>📄 重要之物27（dntx你）（end）</h3></a><a class="article-card" href="重要之物合并.html"><h3>📄 重要之物合并</h3></a></div>
+
+</div>
+</div>
+
+<audio id="bgm" loop></audio>
+
+<div class="music-box">
+<div class="music-title"><span class="music-icon">🎵</span> 当前音乐：<span id="musicName">未播放</span></div>
+<div class="music-line"></div>
+<div class="music-controls">
+<button class="music-btn small" onclick="prevMusic()">⏮</button>
+<button id="playBtn" class="music-btn play" onclick="toggleMusic()">▶</button>
+<button class="music-btn small" onclick="nextMusic()">⏭</button>
+<select id="songSelect"></select>
+</div>
+</div>
+
+<script src="../../../../theme.js"></script>
+<script src="../../../../script.js"></script>
+<script src="../../../../search.js"></script>
+<script>
+(function () {
+  var lang = localStorage.getItem("lang") || "zh";
+  document.documentElement.lang = lang === "en" ? "en" : "zh-CN";
+  window.switchLang = function () {
+    var cur = localStorage.getItem("lang") || "zh";
+    var next = cur === "zh" ? "en" : "zh";
+    localStorage.setItem("lang", next);
+    var p = window.location.pathname;
+    window.location.href = p.replace("/articles/" + cur + "/", "/articles/" + next + "/");
+  };
+  if (lang === "en" && window.location.pathname.indexOf("/articles/zh/") !== -1) {
+    window.location.pathname = window.location.pathname.replace("/articles/zh/", "/articles/en/");
+  } else if (lang === "zh" && window.location.pathname.indexOf("/articles/en/") !== -1) {
+    window.location.pathname = window.location.pathname.replace("/articles/en/", "/articles/zh/");
+  }
+})();
+</script>
+
+</body>
+</html>
