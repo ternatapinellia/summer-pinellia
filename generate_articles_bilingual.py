@@ -21,10 +21,28 @@ UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
 # ==================== 翻译：必应 ====================
 
 def _keep_plus(src, out):
-    """Bing drops the trailing '+' in '18+'; restore it."""
-    if out and "18+" in src:
-        out = re.sub(r"[\uff08(]\s*18\s*[\uff09)]", "(18+)", out)
-    return out
+    """Keep the author's own 18 / 18+ choice.
+
+    The translator silently drops the trailing '+', so every '18' token in the
+    output is matched positionally against the source: source '18+' -> '18+',
+    source '18' -> '18'. If the two sides do not line up, leave it untouched.
+    """
+    if not out or "18" not in src:
+        return out
+
+    src_nums = re.findall(r"18\+?", src)
+    out_hits = list(re.finditer(r"18\+?", out))
+    if not src_nums or len(src_nums) != len(out_hits):
+        return out
+
+    pieces = []
+    last = 0
+    for num, m in zip(src_nums, out_hits):
+        pieces.append(out[last:m.start()])
+        pieces.append("18+" if num.endswith("+") else "18")
+        last = m.end()
+    pieces.append(out[last:])
+    return "".join(pieces)
 
 
 _NAME_FIXES = [
