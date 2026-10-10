@@ -48,6 +48,7 @@ def _keep_plus(src, out):
 _NAME_FIXES = [
     (r"[Tt]riangular\s+runes?", "Deltarune"),
     (r"\u042f", "R18"),   # 作者用俄语字母 Я 标注 18+
+    (r"\bSpomton\b", "Spamton"),   # 作者笔误
 ]
 
 
@@ -60,35 +61,106 @@ def _fix_terms(out):
     return out
 
 
-_LATIN_RUN = re.compile(r"[A-Za-z][A-Za-z0-9._:/%+\-@()\[\]<>~=&?#!'\u2019]*")
+# ==================== 英文白名单 ====================
+# 这些词不发给翻译服务，直接原样保留（避免被合并、拼错或吞掉）。
+WHITELIST = [
+    "MR.(ANT)TENNA", "MR.(ANTON)TENNA", "MR.(ANT) TENNA",
+    "Spamton G. Spamton", "Spamton NEO", "Spamton Neo",
+    "shadow guy", "Shadow Guy", "Spamton.zip",
+    "Swapspt", "Swapspamton", "Defernull", "Deltarune",
+    "Pippins", "Jongler", "Addison", "Zapper", "Battat",
+    "Tenna", "Spamton", "Mike", "Pluey", "Ggdw", "Neo",
+    "tenna", "spamton", "battat", "mike", "pippins",
+    "addison", "zapper", "jongler", "pluey", "neo",
+]
+
+# 词边界可以是任何非字母数字字符
+_WL_RE = re.compile(
+    r"(?<![A-Za-z0-9])(" +
+    "|".join(re.escape(w) for w in sorted(WHITELIST, key=len, reverse=True)) +
+    r")(?![A-Za-z0-9])"
+)
+
+
+def _split_keep(text):
+    """Split text into (chunk, is_whitelisted) pairs."""
+    if not text:
+        return [(text, False)]
+    out = []
+    last = 0
+    for m in _WL_RE.finditer(text):
+        if m.start() > last:
+            out.append((text[last:m.start()], False))
+        out.append((m.group(0), True))
+        last = m.end()
+    if last < len(text):
+        out.append((text[last:], False))
+    return out
+
+
+_TOKEN_TPL = "XQTOKEN%dZ"
 _TOKEN_RE = re.compile(r"[Xx][Qq][Tt][Oo][Kk][Ee][Nn]\d+[Zz]?")
 
 
-def _protect_latin(text):
-    """Mask Latin-script runs so the translator leaves Tenna/Spamton/Battat/MR.(ANT)TENNA alone."""
-    if not text:
-        return text, {}
+def _mask_names(text):
+    """Replace whitelisted names with placeholders; return text + mapping."""
     store = {}
+    parts = _split_keep(text)
+    if not any(keep for _, keep in parts):
+        return text, store
 
-    def repl(m):
-        tok = "XQTOKEN%dZ" % len(store)
-        store[tok] = m.group(0)
-        return tok
+    out = []
+    for chunk, keep in parts:
+        if keep:
+            tok = _TOKEN_TPL % len(store)
+            store[tok] = chunk
+            out.append(tok)
+        else:
+            out.append(chunk)
+    return "".join(out), store
 
-    return _LATIN_RUN.sub(repl, text), store
 
-
-def _restore_latin(out, store):
-    """Put the original Latin text back."""
+def _unmask(out, store):
+    """Restore placeholders; tolerate a dropped trailing Z."""
     if not out or not store:
         return out
     for tok, orig in store.items():
-        variants = [tok, tok[:-1]] if tok.endswith("Z") else [tok]
+        variants = (tok, tok[:-1]) if tok.endswith("Z") else (tok,)
         for v in variants:
-            out = re.sub(re.escape(v) + r"\b", lambda _m, o=orig: o, out, flags=re.I)
-    # 兜底：清掉任何没还原的残留 token
-    out = _TOKEN_RE.sub("", out)
-    return out
+            out = re.sub(re.escape(v) + r"(?![A-Za-z0-9])",
+                         lambda _m, o=orig: o, out, flags=re.I)
+    return _TOKEN_RE.sub("", out)
+
+
+def _translate_with_whitelist(translator, text):
+    """Translate text with whitelisted names preserved.
+
+    Fast path: mask names, send one request. If any name fails to come back,
+    redo that text by translating only the non-name spans (several requests,
+    but guaranteed correct).
+    """
+    if not text:
+        return text
+
+    masked, store = _mask_names(text)
+    if not store:
+        return translator(text)
+
+    out = translator(masked)
+    if out:
+        restored = _unmask(out, store)
+        if all(orig in restored for orig in store.values()):
+            return restored
+    # Fallback: strict, name spans never sent to the translator
+    result = []
+    for chunk, keep in _split_keep(text):
+        if keep:
+            result.append(chunk)
+        elif chunk.strip():
+            result.append(translator(chunk) or chunk)
+        else:
+            result.append(chunk)
+    return "".join(result)
 
 
 class Bing:
@@ -138,11 +210,13 @@ class Bing:
         return part
 
     def translate(self, text, retry=4):
-        masked, store = _protect_latin(text)
+        """Translate, keeping whitelisted English names verbatim."""
         for attempt in range(retry):
-            out = self._post(masked)
+            try:
+                out = _translate_with_whitelist(self._post, text)
+            except Exception:
+                out = None
             if out:
-                out = _restore_latin(out, store)
                 return _fix_terms(_keep_plus(text, out))
             time.sleep(1.0 + attempt)
             self.refresh()
