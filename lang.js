@@ -18,6 +18,7 @@
   "SeaDice OpenQQ数据同步工具": "SeaDice OpenQQ data synchronization tool",
   "开放平台Webhook部署工具": "Open-platform Webhook deployment tool",
   "留言": "Leave a message",
+  "留下你的留言": "Leave a message here",
   "发送": "Send it",
   "当前音乐：": "Current Music:",
   "未播放": "Not played",
