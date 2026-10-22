@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>QQ Webhook Gateway</title>
+
+<link rel="stylesheet" href="../../style.css">
+
+</head>
+
+
+<body>
+<!-- Theme Button -->
+
+<div id="theme-btn">
+☀️
+</div>
+
+<div id="lang-btn" class="lang-btn" title="Switch to English" onclick="switchLang()">EN</div>
+
+<a class="back-btn" href="../../index.html">← 返回首页</a>
+
+<div class="project-page">
+
+<h1>QQ Webhook Gateway</h1>
+
+<p>海豹骰子接 QQ 官方机器人 Webhook 的网关。</p>
+
+<h2>项目简介</h2>
+
+<p>QQ 官方的 WebSocket 模式有个绕不开的问题：会话大约每小时会被强制重连一次，重连的那几秒连接是断的，期间消息可能丢失。如果反复重连失败还会雪崩，出现长时间收不到消息的情况。</p>
+
+<p>另外，官方被动回复有时效窗口，回复稍慢就会报「回复消息 msg_id 已过期」（错误码 40034005），表现出来就是后台已经生成了回复，QQ 里却发不出来。</p>
+
+<p>这个网关把链路切到 Webhook 模式，并且补上了海豹 1.6.1 缺少的部分。海豹自带的 Webhook 只做事件验签，没有实现 QQ 官方的 op=13 回调地址校验，所以直接在开放平台填海豹地址会提示「签名校验不通过」，保存不了。</p>
+
+<p>网关做的事情：</p>
+
+<ul>
+<li>op=13 地址校验：按官方算法生成 plain_token + signature 应答，让后台能保存回调地址。</li>
+<li>事件验签：校验 X-Signature-Ed25519，签名对象是 timestamp + body。</li>
+<li>事件去重：同一个 event id 在 30 分钟内只转发一次，避免 QQ 重投导致一条指令回复多次。</li>
+<li>先 ACK 再异步转发：QQ 不用等海豹处理完，重投和回复过期都会大幅减少。</li>
+<li>转发重试 + 并发限流：避免瞬间打满海豹的 accept 队列导致丢消息。</li>
+</ul>
+
+<h2>架构</h2>
+
+<pre>
+QQ 官方
+  |  HTTPS
+Caddy（公网服务器，443）
+  |  反代到 127.0.0.1:19092
+frps（公网服务器）
+  |  frp 隧道
+frpc（你的服务器）
+  |  127.0.0.1:9092
+QQWebhookGateway.exe（验签 + op=13 + 去重 + ACK）
+  |  127.0.0.1:8099/qq/callback
+海豹 sealdice-core（Webhook 模式）
+</pre>
+
+<p>如果海豹本身就跑在外网服务器上，可以省掉 frps 和 frpc，直接 Caddy 到网关再到海豹。</p>
+
+<h2>下载</h2>
+
+<a class="download-btn" href="QQWebhook-Gateway-v1.0.zip" download>直接下载（含 Caddy / frpc / 源码 / 文档）</a>
+
+<h2>包里有什么</h2>
+
+<ul>
+<li>QQWebhookGateway.exe：网关主程序，常驻运行。</li>
+<li>QQWebhookVerify.exe：自检工具，一条命令验证 op=13 和去重。</li>
+<li>QQWebhookLoadTest.exe：压力测试，模拟几百条消息并统计错误率。</li>
+<li>caddy.exe：HTTPS 服务器（Windows 版 v2.11.7）。</li>
+<li>frpc.exe：隧道客户端，config 里启用时自动拉起。</li>
+<li>config.json：配置文件，只需要改 AppSecret。</li>
+<li>Caddyfile-示例.txt：5 种 Caddy 写法。</li>
+<li>部署方式 A / B / C：国内直连、外网服务器中转、Linux。</li>
+<li>source：三个程序的 Go 源码，Linux 版从这里编译。</li>
+</ul>
+
+<h2>开始之前：准备一个域名</h2>
+
+<p>QQ 官方的网页回调只接受 HTTPS 地址，所以需要一个域名。两种办法，选一个：</p>
+
+<ul>
+<li>外网服务器加 Caddy（不用备案，推荐）：把域名解析到外网服务器，用 Caddy 自动签证书。</li>
+<li>国内买域名并备案：域名解析到跑海豹的那台服务器，直接用 Caddy。</li>
+</ul>
+
+<p>免费域名也可以，例如 DuckDNS。Caddy 的写法都在「Caddyfile-示例.txt」里。</p>
+
+<h2>怎么选部署方式</h2>
+
+<ul>
+<li>家里或国内服务器，没有备案域名，用方式 B（外网服务器中转）。</li>
+<li>国内服务器，已有备案域名，用方式 A（直连）。</li>
+<li>海豹本来就跑在外网服务器上，用方式 A，并把 config.json 里 frp 关掉。</li>
+<li>海豹跑在 Linux 上，用方式 C，源码在 source 目录。</li>
+</ul>
+
+<h2>唯一必须改的配置</h2>
+
+<p>打开 config.json，只要改这一项：</p>
+
+<pre>
+"appSecret": "填你机器人的AppSecret"
+</pre>
+
+<p>AppSecret 就在海豹目录 data/default/serve.yaml 里，找 appSecret 那一行，复制过来即可。</p>
+
+<p>不需要重新申请机器人，也不用填 QQ 号，用海豹里已有的 AppID 和 AppSecret 就够了。</p>
+
+<h2>三步上手（方式 B：外网服务器中转）</h2>
+
+<h3>1. 外网服务器：装 frps 和 Caddy</h3>
+
+<p>frps 只需要在外网服务器上装一次，之后不管你开多少个骰子都用同一个，不用再动它。它只做一件事：开 7000 端口等 frpc 连上来。</p>
+
+<pre>
+# /opt/frp/frps.toml
+bindPort = 7000
+auth.method = "token"
+auth.token = "换成你自己的强口令"
+</pre>
+
+<p>Caddy 把域名转给隧道端口，端口要和 config.json 的 frp.remotePort 一致：</p>
+
+<pre>
+qq1.example.com {
+    reverse_proxy /qq/callback* 127.0.0.1:19092 {
+        transport http {
+            dial_timeout 10s
+            response_header_timeout 30s
+        }
+    }
+}
+</pre>
+
+<pre>
+systemctl reload caddy
+</pre>
+
+<h3>2. 你的服务器：改海豹和 config.json</h3>
+
+<p>海豹 data/default/serve.yaml 里找到官方 QQ 端点那段：</p>
+
+<pre>
+adapter:
+  appID: "你的AppID"
+  appSecret: 你的AppSecret
+  useWebhook: false        # 改成 true
+  webhookPath: ""          # 改成 /qq/callback
+  webhookPort: 0           # 改成 8099
+</pre>
+
+<p>重启海豹，日志出现这两行才算成功：</p>
+
+<pre>
+official qq webhook: 监听地址 :8099/qq/callback
+official qq webhook模式启动成功
+</pre>
+
+<p>config.json 里填隧道信息，网关启动时会自动把 frpc 一起拉起来：</p>
+
+<pre>
+"frp": {
+  "enabled": true,
+  "serverAddr": "外网服务器IP",
+  "serverPort": 7000,
+  "token": "和 frps.toml 里一致",
+  "remotePort": 19092,
+  "localPort": 9092,
+  "name": "qqbridge"
+}
+</pre>
+
+<h3>3. 填开放平台并自检</h3>
+
+<pre>
+QQWebhookGateway.exe -config config.json
+</pre>
+
+<p>回调地址填：</p>
+
+<pre>
+https://qq1.example.com/qq/callback
+</pre>
+
+<p>然后跑自检：</p>
+
+<pre>
+QQWebhookVerify.exe -secret 你的AppSecret -url https://qq1.example.com/qq/callback
+</pre>
+
+<p>期望看到：</p>
+
+<pre>
+[1] op=13  callback validation : status=200 ok=true
+[2.1] event delivery #1        : status=200
+[2.2] event delivery #2        : status=200
+[2.3] event delivery #3        : status=200
+RESULT: PASS  (dedup working, duplicates >= 2)
+</pre>
+
+<p>含义是同一条事件发 3 次，网关只转发 1 次、拦下 2 次。</p>
+
+<h2>压力测试结果</h2>
+
+<p>用 QQWebhookLoadTest.exe 模拟 500 条唯一事件加 20% 重复，三台实际部署的机器实测：</p>
+
+<pre>
+sent        : 600  (unique=500 duplicated=100)
+http 200    : 600
+http failed : 0
+error rate  : 0.00%
+forwarded   : 500
+duplicates  : 100
+failed      : 0
+</pre>
+
+<p>错误率 0%，转发数与唯一事件数完全一致。</p>
+
+<h2>看运行状态</h2>
+
+<pre>
+http://127.0.0.1:9092/health
+</pre>
+
+<ul>
+<li>received：收到的请求总数。</li>
+<li>validated：成功的 op=13 校验次数。</li>
+<li>acked：已回 ACK 的事件数。</li>
+<li>duplicates：被拦下的重复事件数。</li>
+<li>forwarded：实际转发给海豹的次数。</li>
+<li>failed：转发失败次数，应始终为 0。</li>
+<li>rejected：验签失败次数，应始终为 0。</li>
+<li>lastError：最近一次转发失败原因，正常时为空。</li>
+<li>lastFwd：最近一次转发结果，正常是 200 OK。</li>
+</ul>
+
+<h2>常见问题</h2>
+
+<h3>后台保存提示「签名校验不通过」</h3>
+
+<p>说明请求没走到网关。按顺序查：</p>
+
+<ol>
+<li>网关在跑吗？浏览器打开 http://127.0.0.1:9092/health</li>
+<li>公网能通吗？浏览器打开 https://你的域名/health</li>
+<li>Caddy 的端口和 config.json 的 frp.remotePort 对得上吗</li>
+<li>方式 B 还要看隧道连没连上，看网关目录下的 frpc.log</li>
+</ol>
+
+<h3>消息收不到</h3>
+
+<p>看海豹日志有没有「收到群的消息」。没有就说明消息没进来，查回调地址和隧道；有就说明消息进来了，是海豹那边的问题。</p>
+
+<h3>海豹回复了，但 QQ 里看不到</h3>
+
+<p>这是出站问题，和本网关无关。常见原因是「回复消息 msg_id 已过期」（错误码 40034005），也就是回复太慢超过了 QQ 的被动回复有效期。本网关先 ACK 再转发，已经大幅降低这个概率。</p>
+
+<h3>一条指令回复好几次</h3>
+
+<p>本网关已按 event id 去重。若仍重复，检查是否有第二个程序也在收同一个 AppID 的回调，比如旧的 webhook 桥还开着；再检查是否同一个 QQ 号被两个骰子同时挂着；以及开放平台里回调地址是否只填了一个。</p>
+
+<h3>需要重新申请机器人密钥吗</h3>
+
+<p>不需要。用海豹里已有的 AppID 和 AppSecret 就行，它们本来就在 serve.yaml 里，不需要额外申请或登录。</p>
+
+<h2>安全提醒</h2>
+
+<ul>
+<li>appSecret 等同机器人密码，config.json 不要提交到公开仓库。</li>
+<li>网关只监听 127.0.0.1，公网访问一律走 Caddy 的 HTTPS。</li>
+<li>不要把 9092 端口直接暴露到公网。</li>
+<li>frp 的 token 也要用强口令。</li>
+</ul>
+
+</div>
+<audio id="bgm" loop></audio>
+
+
+<div class="music-box">
+
+
+<div class="music-title">
+
+<span class="music-icon">
+🎵
+</span>
+
+当前音乐：
+
+<span id="musicName">
+未播放
+</span>
+
+</div>
+
+
+<div class="music-line"></div>
+
+
+<div class="music-controls">
+
+
+<button class="music-btn small" onclick="prevMusic()">
+⏮
+</button>
+
+
+<button id="playBtn" class="music-btn play" onclick="toggleMusic()">
+▶
+</button>
+
+
+<button class="music-btn small" onclick="nextMusic()">
+⏭
+</button>
+
+
+<select id="songSelect"></select>
+
+
+</div>
+
+
+</div>
+
+<div class="comment-box">
+<h3>
+留言
+</h3>
+
+
+<textarea
+id="message"
+placeholder="留下你的留言">
+</textarea>
+
+
+
+<button onclick="sendComment()">
+
+发送
+
+</button>
+
+</div>
+
+
+<script src="../../theme.js"></script>
+<script src="../../script.js"></script><script src="../../lang.js"></script>
+</body>
+
+
+</html>
