@@ -1,7 +1,10 @@
 ﻿/* Language switcher: 中文 / English (in-place text swap) */
 (function () {
   var DICT = {
-    "v3.0 修复：兼容 GBK 编码的历史数据": "v3.0 fix: support legacy GBK-encoded data",
+    "v3.2 更新：绑定判定": "v3.2: binding identity",
+  "绑定身份从「旧QQ + 旧群」改为「旧QQ + 旧群 + OpenQQ账号 + 目标群」。这样一来，同一个旧 QQ 可以绑到多个不同的 OpenQQ 官 bot，而完全相同的配对再次绑定会被拒绝。": "The binding identity changed from (old QQ + old group) to (old QQ + old group + OpenQQ account + target group). One old QQ may now bind to several different OpenQQ bots, while re-binding the exact same pair is rejected.",
+  "旧版本留下的记录仍能识别，不会因为升级而允许重复绑定；下次成功绑定时会自动整理成新格式。": "Records left by older versions are still recognised, so upgrading never allows a duplicate binding; the next successful bind rewrites them into the new format.",
+  "v3.0 修复：兼容 GBK 编码的历史数据": "v3.0 fix: support legacy GBK-encoded data",
   "旧版海豹在某些 Windows 环境下，会把中文按 GBK 编码写进数据库。桥读取时默认按严格 UTF-8 解码，遇到这种数据会直接报错：": "On some Windows setups, older SealDice versions wrote Chinese text into the database using GBK. The bridge originally decoded strictly as UTF-8 and failed immediately on such rows:",
   "表现为绑定直接失败、返回 500。现在所有数据库连接都改用了容错解码，顺序是 UTF-8 → GB18030 → GBK → Big5 → latin-1，最后才做字符替换。像「Bryana Marist (测试角色).st 力量65str65...」这种角色名，现在能完整读出，中文和属性数值都不会丢。": "The symptom was binding failing outright with HTTP 500. All database connections now use tolerant decoding, trying UTF-8, then GB18030, GBK, Big5 and latin-1, and only replacing characters as a last resort. A card name like \"Bryana Marist (test character).st STR65str65...\" now reads back completely, with no loss of Chinese text or stat values.",
   "影响范围：绑定、角色查询、增量同步全部覆盖，不再因为个别历史数据卡死整个流程。": "This covers binding, character lookup and incremental sync, so a few legacy rows no longer stall the whole flow.",

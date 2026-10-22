@@ -156,6 +156,19 @@ column 'name' with text 'Bryana Marist (?????).st ...'
 影响范围：绑定、角色查询、增量同步全部覆盖，
 不再因为个别历史数据卡死整个流程。
 </p>
+
+<h3>v3.2 更新：绑定判定</h3>
+
+<p>绑定身份从「旧QQ + 旧群」改为「旧QQ + 旧群 + OpenQQ账号 + 目标群」。这样一来，同一个旧 QQ 可以绑到多个不同的 OpenQQ 官 bot，而完全相同的配对再次绑定会被拒绝。</p>
+
+<pre>
+qq222 -&gt; openqq444        允许
+qq222 -&gt; openqq555        允许（同一个旧QQ，不同官 bot）
+qq222 -&gt; openqq444 再绑    拒绝
+qq233 -&gt; openqq444        允许
+</pre>
+
+<p>旧版本留下的记录仍能识别，不会因为升级而允许重复绑定；下次成功绑定时会自动整理成新格式。</p>
 <p>
 使用方式：
 双击启动openqq.exe，然后保持运行，不能关闭
@@ -181,13 +194,13 @@ column 'name' with text 'Bryana Marist (?????).st ...'
 下载
 </h2>
 
-<a class="download-btn" href="OpenQQBridge-v3.1.zip" download>
+<a class="download-btn" href="民转官数据3.2（windows+linux）.zip" download>
 直接下载
 </a>
 
 <a 
 class="download-btn"
-href="https://github.com/ternatapinellia/openqq-qq-sync-bridge/releases/tag/v3.1"
+href="https://github.com/ternatapinellia/openqq-qq-sync-bridge/releases/tag/v3.2"
 target="_blank">
 
 Github Release
