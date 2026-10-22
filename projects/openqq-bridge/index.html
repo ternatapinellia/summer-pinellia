@@ -169,6 +169,29 @@ qq233 -&gt; openqq444        允许
 </pre>
 
 <p>旧版本留下的记录仍能识别，不会因为升级而允许重复绑定；下次成功绑定时会自动整理成新格式。</p>
+
+<h3>v3.3 修复：数据库连接泄漏导致海豹变慢</h3>
+
+<p>桥在 lookup() 里用了 with self.connect(...)。但 Python 的 sqlite3 中，with 语句只提交事务，并不会关闭连接，于是每次查询都会泄漏一个连接。这些连接一直持有读事务，阻塞海豹的 WAL checkpoint。</p>
+
+<pre>
+with self.connect(self.db_path) as con:
+    ...
+</pre>
+
+<p>结果 -wal 文件持续膨胀（实测有实例涨到主库的 11 倍），每次读库都要扫越来越大的 WAL。表现为海豹的 database.log 里不断出现 1~4 秒的 SLOW SQL，机器人回复变慢，偶发因为超过 QQ 被动回复窗口而发不出消息。</p>
+
+<p>现在改为显式关闭：</p>
+
+<pre>
+con = self.connect(self.db_path)
+try:
+    ...
+finally:
+    con.close()
+</pre>
+
+<p>升级后建议重启一次海豹，让已经膨胀的 -wal 立即回收。</p>
 <p>
 使用方式：
 双击启动openqq.exe，然后保持运行，不能关闭
@@ -194,13 +217,13 @@ qq233 -&gt; openqq444        允许
 下载
 </h2>
 
-<a class="download-btn" href="民转官数据3.2（windows+linux）.zip" download>
+<a class="download-btn" href="民转官数据3.3（windows+linux）.zip" download>
 直接下载
 </a>
 
 <a 
 class="download-btn"
-href="https://github.com/ternatapinellia/openqq-qq-sync-bridge/releases/tag/v3.2"
+href="https://github.com/ternatapinellia/openqq-qq-sync-bridge/releases/tag/v3.3"
 target="_blank">
 
 Github Release

@@ -1,7 +1,12 @@
 ﻿/* Language switcher: 中文 / English (in-place text swap) */
 (function () {
   var DICT = {
-    "v3.2 更新：绑定判定": "v3.2: binding identity",
+    "v3.3 修复：数据库连接泄漏导致海豹变慢": "v3.3 fix: database connection leak slowed SealDice down",
+  "桥在 lookup() 里用了 with self.connect(...)。但 Python 的 sqlite3 中，with 语句只提交事务，并不会关闭连接，于是每次查询都会泄漏一个连接。这些连接一直持有读事务，阻塞海豹的 WAL checkpoint。": "The bridge used with self.connect(...) inside lookup(). In Python's sqlite3, the with statement only commits the transaction and does not close the connection, so every query leaked a connection. Those connections held read transactions open and blocked SealDice's WAL checkpoint.",
+  "结果 -wal 文件持续膨胀（实测有实例涨到主库的 11 倍），每次读库都要扫越来越大的 WAL。表现为海豹的 database.log 里不断出现 1~4 秒的 SLOW SQL，机器人回复变慢，偶发因为超过 QQ 被动回复窗口而发不出消息。": "As a result the -wal file kept growing (in one instance it reached 11 times the size of the main database) and every read had to scan an ever larger WAL. The symptom was repeated 1-4 second SLOW SQL entries in SealDice's database.log, slower replies, and occasionally messages that could not be sent because they missed the QQ passive-reply window.",
+  "现在改为显式关闭：": "It now closes the connection explicitly:",
+  "升级后建议重启一次海豹，让已经膨胀的 -wal 立即回收。": "After upgrading, restart SealDice once so the bloated -wal is reclaimed immediately.",
+  "v3.2 更新：绑定判定": "v3.2: binding identity",
   "绑定身份从「旧QQ + 旧群」改为「旧QQ + 旧群 + OpenQQ账号 + 目标群」。这样一来，同一个旧 QQ 可以绑到多个不同的 OpenQQ 官 bot，而完全相同的配对再次绑定会被拒绝。": "The binding identity changed from (old QQ + old group) to (old QQ + old group + OpenQQ account + target group). One old QQ may now bind to several different OpenQQ bots, while re-binding the exact same pair is rejected.",
   "旧版本留下的记录仍能识别，不会因为升级而允许重复绑定；下次成功绑定时会自动整理成新格式。": "Records left by older versions are still recognised, so upgrading never allows a duplicate binding; the next successful bind rewrites them into the new format.",
   "v3.0 修复：兼容 GBK 编码的历史数据": "v3.0 fix: support legacy GBK-encoded data",
