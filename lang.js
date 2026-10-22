@@ -1,7 +1,11 @@
 ﻿/* Language switcher: 中文 / English (in-place text swap) */
 (function () {
   var DICT = {
-    "QQ Webhook Gateway": "QQ Webhook Gateway",
+    "v3.0 修复：兼容 GBK 编码的历史数据": "v3.0 fix: support legacy GBK-encoded data",
+  "旧版海豹在某些 Windows 环境下，会把中文按 GBK 编码写进数据库。桥读取时默认按严格 UTF-8 解码，遇到这种数据会直接报错：": "On some Windows setups, older SealDice versions wrote Chinese text into the database using GBK. The bridge originally decoded strictly as UTF-8 and failed immediately on such rows:",
+  "表现为绑定直接失败、返回 500。现在所有数据库连接都改用了容错解码，顺序是 UTF-8 → GB18030 → GBK → Big5 → latin-1，最后才做字符替换。像「Bryana Marist (测试角色).st 力量65str65...」这种角色名，现在能完整读出，中文和属性数值都不会丢。": "The symptom was binding failing outright with HTTP 500. All database connections now use tolerant decoding, trying UTF-8, then GB18030, GBK, Big5 and latin-1, and only replacing characters as a last resort. A card name like \"Bryana Marist (test character).st STR65str65...\" now reads back completely, with no loss of Chinese text or stat values.",
+  "影响范围：绑定、角色查询、增量同步全部覆盖，不再因为个别历史数据卡死整个流程。": "This covers binding, character lookup and incremental sync, so a few legacy rows no longer stall the whole flow.",
+  "QQ Webhook Gateway": "QQ Webhook Gateway",
   "QQ官方机器人Webhook部署网关": "Webhook deployment gateway for QQ official bots",
   "海豹骰子接 QQ 官方机器人 Webhook 的网关。": "A gateway for connecting SealDice to the QQ official bot Webhook.",
   "项目简介": "About this project",

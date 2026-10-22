@@ -132,6 +132,30 @@ OpenQQ Bridge 是用于 SeaDice 与 OpenQQ 身份兼容的数据桥接工具。
 但海豹允许同群共享角色卡，绑定被清空后面板就没东西显示了。
 v3.0 改为保留原绑定。数据本身一直没有丢失。
 </p>
+
+<h3>v3.0 修复：兼容 GBK 编码的历史数据</h3>
+
+<p>
+旧版海豹在某些 Windows 环境下，会把中文按 GBK 编码写进数据库。
+桥读取时默认按严格 UTF-8 解码，遇到这种数据会直接报错：
+</p>
+
+<pre>
+sqlite3.OperationalError: Could not decode to UTF-8
+column 'name' with text 'Bryana Marist (?????).st ...'
+</pre>
+
+<p>
+表现为绑定直接失败、返回 500。现在所有数据库连接都改用了容错解码，
+顺序是 UTF-8 → GB18030 → GBK → Big5 → latin-1，最后才做字符替换。
+像「Bryana Marist (测试角色).st 力量65str65...」这种角色名，
+现在能完整读出，中文和属性数值都不会丢。
+</p>
+
+<p>
+影响范围：绑定、角色查询、增量同步全部覆盖，
+不再因为个别历史数据卡死整个流程。
+</p>
 <p>
 使用方式：
 双击启动openqq.exe，然后保持运行，不能关闭
