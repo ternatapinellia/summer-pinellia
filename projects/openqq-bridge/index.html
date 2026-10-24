@@ -85,11 +85,99 @@ OpenQQ Bridge 是用于 SeaDice 与 OpenQQ 身份兼容的数据桥接工具。
 <li>.旧QQ验证码 <验证码>：验证成功后才执行数据迁移。 验证码 5 分钟有效，最多错误 5 次。
 </li>
 
-<li>.旧QQ+旧群已绑定其他 OpenQQ 身份时拒绝再次绑定。
+<li>绑定身份是「旧QQ + 旧群 + OpenQQ账号 + 目标群」。同一个旧QQ可以绑到多个不同的OpenQQ账号，换账号不需要先解绑；只有完全相同的组合重复绑定才会被拒绝。
 </li>
 
 
 </ul>
+
+<h2>
+下载
+</h2>
+
+<a class="download-btn" href="民转官数据3.3（windows+linux）.zip" download>
+直接下载
+</a>
+
+<a 
+class="download-btn"
+href="https://github.com/ternatapinellia/openqq-qq-sync-bridge/releases/tag/v3.3"
+target="_blank">
+
+Github Release
+</a>
+
+<a
+class="download-btn"
+href="https://github.com/ternatapinellia/openqq-qq-sync-bridge"
+target="_blank">
+
+GitHub 仓库
+
+</a>
+
+
+<p>
+
+如果下载后无法打开，
+
+或者打开后立即关闭，
+
+请检查 Windows 安全中心和防火墙是否允许该软件运行。
+
+大概率是被防火墙拦截。
+</p>
+
+
+
+<p>
+注意：
+
+- 插件配置中的“SMTP授权码”不是邮箱登录密码。
+
+- QQ邮箱通常使用 smtp.qq.com:465，并使用 SMTP 授权码。
+
+- 测试邮件会发送到你填写的“发件邮箱”本身。
+
+- bridge_port.txt 与 EXE 放在同步桥目录中；EXE 默认读取其中的端口。
+
+- email_config.json 仅作为兼容/手工启动备用配置，本版正常使用时由 SeaDice 插件配置向 Bridge 临时下发邮箱配置。
+</p>
+
+
+<h2>
+SMTP 授权码怎么填
+</h2>
+
+<p>
+验证码是桥用你填的「发件邮箱」发出去的，所以这个邮箱必须先开通 SMTP 并生成授权码。
+授权码属于【发件邮箱】，收验证码的 旧QQ号@qq.com 什么都不用设置。
+</p>
+
+<p>
+1. 电脑浏览器打开 https://mail.qq.com ，登录你要当发件箱的 QQ 邮箱
+2. 左上角 设置 → 账号（有的版本叫「账户」）
+3. 往下找到「POP3/IMAP/SMTP/Exchange/CardDAV/CalDAV服务」
+4. 在「IMAP/SMTP服务」那一行点【开启】（开 POP3/SMTP 也行，两个开一个就够）
+5. 按提示用绑定手机发一条短信，发完点「我已发送」
+6. 通过后会显示一串 16 位授权码，形如 abcd efgh ijkl mnop，只显示这一次，先复制下来
+7. 回到插件配置填写：
+</p>
+
+<p>
+发件邮箱 → 你刚才登录的那个邮箱，如 123456@qq.com
+SMTP授权码 → 那 16 位，【去掉空格】，变成 abcdefghijklmnop
+SMTP服务器 → smtp.qq.com（不用改）
+SMTP端口 → 465（不用改）
+</p>
+
+<p>
+8. 保存后在群里发 .旧QQ邮箱测试 ，能收到测试邮件就说明配好了。
+</p>
+
+<p>
+容易踩的坑：填成 QQ 登录密码一定失败；授权码里的空格要去掉；忘了授权码可以回到第 4 步点「生成授权码」重新生成（旧的会失效）；改过 QQ 密码后授权码通常也会失效；同一个发件邮箱可以给多个海豹实例共用；收不到邮件时让对方检查 QQ 邮箱的「设置 → 反垃圾」，必要时把发件邮箱加进白名单。
+</p>
 
 <h3>v3.0 新增：增量同步</h3>
 <p>
@@ -201,8 +289,9 @@ finally:
 
 <p>
 在目标QQ 群执行：
- 如  .旧QQ绑定 2522629086 1081354778，也就是格式是： .旧QQ绑定 <本账号QQ><本QQ群账号>，后bot会朝你使用账号的QQ号@qq.com发送验证码邮件，输入。旧QQ验证码+6位数字的验证码后可绑定。再次绑定该群号和QQ账号会失败，仅限单次数绑定。QQ号+群号可用于多群进行绑定查询log。
-</p>
+ 如  .旧QQ绑定 2522629086 1081354778，也就是格式是： .旧QQ绑定 <本账号QQ><本QQ群账号>，后bot会朝你使用账号的QQ号@qq.com发送验证码邮件，输入 .旧QQ验证码+6位数字 即可完成绑定。
+同一个旧QQ可以分别绑到多个不同的OpenQQ账号，不用先解绑；只有完全相同的组合重复绑定才会失败。
+QQ号+群号可用于多群进行绑定查询log。</p>
 
 
 
@@ -213,58 +302,7 @@ finally:
 
 
 
-<h2>
-下载
-</h2>
 
-<a class="download-btn" href="民转官数据3.3（windows+linux）.zip" download>
-直接下载
-</a>
-
-<a 
-class="download-btn"
-href="https://github.com/ternatapinellia/openqq-qq-sync-bridge/releases/tag/v3.3"
-target="_blank">
-
-Github Release
-</a>
-
-<a
-class="download-btn"
-href="https://github.com/ternatapinellia/openqq-qq-sync-bridge"
-target="_blank">
-
-GitHub 仓库
-
-</a>
-
-
-<p>
-
-如果下载后无法打开，
-
-或者打开后立即关闭，
-
-请检查 Windows 安全中心和防火墙是否允许该软件运行。
-
-大概率是被防火墙拦截。
-</p>
-
-
-
-<p>
-注意：
-
-- 插件配置中的“SMTP授权码”不是邮箱登录密码。
-
-- QQ邮箱通常使用 smtp.qq.com:465，并使用 SMTP 授权码。
-
-- 测试邮件会发送到你填写的“发件邮箱”本身。
-
-- bridge_port.txt 与 EXE 放在同步桥目录中；EXE 默认读取其中的端口。
-
-- email_config.json 仅作为兼容/手工启动备用配置，本版正常使用时由 SeaDice 插件配置向 Bridge 临时下发邮箱配置。
-</p>
 
 
 

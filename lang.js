@@ -187,10 +187,12 @@
   "@qq.com 发送 6 位验证码。": "@qq.com sends a 6-bit verification code.",
   ".旧QQ验证码": ".Old QQ verification codes",
   "：验证成功后才执行数据迁移。 验证码 5 分钟有效，最多错误 5 次。": ": Data migration is only performed after successful verification. Verification codes are valid for 5 minutes and can be incorrect up to 5 times.",
-  ".旧QQ+旧群已绑定其他 OpenQQ 身份时拒绝再次绑定。": ". If the old QQ + old group has already bound another OpenQQ identity, refuse to bind again.",
+  "绑定身份是「旧QQ + 旧群 + OpenQQ账号 + 目标群」。同一个旧QQ可以绑到多个不同的OpenQQ账号，换账号不需要先解绑；只有完全相同的组合重复绑定才会被拒绝。": "The binding identity is (old QQ + old group + OpenQQ account + target group). One old QQ may bind to several different OpenQQ accounts, and switching accounts does not require unbinding first; only re-binding the exact same combination is rejected.",
   "使用方式： 双击启动openqq.exe，然后保持运行，不能关闭": "How to use: Double-click to start openqq.exe, then keep running; do not close it",
   "在目标QQ 群执行： 如 .旧QQ绑定 2522629086 1081354778，也就是格式是： .旧QQ绑定": "Execute in the target QQ group: For example, .Old QQ binding 2522629086 1081354778, i.e., format: .Old QQ binding",
-  "，后bot会朝你使用账号的QQ号@qq.com发送验证码邮件，输入。旧QQ验证码+6位数字的验证码后可绑定。再次绑定该群号和QQ账号会失败，仅限单次数绑定。QQ号+群号可用于多群进行绑定查询log。": ", after which the bot will send a verification code email to the QQ number @qq.com you use for your account. Enter it. After the old QQ verification code + 6-digit verification code, you can bind it. Binding the group number and QQ account again will fail; binding is limited to a single attempt. QQ number + group number can be used for binding logs in multiple groups.",
+  "，后bot会朝你使用账号的QQ号@qq.com发送验证码邮件，输入 .旧QQ验证码+6位数字 即可完成绑定。": ", after which the bot sends a verification-code email to <old QQ>@qq.com. Enter .旧QQ验证码 plus the 6-digit code to complete the binding.",
+  "同一个旧QQ可以分别绑到多个不同的OpenQQ账号，不用先解绑；只有完全相同的组合重复绑定才会失败。": "One old QQ can be bound to several different OpenQQ accounts, with no need to unbind first; only re-binding the exact same combination fails.",
+  "QQ号+群号可用于多群进行绑定查询log。": "The QQ number + group number can be used to look up logs bound in multiple groups.",
   "绑定完成后再执行： .st或者。pc或者。log，先前的log可通过log get+名字取出。": "After binding is complete, run: .st or. pc or. log. The previous log can be retrieved using log get+name.",
   "百度云链接": "Baidu Cloud Link",
   "注意： - 插件配置中的“SMTP授权码”不是邮箱登录密码。 - QQ邮箱通常使用 smtp.qq.com:465，并使用 SMTP 授权码。 - 测试邮件会发送到你填写的“发件邮箱”本身。 - bridge_port.txt 与 EXE 放在同步桥目录中；EXE 默认读取其中的端口。 - email_config.json 仅作为兼容/手工启动备用配置，本版正常使用时由 SeaDice 插件配置向 Bridge 临时下发邮箱配置。": "Note: - The \"SMTP authorization code\" in the plugin configuration is not the mailbox login password. - QQ Mail usually uses smtp.qq.com:465 and uses SMTP authorization codes. - Test emails will be sent directly to the \"sending email\" you provided. - bridge_port.txt and EXE are placed in the synchronized bridge directory; EXE reads the ports within by default. - email_config.json Only as a backup/manual boot configuration; in this version, the SeaDice plugin configuration temporarily sends emails to Bridge.",
@@ -282,7 +284,14 @@
   "其他链接": "Other links",
   "搜索文章...": "Search articles...",
   "搜索...": "Search...",
-  "搜索文章": "Search articles"
+  "搜索文章": "Search articles",
+  "SMTP 授权码怎么填": "How to get the SMTP authorization code",
+  "验证码是桥用你填的「发件邮箱」发出去的，所以这个邮箱必须先开通 SMTP 并生成授权码。": "The bridge sends the verification code from the \"sender email\" you configure, so that mailbox must have SMTP enabled and an authorization code generated.",
+  "授权码属于【发件邮箱】，收验证码的 旧QQ号@qq.com 什么都不用设置。": "The authorization code belongs to the SENDER mailbox. The <old QQ>@qq.com mailbox that receives the code needs no setup at all.",
+                        "8. 保存后在群里发 .旧QQ邮箱测试 ，能收到测试邮件就说明配好了。": "8. Save, then send .旧QQ邮箱测试 in the group. If the test email arrives, the setup is correct.",
+  "容易踩的坑：填成 QQ 登录密码一定失败；授权码里的空格要去掉；忘了授权码可以回到第 4 步点「生成授权码」重新生成（旧的会失效）；改过 QQ 密码后授权码通常也会失效；同一个发件邮箱可以给多个海豹实例共用；收不到邮件时让对方检查 QQ 邮箱的「设置 → 反垃圾」，必要时把发件邮箱加进白名单。": "Common pitfalls: using the QQ login password always fails; remove the spaces from the authorization code; if you lose the code, go back to step 4 and click \"Generate authorization code\" again (the old one stops working); the code usually also stops working after you change your QQ password; one sender mailbox can be shared by several SealDice instances; if mail does not arrive, ask the recipient to check Settings -> Anti-spam in their QQ mailbox and whitelist the sender if needed.",
+  "1. 电脑浏览器打开 https://mail.qq.com ，登录你要当发件箱的 QQ 邮箱 2. 左上角 设置 → 账号（有的版本叫「账户」） 3. 往下找到「POP3/IMAP/SMTP/Exchange/CardDAV/CalDAV服务」 4. 在「IMAP/SMTP服务」那一行点【开启】（开 POP3/SMTP 也行，两个开一个就够） 5. 按提示用绑定手机发一条短信，发完点「我已发送」 6. 通过后会显示一串 16 位授权码，形如 abcd efgh ijkl mnop，只显示这一次，先复制下来 7. 回到插件配置填写：": "1. Open https://mail.qq.com in a desktop browser and sign in to the QQ mailbox you want to use as the sender. 2. Top-left Settings -> Account. 3. Scroll down to POP3/IMAP/SMTP/Exchange/CardDAV/CalDAV services. 4. On the IMAP/SMTP service row click Enable (POP3/SMTP also works; one is enough). 5. Follow the prompt to send an SMS from your bound phone, then click I have sent it. 6. On success a 16-character authorization code appears, e.g. abcd efgh ijkl mnop. It is shown only once, so copy it now. 7. Go back to the plugin configuration and fill in:",
+  "发件邮箱 → 你刚才登录的那个邮箱，如 123456@qq.com SMTP授权码 → 那 16 位，【去掉空格】，变成 abcdefghijklmnop SMTP服务器 → smtp.qq.com（不用改） SMTP端口 → 465（不用改）": "Sender email -> the mailbox you just signed in to, e.g. 123456@qq.com. SMTP authorization code -> the 16 characters with spaces removed, e.g. abcdefghijklmnop. SMTP server -> smtp.qq.com (no change). SMTP port -> 465 (no change).",
 };
   var LANGS = {
   "zh": {

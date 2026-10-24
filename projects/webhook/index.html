@@ -49,6 +49,15 @@
 <li>转发重试 + 并发限流：避免瞬间打满海豹的 accept 队列导致丢消息。</li>
 </ul>
 
+<h2>下载</h2>
+
+<a class="download-btn" href="https://github.com/ternatapinellia/qq-webhook-gateway/releases/download/webhook-v1.0/QQWebhook-Gateway-v1.0.zip" target="_blank">直接下载（含 Caddy / frpc / 源码 / 文档）</a>
+
+<a class="download-btn" href="https://github.com/ternatapinellia/qq-webhook-gateway" target="_blank">GitHub 仓库</a>
+
+<a class="download-btn" href="https://github.com/ternatapinellia/qq-webhook-gateway/releases/tag/webhook-v1.0" target="_blank">GitHub Release</a>
+
+
 <h2>架构</h2>
 
 <pre>
@@ -66,14 +75,6 @@ QQWebhookGateway.exe（验签 + op=13 + 去重 + ACK）
 </pre>
 
 <p>如果海豹本身就跑在外网服务器上，可以省掉 frps 和 frpc，直接 Caddy 到网关再到海豹。</p>
-
-<h2>下载</h2>
-
-<a class="download-btn" href="https://github.com/ternatapinellia/qq-webhook-gateway/releases/download/webhook-v1.0/QQWebhook-Gateway-v1.0.zip" target="_blank">直接下载（含 Caddy / frpc / 源码 / 文档）</a>
-
-<a class="download-btn" href="https://github.com/ternatapinellia/qq-webhook-gateway" target="_blank">GitHub 仓库</a>
-
-<a class="download-btn" href="https://github.com/ternatapinellia/qq-webhook-gateway/releases/tag/webhook-v1.0" target="_blank">GitHub Release</a>
 
 <h2>包里有什么</h2>
 
