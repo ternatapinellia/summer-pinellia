@@ -14,3 +14,6 @@ gen_log*.txt
 .idea/
 Thumbs.db
 .DS_Store
+
+# 原始稿件（不公开）
+article_source/
