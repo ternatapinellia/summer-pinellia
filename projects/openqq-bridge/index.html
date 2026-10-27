@@ -95,13 +95,13 @@ OpenQQ Bridge 是用于 SeaDice 与 OpenQQ 身份兼容的数据桥接工具。
 下载
 </h2>
 
-<a class="download-btn" href="民转官数据3.3（windows+linux）.zip" download>
+<a class="download-btn" href="民转官数据3.4（windows+linux）.zip" download>
 直接下载
 </a>
 
 <a 
 class="download-btn"
-href="https://github.com/ternatapinellia/openqq-qq-sync-bridge/releases/tag/v3.3"
+href="https://github.com/ternatapinellia/openqq-qq-sync-bridge/releases/tag/v3.4"
 target="_blank">
 
 Github Release
@@ -258,6 +258,20 @@ qq233 -&gt; openqq444        允许
 
 <p>旧版本留下的记录仍能识别，不会因为升级而允许重复绑定；下次成功绑定时会自动整理成新格式。</p>
 
+<h3>v3.4 修复：多官bot并发丢同步队列</h3>
+
+<p>一个海豹同时挂多个官方 QQ 机器人（多个群）时，如果几个群几乎同时完成绑定，后台同步线程会把刚登记的同步关系覆盖掉。表现是「绑定时提示成功，但那个群之后再也没自动同步过」。</p>
+
+<p>根本原因在 sync_all()：它先读一份配置，跑完所有群的同步后再把整份配置写回。期间别处新增的配对就丢了。</p>
+
+<pre>
+旧写法：pairs = load();  ...跑很久...  save(pairs)
+新写法：pairs = load();  ...跑很久...  按 key 合并回最新配置
+</pre>
+
+<p>同时修掉两个相关问题：sync_config.json 并发写入会在 Windows 上报 PermissionError 并留下 .tmp 垃圾文件；每轮同步都对数据库做全量快照，多官bot时磁盘 IO 被放大几十倍（data-logs.db 常有几百 MB）。现在同一文件 600 秒内最多备份一次，首次快照仍会保留，绑定路径也仍然每次都备份。</p>
+
+<p>验证方式：4 个官 bot x 5 个群、并发 8 个同步线程跑 12 轮，同时并发新增 60 条同步关系，最终 80/80 条全部保留、0 异常、0 残留临时文件。</p>
 <h3>v3.3 修复：数据库连接泄漏导致海豹变慢</h3>
 
 <p>桥在 lookup() 里用了 with self.connect(...)。但 Python 的 sqlite3 中，with 语句只提交事务，并不会关闭连接，于是每次查询都会泄漏一个连接。这些连接一直持有读事务，阻塞海豹的 WAL checkpoint。</p>
