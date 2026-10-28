@@ -95,13 +95,13 @@ OpenQQ Bridge 是用于 SeaDice 与 OpenQQ 身份兼容的数据桥接工具。
 下载
 </h2>
 
-<a class="download-btn" href="民转官数据3.4（windows+linux）.zip" download>
+<a class="download-btn" href="民转官数据3.5（windows+linux）.zip" download>
 直接下载
 </a>
 
 <a 
 class="download-btn"
-href="https://github.com/ternatapinellia/openqq-qq-sync-bridge/releases/tag/v3.4"
+href="https://github.com/ternatapinellia/openqq-qq-sync-bridge/releases/tag/v3.5"
 target="_blank">
 
 Github Release
@@ -258,6 +258,25 @@ qq233 -&gt; openqq444        允许
 
 <p>旧版本留下的记录仍能识别，不会因为升级而允许重复绑定；下次成功绑定时会自动整理成新格式。</p>
 
+<h3>v3.5 修复：健壮性补齐</h3>
+
+<p>3.4.1 是在更早版本上做的，回退了 v3.4 里的三处修复。3.5 把它们补回来，并加固了一处原子性隐患。</p>
+
+<pre>
+1. 恢复首次快照生成（.snapshot-first.bak）
+   3.4.1 的增量同步只写会滚动清理的临时备份，没有长期基线可回滚。
+
+2. data.db 与 data-logs.db 相互独立
+   缺一个不再连累另一个；日志同步失败只记日志，角色卡/PC 照常同步。
+
+3. 备份失败不再阻断同步
+   磁盘临时不可写时，不再让所有群一起停摆。
+
+4. 兜底覆盖改为两段式（本版新增）
+   3.4.1 重试失败后会直接截断覆盖目标文件，
+   进程写一半被杀就是半个 JSON、绑定记录全丢。
+   现在改为「先备份 -&gt; 写临时文件 -&gt; 校验字节数 -&gt; 失败回滚」。
+</pre>
 <h3>v3.4 修复：多官bot并发丢同步队列</h3>
 
 <p>一个海豹同时挂多个官方 QQ 机器人（多个群）时，如果几个群几乎同时完成绑定，后台同步线程会把刚登记的同步关系覆盖掉。表现是「绑定时提示成功，但那个群之后再也没自动同步过」。</p>
