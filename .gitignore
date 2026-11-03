@@ -8,6 +8,7 @@ tools/_*.py
 tools/_*.json
 tools/_*.txt
 gen_log*.txt
+__p*.txt
 
 # 编辑器
 .vscode/
