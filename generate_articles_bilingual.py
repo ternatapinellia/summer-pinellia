@@ -11,20 +11,6 @@ CACHE_FILE = Path("translate_cache.json")
 
 MAX_CHARS = 4000
 
-# ==================== 目录下载区（可选） ====================
-# 键为相对 OUTPUT_ZH 的目录路径；值为 GitHub Release 直链。
-# 生成该目录的 index.html 时，会在文章列表上方插入一个下载区块。
-DIR_DOWNLOADS = {
-    "antenna/ADVENTURERROR(end)": {
-        "test": True,
-        "files": [
-            ("Windows.zip", "Windows 版",
-             "https://github.com/ternatapinellia/summer-pinellia/releases/download/adventurerror-test-zh/Windows.zip"),
-            ("Mac.zip", "Mac 版",
-             "https://github.com/ternatapinellia/summer-pinellia/releases/download/adventurerror-test-zh/Mac.zip"),
-        ],
-    },
-}
 
 SEARCH_ZH = []
 SEARCH_EN = []
@@ -385,8 +371,6 @@ INDEX_TPL = """<!DOCTYPE html>
 
 <h1>{title}</h1>
 
-{downloads}
-
 {folders}
 
 {articles}
@@ -572,25 +556,6 @@ def build_index(folder, oz, oe, uz, ue):
             arts_en.append('<a class="article-card" href="%s.html"><h3>%s %s</h3></a>'
                            % (t, ue["article"], html.escape(t_en)))
 
-    rel_dir = oz.parent.relative_to(OUTPUT_ZH).as_posix()
-    dl_cfg = DIR_DOWNLOADS.get(rel_dir)
-    dl_zh = dl_en = ""
-    if dl_cfg:
-        def _dl_html(cfg, lang):
-            head = "测试版说明" if lang == "zh" else "Test build"
-            note = ("这是测试中文版，可能存在改动与已知问题。" if lang == "zh"
-                    else "Test build of the Chinese version; changes and known issues may exist.")
-            links = "".join(
-                '<a class="download-btn" href="%s" target="_blank" rel="noopener">%s</a>'
-                % (url, label if lang == "zh" else label)
-                for _name, label, url in cfg["files"]
-            )
-            badge = '<span class="dl-badge">测试版 / TEST</span>' if cfg.get("test") else ""
-            return ('<div class="download-box"><h2>%s %s</h2><p class="download-note">%s</p>'
-                    '<div class="download-actions">%s</div></div>' % (head, badge, note, links))
-        dl_zh = _dl_html(dl_cfg, "zh")
-        dl_en = _dl_html(dl_cfg, "en")
-
     dir_zh = '<h2>%s</h2>\n<div class="article-grid">%s</div>' % (uz["dirs"], "".join(folders_zh)) if folders_zh else ""
     dir_en = '<h2>%s</h2>\n<div class="article-grid">%s</div>' % (ue["dirs"], "".join(folders_en)) if folders_en else ""
     art_zh = '<h2>%s</h2>\n<div class="article-grid">%s</div>' % (uz["arts"], "".join(arts_zh)) if arts_zh else ""
@@ -615,7 +580,6 @@ def build_index(folder, oz, oe, uz, ue):
 
     oz.write_text(INDEX_TPL.format(
         html_lang=uz["html_lang"], title=html.escape(t_title), folders=dir_zh, articles=art_zh,
-        downloads=dl_zh,
         nav=nav_zh, music=music_zh, css=asset(oz, OUTPUT_ZH, "style.css"),
         theme=asset(oz, OUTPUT_ZH, "theme.js"), script=asset(oz, OUTPUT_ZH, "script.js"),
         search_js=up(oz, OUTPUT_ZH, 1) + "search.js", lang_script=LANG_SCRIPT,
@@ -624,7 +588,6 @@ def build_index(folder, oz, oe, uz, ue):
 
     oe.write_text(INDEX_TPL.format(
         html_lang=ue["html_lang"], title=html.escape(t_title_en), folders=dir_en, articles=art_en,
-        downloads=dl_en,
         nav=nav_en, music=music_en, css=asset(oe, OUTPUT_EN, "style.css"),
         theme=asset(oe, OUTPUT_EN, "theme.js"), script=asset(oe, OUTPUT_EN, "script.js"),
         search_js=up(oe, OUTPUT_EN, 1) + "search.js", lang_script=LANG_SCRIPT,
