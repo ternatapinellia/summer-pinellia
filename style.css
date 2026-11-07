@@ -2587,3 +2587,47 @@ body.light #site-search{
     }
 
 }
+
+/* =========================
+   下载区（Release 直链）
+   ========================= */
+.download-box{
+    margin:26px 0 34px;
+    padding:22px 24px;
+    border:1px solid #8b6cff;
+    border-radius:14px;
+    background:rgba(139,108,255,.08);
+}
+.download-box h2{
+    margin:0 0 8px;
+    font-size:1.15rem;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
+}
+.dl-badge{
+    font-size:.72rem;
+    padding:2px 9px;
+    border-radius:20px;
+    background:#8b6cff;
+    color:#fff;
+    letter-spacing:.4px;
+}
+.download-note{
+    margin:0 0 14px;
+    font-size:.9rem;
+    opacity:.85;
+    line-height:1.6;
+}
+.download-actions{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+}
+.download-actions .download-btn{
+    margin-top:0;
+}
+body.light .download-box{
+    background:rgba(139,108,255,.06);
+}
