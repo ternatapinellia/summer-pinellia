@@ -155,7 +155,7 @@
   "Deltarune Spamton 相关周边展示。 包含拍立得、徽章、亚克力等商品。": "Display of Deltarune Spamton-related merchandise. Includes Polaroids, badges, acrylic, and other merchandise.",
   "Deltarune Tenna 周边": "Around Deltarune Tenna",
   "Deltarune Tenna 相关周边展示。 包含拍立得、徽章、亚克力等商品。": "Display of Deltarune Tenna related merchandise. Includes instant cameras, badges, acrylic, and other merchandise.",
-  "Deltarune tenna乙女游戏-Arventuerror": "Deltarune Tenna Otome Game - Arventuerror",
+  "Deltarune tenna乙女游戏-ADVENTURERROR": "Deltarune Tenna Otome Game - ADVENTURERROR",
   "游戏简介": "Game Introduction",
   "你只是普普通通地睡了一觉……大概，为什么就突然来到了一个电视人做的所谓的bug齐出的游戏当中？！身为勇者的你，正式开始自己的冒险旅程吧！": "You just had an ordinary nap...... Maybe why did you suddenly find yourself in a game full of bugs made by a TV personality?! As a hero, now officially begin your adventure!",
   "当然，比起那些，似乎这个游戏的制作人，tenna先生，更想和你玩一个恋爱游戏……": "Of course, compared to those, it seems the game's producer, Mr. Tenna, would rather play a romance game with you......",
