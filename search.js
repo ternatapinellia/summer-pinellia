@@ -1,5 +1,6 @@
 let searchData = [];
 let indexReady = false;
+let indexLoading = false;
 
 
 // ==========================
@@ -39,15 +40,28 @@ function langName() {
 // 加载索引：优先当前语言，其次通用
 // ==========================
 
-async function fetchJson(url) {
-    var r = await fetch(url);
-    if (!r.ok) throw new Error("HTTP " + r.status);
-    return await r.json();
+async function fetchJson(url, timeoutMs) {
+    // 手机上十几 MB 的索引经常因弱网超时，这里加超时保护
+    var ctrl = typeof AbortController !== "undefined" ? new AbortController() : null;
+    var timer = null;
+    if (ctrl) {
+        timer = setTimeout(function () { try { ctrl.abort(); } catch (e) {} }, timeoutMs || 90000);
+    }
+    try {
+        var opts = { cache: "force-cache" };
+        if (ctrl) opts.signal = ctrl.signal;
+        var r = await fetch(url, opts);
+        if (!r.ok) throw new Error("HTTP " + r.status);
+        return await r.json();
+    } finally {
+        if (timer) clearTimeout(timer);
+    }
 }
 
 
 async function loadSearchData() {
 
+    indexLoading = true;
     var base = basePath();
     var lang = langName();
 
@@ -58,21 +72,31 @@ async function loadSearchData() {
         "/search.json"
     ];
 
+    var errors = [];
     for (var i = 0; i < candidates.length; i++) {
-        try {
-            searchData = await fetchJson(candidates[i]);
-            if (Array.isArray(searchData) && searchData.length) {
-                indexReady = true;
-                console.log("搜索索引已加载:", candidates[i], searchData.length, "条");
-                return;
+        for (var attempt = 1; attempt <= 2; attempt++) {
+            try {
+                searchData = await fetchJson(candidates[i], 90000);
+                if (Array.isArray(searchData) && searchData.length) {
+                    indexReady = true;
+                    indexLoading = false;
+                    console.log("搜索索引已加载:", candidates[i], searchData.length, "条");
+                    return;
+                }
+                errors.push(candidates[i] + ": 内容为空");
+                break;
+            } catch (e) {
+                errors.push(candidates[i] + " (" + attempt + "): " + e.message);
+                if (attempt === 1) {
+                    await new Promise(function (r) { setTimeout(r, 1500); });
+                }
             }
-        } catch (e) {
-            // 试下一个
         }
     }
 
     indexReady = false;
-    console.log("搜索索引加载失败：本地直接打开(file://)时无法读取索引，请用本地服务器或部署后再试");
+    indexLoading = false;
+    console.log("搜索索引加载失败:", errors.join(" | "));
 }
 
 
@@ -98,9 +122,16 @@ function doSearch() {
 
     if (!indexReady) {
         var isEn = langName() === "en";
-        resultBox.innerHTML = '<div class="search-item">' +
-            (isEn ? "Search index not loaded yet." : "搜索索引尚未加载完成。") +
-            '</div>';
+        if (indexLoading) {
+            resultBox.innerHTML = '<div class="search-item">' +
+                (isEn ? "Loading search index, please wait..." : "正在加载搜索索引，请稍候…") +
+                '</div>';
+        } else {
+            resultBox.innerHTML = '<div class="search-item">' +
+                (isEn ? "Search index failed to load. Check your connection and refresh." :
+                        "搜索索引加载失败，请检查网络后刷新页面。") +
+                '</div>';
+        }
         return;
     }
 
