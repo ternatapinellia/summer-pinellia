@@ -1,4 +1,4 @@
-﻿/* Language switcher: 中文 / English (in-place text swap) */
+/* Language switcher: 中文 / English (in-place text swap) */
 (function () {
   var DICT = {
     "v3.3 修复：数据库连接泄漏导致海豹变慢": "v3.3 fix: database connection leak slowed SealDice down",
@@ -278,6 +278,8 @@
   "下载dr big shot皮肤包": "Download DR big shot skin pack",
   "下载spt皮肤包": "Download spt skin pack",
   "下载hot shot皮肤包": "Download hot shot skin pack",
+  "这个是dn hot shot的白色西装版本": "This is the white suit version of dn hot shot.",
+  "下载dn hot shot白色西装版皮肤包": "Download dn hot shot white suit skin pack",
   "下载dr spamton neo皮肤包": "Download DR Spamton NEO skin pack",
   "下载dns皮肤包": "Download dns skin pack",
   "下载dn sneo皮肤包": "Download dn sneo skin pack",
