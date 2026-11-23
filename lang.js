@@ -261,6 +261,7 @@
   "SWAP SPAMTON桌宠是一款 Windows 桌面宠物程序。 支持桌面互动、语音、提醒、便签、商店、小游戏等功能。": "SWAP SPAMTON Desktop Pet is a Windows desktop pet program. It supports desktop interaction, voice, reminders, notes, store, mini-games, and other features.",
   "左键点击桌宠可以进行互动和显示对话。 右键点击桌宠可以打开菜单以及退出程序。 控制面板、商店界面、便签界面同样可以通过右键退出。": "Left-click on the desktop pet to interact and display dialogue. Right-click on the pet to open the menu and exit the program. The control panel, store interface, and note interface can also be exited via right-click.",
   "点击小游戏可自行游玩多种已配置完毕的游戏。 按住 Ctrl 并滚动鼠标滚轮，可以调整桌宠大小。": "Click on mini-games to play various pre-configured games. Hold Ctrl and scroll the mouse wheel to adjust the size of the desktop pet.",
+  "v3.0 会记忆桌宠的位置和缩放大小，修复了开机自启开关，并优化了退出流程。": "Version 3.0 remembers the desktop pet’s position and size, fixes the Windows auto-start setting, and improves the shutdown process.",
   "百度云网盘链接 暂无": "Baidu Cloud link: Not available",
   "下载压缩包后解压， 直接双击SPT-DeskPet.exe即可使用。": "After downloading the compressed package, unzip it and double-click SPT-DeskPet.exe to use.",
   "Windows桌面打字&手柄识别工具，含三角符文各种角色皮肤 工具是x发布的compet的补丁包，compet原软件链接：https://github.com/morningmeal/morningmeal_ComPet": "Windows desktop typing & gamepad recognition tool, including various Deltarune character skins. The tool is the patch package for ComPet released by x, original software link: https://github.com/morningmeal/morningmeal_ComPet",
