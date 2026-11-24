@@ -180,6 +180,7 @@
   "使用提示": "Usage tips",
   "下载压缩包后解压， 直接双击 desktoppet.exe 即可使用。": "After downloading the compressed package, extract it, then double-click desktoppet.exe to use.",
   "如果下载后无法打开， 或者打开后立即关闭， 请检查 Windows 安全中心和防火墙是否允许该软件运行。 大概率是被防火墙拦截。": "If you cannot open after downloading, or close immediately after opening, check whether Windows Security Center and the firewall allow the software to run. Most likely, it is blocked by the firewall.",
+  "开机自启：在右键菜单里勾选「开机自启」即可。 如果系统拦下了注册表写入，程序会自动改用「启动文件夹快捷方式」， 并在同目录生成 autostart_error.log 记录原因。": "Auto-start: tick the “Start with Windows” item in the right-click menu. If the system blocks the registry write, the app automatically falls back to a Startup-folder shortcut and writes the reason to autostart_error.log in the same folder.",
   "OpenQQ Bridge 是用于 SeaDice 与 OpenQQ 身份兼容的数据桥接工具。 用于解决 OpenQQ 平台身份变化后， 原有角色卡、属性数据以及日志数据无法直接读取的问题。 支持旧 QQ 数据绑定到当前 OpenQQ 身份， 实现数据兼容读取。": "OpenQQ Bridge is a data bridging tool for SeaDice and OpenQQ identity compatibility. It solves the problem where original role cards, attribute data, and log data cannot be directly read after OpenQQ platform identity changes. Supports binding old QQ data to current OpenQQ identities to enable compatible data reading.",
   "本版支持：": "This version supports:",
   "多 SeaDice 实例分别配置 Bridge 端口。": "Multiple SeaDice instances are configured separately with Bridge ports.",
